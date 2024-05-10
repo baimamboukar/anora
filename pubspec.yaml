@@ -1,0 +1,57 @@
+name: anora
+description: Make sense of your enterprise data leveraging powerful LLMs
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: "^3.3.0"
+
+dependencies:
+  bloc: ^8.1.3
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.4
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.1
+
+  flutter_gen: any
+  dio: ^5.4.3+1
+  firebase_auth: ^4.19.4
+  cloud_firestore: ^4.17.2
+  redacted: ^1.0.11
+  firebase_storage: ^11.7.4
+  flutter_speed_dial: ^7.0.0
+  uuid: ^4.4.0
+  flutter_dotenv: ^5.1.0
+  hive_flutter: ^1.1.0
+  file_picker: ^8.0.3
+  flutter_markdown: ^0.7.1
+  vibration: ^1.8.4
+  simple_ripple_animation: ^0.0.9
+  auto_route: ^8.1.3
+  flutter_native_splash: ^2.4.0
+  connectivity_plus: ^6.0.3
+  lottie: ^3.1.0
+  shadcn_ui: ^0.4.3
+  freezed_annotation: ^2.4.1
+  dartz: ^0.10.1
+  internet_connection_checker: ^1.0.0+1
+  pretty_dio_logger: ^1.3.1
+  flutter_secure_storage: ^9.0.0
+  injectable: ^2.4.1
+  heroicons: ^0.10.0
+  speech_to_text_google_dialog: ^0.0.6
+  speech_to_text: ^6.6.0
+dev_dependencies:
+  auto_route_generator: ^8.0.0
+  bloc_test: ^9.1.6
+  build_runner: ^2.4.9
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.3
+  very_good_analysis: ^5.1.0
+
+flutter:
+  uses-material-design: true
+  generate: true
