@@ -47,8 +47,10 @@ dev_dependencies:
   auto_route_generator: ^8.0.0
   bloc_test: ^9.1.6
   build_runner: ^2.4.9
+  flutter_launcher_icons: "^0.13.1"
   flutter_test:
     sdk: flutter
+  
   mocktail: ^1.0.3
   very_good_analysis: ^5.1.0
 
@@ -66,13 +68,10 @@ flutter:
     - family: Gilroy
       fonts:
         - asset: assets/fonts/Gilroy-Regular.ttf
-icons_launcher:
+flutter_launcher_icons:
   image_path: "assets/launcher_icon.png"
-  platforms:
-    android:
-      enable: true
-    ios:
-      enable: true
+  android: true
+  ios: true
 flutter_assets:
   assets_path: assets/
   output_path: lib/src/app/
