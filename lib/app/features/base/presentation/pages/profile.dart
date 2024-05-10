@@ -1,5 +1,6 @@
 import 'dart:developer' as dev;
 
+import 'package:anora/app/router/router_paths.dart';
 import 'package:anora/core/core.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -202,19 +203,24 @@ class Action extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        children: [
-          HeroIcon(icon),
-          6.hGap,
-          Text(title),
-          const Spacer(),
-          const HeroIcon(
-            HeroIcons.chevronRight,
-            size: 10,
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        context.router.pushNamed(MY_SPACE_CONFIG_ROUTE);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Row(
+          children: [
+            HeroIcon(icon),
+            6.hGap,
+            Text(title),
+            const Spacer(),
+            const HeroIcon(
+              HeroIcons.chevronRight,
+              size: 10,
+            ),
+          ],
+        ),
       ),
     );
   }
