@@ -1,3 +1,4 @@
+import 'package:anora/app/features/settings/data/models/integration_model.dart';
 import 'package:anora/core/core.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -23,24 +24,57 @@ class _SpacePageState extends State<SpacePage> {
         children: [
           const Text('Integrations'),
           34.vGap,
-          const ShadCard(
-            padding: EdgeInsets.all(8),
-            width: 134,
-            height: 124,
-            content: Center(
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  HeroIcon(
-                    HeroIcons.sparkles,
-                    size: 32,
+          SizedBox(
+            height: 154,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 3,
+              itemBuilder: (BuildContext context, int index) {
+                final integration = integrations[index];
+                return Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: IntegrationCard(
+                    integration: integration,
                   ),
-                  Text('Web Data'),
-                ],
-              ),
+                );
+              },
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class IntegrationCard extends StatelessWidget {
+  const IntegrationCard({
+    required this.integration,
+    super.key,
+  });
+  final Integration integration;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = ShadTheme.of(context);
+    return ShadCard(
+      padding: const EdgeInsets.all(8),
+      width: 164,
+      height: 134,
+      backgroundColor: theme.colorScheme.secondary,
+      trailing: Visibility(
+        visible: integration.integrated,
+        child: const HeroIcon(
+          HeroIcons.checkCircle,
+          color: Colors.green,
+        ),
+      ),
+      title: Text(integration.title),
+      description: Text(integration.desc),
+      content: Center(
+        child: ShadImage.square(
+          integration.icon,
+          size: 64,
+        ),
       ),
     );
   }
