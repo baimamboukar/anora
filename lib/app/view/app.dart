@@ -23,10 +23,18 @@ class _AppState extends State<App> {
     return ShadApp.router(
       routerConfig: _router.config(),
       darkTheme: ShadThemeData(
+        textTheme: ShadTextTheme(
+          family: 'Gilroy',
+          colorScheme: const ShadBlueColorScheme.dark(),
+        ),
         brightness: Brightness.dark,
         colorScheme: const ShadBlueColorScheme.dark(),
       ),
       theme: ShadThemeData(
+        textTheme: ShadTextTheme(
+          family: 'Gilroy',
+          colorScheme: const ShadBlueColorScheme.light(),
+        ),
         brightness: Brightness.light,
         colorScheme: const ShadBlueColorScheme.light(),
       ),
