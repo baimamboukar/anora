@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:anora/app/features/settings/data/models/integration_model.dart';
 import 'package:anora/core/core.dart';
 import 'package:auto_route/auto_route.dart';
@@ -22,8 +24,16 @@ class _SpacePageState extends State<SpacePage> {
       ),
       child: Column(
         children: [
-          const Text('Integrations'),
-          34.vGap,
+          Text(
+            'Integrations',
+            style: context.head,
+          ).floatL,
+          8.vGap,
+          Text(
+            'Integrations let you contextualize your prompts based on your custom Entrepise Data. Browse Integrations and add the ones you care about',
+            style: context.desc,
+          ),
+          14.vGap,
           SizedBox(
             height: 154,
             child: ListView.builder(
