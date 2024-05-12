@@ -32,6 +32,18 @@ class _SpacePageState extends State<SpacePage> {
                 'Integrations let you contextualize your prompts based on your custom Entrepise Data. Browse Integrations and add the ones you care about',
             content: IntegrationsList(),
           ),
+          const ConfigBloc(
+            title: 'Members',
+            desc:
+                'Members are the people who have access to this space. You can add or remove members from this space',
+            content: IntegrationsList(),
+          ),
+          const ConfigBloc(
+            title: 'Members',
+            desc:
+                'Members are the people who have access to this space. You can add or remove members from this space',
+            content: IntegrationsList(),
+          ),
         ],
       ),
     );
