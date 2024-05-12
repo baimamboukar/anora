@@ -1,12 +1,11 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'package:anora/app/features/settings/data/models/integration_model.dart';
+import 'package:anora/app/features/settings/settings.dart';
 import 'package:anora/core/core.dart';
 import 'package:anora/src/app/assets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 @RoutePage()
 class SpacePage extends StatefulWidget {
@@ -25,71 +24,13 @@ class _SpacePageState extends State<SpacePage> {
       ),
       child: Column(
         children: [
-          Container(
-            //height: 120,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: context.colorScheme.secondary,
-              borderRadius: BorderRadius.circular(18),
-              //border: Border.all(color: theme.colorScheme.primary, width: .4),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(14),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(14),
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: context.colorScheme.foreground,
-                          ),
-                          child: Image.asset(Assets.assetsLauncherIcon),
-                        ),
-                      ),
-                      8.hGap,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Xenora AI', style: context.title),
-                          Text('54 Members', style: context.desc),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const SpaceSumarry(),
           14.vGap,
-          Text(
-            'Integrations',
-            style: context.head,
-          ).floatL,
-          8.vGap,
-          Text(
-            'Integrations let you contextualize your prompts based on your custom Entrepise Data. Browse Integrations and add the ones you care about',
-            style: context.desc,
-          ),
-          14.vGap,
-          SizedBox(
-            height: 154,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: integrations.length,
-              itemBuilder: (BuildContext context, int index) {
-                final integration = integrations[index];
-                return Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: IntegrationCard(
-                    integration: integration,
-                  ),
-                );
-              },
-            ),
+          const ConfigBloc(
+            title: 'Integrations',
+            desc:
+                'Integrations let you contextualize your prompts based on your custom Entrepise Data. Browse Integrations and add the ones you care about',
+            content: IntegrationsList(),
           ),
         ],
       ),
@@ -97,35 +38,117 @@ class _SpacePageState extends State<SpacePage> {
   }
 }
 
-class IntegrationCard extends StatelessWidget {
-  const IntegrationCard({
-    required this.integration,
+class SpaceSumarry extends StatelessWidget {
+  const SpaceSumarry({
     super.key,
   });
-  final Integration integration;
 
   @override
   Widget build(BuildContext context) {
-    final theme = ShadTheme.of(context);
-    return ShadCard(
-      padding: const EdgeInsets.all(8),
-      width: 164,
-      height: 134,
-      backgroundColor: theme.colorScheme.secondary,
-      trailing: Visibility(
-        visible: integration.integrated,
-        child: const HeroIcon(
-          HeroIcons.checkCircle,
-          color: Colors.green,
+    return Container(
+      //height: 120,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: context.colorScheme.secondary,
+        borderRadius: BorderRadius.circular(18),
+        //border: Border.all(color: theme.colorScheme.primary, width: .4),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(14),
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.foreground,
+                    ),
+                    child: Image.asset(Assets.assetsLauncherIcon),
+                  ),
+                ),
+                8.hGap,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text('Xenora AI', style: context.title),
+                        4.hGap,
+                        const HeroIcon(
+                          HeroIcons.checkBadge,
+                          color: Colors.blue,
+                          size: 20,
+                        ),
+                      ],
+                    ),
+                    Text('54 Members', style: context.desc),
+                  ],
+                ),
+              ],
+            ),
+          ],
         ),
       ),
-      title: Text(integration.title),
-      description: Text(integration.desc),
-      content: Center(
-        child: ShadImage.square(
-          integration.icon,
-          size: 64,
+    );
+  }
+}
+
+class ConfigBloc extends StatelessWidget {
+  const ConfigBloc({
+    required this.title,
+    required this.desc,
+    required this.content,
+    super.key,
+  });
+  final String title;
+  final String desc;
+  final Widget content;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: context.head,
+        ).floatL,
+        8.vGap,
+        Text(
+          desc,
+          style: context.desc,
         ),
+        14.vGap,
+        content,
+      ],
+    );
+  }
+}
+
+class IntegrationsList extends StatelessWidget {
+  const IntegrationsList({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 154,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: integrations.length,
+        itemBuilder: (BuildContext context, int index) {
+          final integration = integrations[index];
+          return Padding(
+            padding: const EdgeInsets.all(10),
+            child: IntegrationCard(
+              integration: integration,
+            ),
+          );
+        },
       ),
     );
   }

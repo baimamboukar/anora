@@ -13,4 +13,4 @@ export 'presentation/pages/notifications_config_page.dart';
 export 'presentation/pages/space_config_page.dart';
 export 'presentation/widgets/action.dart';
 export 'presentation/widgets/actions_bloc.dart';
-export 'presentation/widgets/widgets.dart';
+export 'presentation/widgets/integration_card.dart';

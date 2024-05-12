@@ -1,7 +1,7 @@
 // ignore_for_file: use_colored_box
 
 import 'package:anora/app/features/connectivity/logic/connectivity_cubit.dart';
-import 'package:anora/app/features/connectivity/presentation/ecocaasitech_no_connection.dart';
+import 'package:anora/app/features/connectivity/presentation/offline_view.dart';
 import 'package:anora/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
