@@ -25,6 +25,13 @@ final integrations = <Integration>[
     icon: Assets.assetsIconsDrive,
   ),
   Integration(
+    authorized: true,
+    integrated: true,
+    title: 'PDF',
+    desc: 'PDF Documents',
+    icon: Assets.assetsIconsPdf,
+  ),
+  Integration(
     authorized: false,
     integrated: false,
     title: 'Slack',

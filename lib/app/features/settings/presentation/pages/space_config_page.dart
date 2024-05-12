@@ -2,6 +2,7 @@
 
 import 'package:anora/app/features/settings/data/models/integration_model.dart';
 import 'package:anora/core/core.dart';
+import 'package:anora/src/app/assets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
@@ -24,6 +25,46 @@ class _SpacePageState extends State<SpacePage> {
       ),
       child: Column(
         children: [
+          Container(
+            //height: 120,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: context.colorScheme.secondary,
+              borderRadius: BorderRadius.circular(18),
+              //border: Border.all(color: theme.colorScheme.primary, width: .4),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: context.colorScheme.foreground,
+                          ),
+                          child: Image.asset(Assets.assetsLauncherIcon),
+                        ),
+                      ),
+                      8.hGap,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Xenora AI', style: context.title),
+                          Text('54 Members', style: context.desc),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          14.vGap,
           Text(
             'Integrations',
             style: context.head,
@@ -38,7 +79,7 @@ class _SpacePageState extends State<SpacePage> {
             height: 154,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 3,
+              itemCount: integrations.length,
               itemBuilder: (BuildContext context, int index) {
                 final integration = integrations[index];
                 return Padding(
