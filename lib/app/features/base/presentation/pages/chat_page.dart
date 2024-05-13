@@ -26,39 +26,54 @@ class _ChatPageState extends State<ChatPage> {
           ),
         ],
       ),
-      child: Column(
-        children: [
-          14.vGap,
-          Text(
-            'Hey, Baimam of Xenora 👋',
-            style: context.head,
-          ).floatL,
-          Text(
-            'How can I help you today?',
-            style: context.paragraph
-                .copyWith(color: context.colorScheme.selection),
-          ).floatL,
-          14.vGap,
-          const ChatSuggestions(),
-          14.vGap,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Recent Chats',
-                style: context.paragraph,
-              ),
-              HeroIcon(
-                HeroIcons.chevronRight,
-                color: context.colorScheme.primary,
-                size: 16,
-              ),
-            ],
-          ),
-          //  8.vGap,
-          const RecentChats(),
-        ],
+      child: const FractionallySizedBox(
+        widthFactor: 1,
+        child: Column(
+          children: [
+            Expanded(child: ChatHome()),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class ChatHome extends StatelessWidget {
+  const ChatHome({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        Text(
+          'Hey, Baimam of Xenora 👋',
+          style: context.head,
+        ).floatL,
+        Text(
+          'How can I help you today?',
+          style:
+              context.paragraph.copyWith(color: context.colorScheme.selection),
+        ).floatL,
+        14.vGap,
+        const ChatSuggestions(),
+        14.vGap,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Recent Chats',
+              style: context.paragraph,
+            ),
+            HeroIcon(
+              HeroIcons.chevronRight,
+              color: context.colorScheme.primary,
+              size: 16,
+            ),
+          ],
+        ),
+        //  8.vGap,
+        const RecentChats(),
+      ],
     );
   }
 }
