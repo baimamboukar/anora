@@ -1,5 +1,8 @@
+import 'dart:math' as math;
+
 import 'package:anora/core/core.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -18,6 +21,8 @@ class _ChatPageState extends State<ChatPage> {
     const userAvatar =
         'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
     return AnoraPage(
+      withoutSingleScroll: true,
+      withPadding: false,
       appBar: AppBar(
         title: const Switcher(),
         actions: const [
@@ -26,13 +31,86 @@ class _ChatPageState extends State<ChatPage> {
           ),
         ],
       ),
-      child: const FractionallySizedBox(
-        widthFactor: 1,
-        child: Column(
-          children: [
-            Expanded(child: ChatHome()),
-          ],
-        ),
+      child: Column(
+        children: [
+          const ChatHome(),
+          Container(
+            width: context.width,
+            height: context.height * .175,
+            decoration: BoxDecoration(
+              color: context.colorScheme.muted,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(24),
+                topRight: Radius.circular(24),
+              ),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Type, talk or upload an image...',
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          hintStyle: context.desc.copyWith(fontSize: 20),
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          contentPadding: const EdgeInsets.all(2),
+                        ),
+                      ),
+                    ),
+                    Transform.rotate(
+                      angle: math.pi / 4,
+                      child: const HeroIcon(HeroIcons.chevronUpDown, size: 24),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Row(
+                  children: [
+                    const Spacer(),
+                    Container(
+                      // width: context.width * .3,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: context.colorScheme.primary,
+                        borderRadius: BorderRadius.circular(
+                          24,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const Icon(Icons.keyboard_alt_outlined, size: 24)
+                              .hPaddingx(8),
+                          AvatarGlow(
+                            // backgroundColor: context.colorScheme.background,
+                            child:
+                                const HeroIcon(HeroIcons.microphone, size: 24)
+                                    .hPaddingx(8),
+                          ),
+                          const HeroIcon(HeroIcons.camera, size: 24)
+                              .hPaddingx(8),
+                        ],
+                      ).hPadding,
+                    ).vPaddingx(8),
+                    const Spacer(),
+                    ShadButton.outline(
+                      icon: const HeroIcon(HeroIcons.paperAirplane, size: 24),
+                      size: ShadButtonSize.icon,
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ],
+            ).hPadding,
+          ),
+        ],
       ),
     );
   }
@@ -43,37 +121,39 @@ class ChatHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Text(
-          'Hey, Baimam of Xenora 👋',
-          style: context.head,
-        ).floatL,
-        Text(
-          'How can I help you today?',
-          style:
-              context.paragraph.copyWith(color: context.colorScheme.selection),
-        ).floatL,
-        14.vGap,
-        const ChatSuggestions(),
-        14.vGap,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Recent Chats',
-              style: context.paragraph,
-            ),
-            HeroIcon(
-              HeroIcons.chevronRight,
-              color: context.colorScheme.primary,
-              size: 16,
-            ),
-          ],
-        ),
-        //  8.vGap,
-        const RecentChats(),
-      ],
+    return Expanded(
+      child: ListView(
+        children: [
+          Text(
+            'Hey, Baimam of Xenora 👋',
+            style: context.head,
+          ).floatL.hPadding,
+          Text(
+            'How can I help you today?',
+            style: context.paragraph
+                .copyWith(color: context.colorScheme.selection),
+          ).floatL.hPadding,
+          14.vGap,
+          const ChatSuggestions().hPadding,
+          14.vGap,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Recent Chats',
+                style: context.paragraph,
+              ),
+              HeroIcon(
+                HeroIcons.chevronRight,
+                color: context.colorScheme.primary,
+                size: 16,
+              ),
+            ],
+          ).hPadding,
+          //  8.vGap,
+          const RecentChats().hPadding,
+        ],
+      ),
     );
   }
 }
