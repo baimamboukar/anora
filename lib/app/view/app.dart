@@ -25,7 +25,7 @@ class _AppState extends State<App> {
       darkTheme: ShadThemeData(
         textTheme: ShadTextTheme(
           family: 'Gilroy',
-          colorScheme: const ShadBlueColorScheme.dark(),
+          colorScheme: const ShadRedColorScheme.dark(),
         ),
         brightness: Brightness.dark,
         colorScheme: const ShadBlueColorScheme.dark(),

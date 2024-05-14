@@ -152,6 +152,7 @@ class ChatHome extends StatelessWidget {
           ).hPadding,
           //  8.vGap,
           const RecentChats().hPadding,
+          const Switcher(),
         ],
       ),
     );
