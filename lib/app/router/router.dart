@@ -50,5 +50,9 @@ class AppRouter extends $AppRouter {
           page: ApperanceConfigRoute.page,
           path: APPREARANCE_CONFIG_ROUTE,
         ),
+        AutoRoute(
+          page: MemberDetailsRoute.page,
+          path: MEMBER_DETAILS_ROUTE,
+        ),
       ];
 }

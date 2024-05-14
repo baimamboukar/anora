@@ -8,10 +8,12 @@ class ActionLabel extends StatelessWidget {
   const ActionLabel({
     required this.title,
     required this.icon,
+    this.trailing,
     super.key,
   });
   final String title;
   final HeroIcons icon;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,8 @@ class ActionLabel extends StatelessWidget {
             6.hGap,
             Text(title),
             const Spacer(),
+            if (trailing != null) trailing!,
+            8.hGap,
             const HeroIcon(
               HeroIcons.chevronRight,
               size: 10,

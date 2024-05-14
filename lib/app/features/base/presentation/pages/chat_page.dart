@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:anora/core/core.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -88,12 +87,12 @@ class _ChatPageState extends State<ChatPage> {
                         children: [
                           const Icon(Icons.keyboard_alt_outlined, size: 24)
                               .hPaddingx(8),
-                          AvatarGlow(
-                            // backgroundColor: context.colorScheme.background,
-                            child:
-                                const HeroIcon(HeroIcons.microphone, size: 24)
-                                    .hPaddingx(8),
-                          ),
+                          // AvatarGlow(
+                          // backgroundColor: context.colorScheme.background,
+                          //child:
+                          const HeroIcon(HeroIcons.microphone, size: 24)
+                              .hPaddingx(8),
+                          //),
                           const HeroIcon(HeroIcons.camera, size: 24)
                               .hPaddingx(8),
                         ],
@@ -152,7 +151,7 @@ class ChatHome extends StatelessWidget {
           ).hPadding,
           //  8.vGap,
           const RecentChats().hPadding,
-          const Switcher(),
+          //   const Switcher(),
         ],
       ),
     );
@@ -247,8 +246,8 @@ class Switcher extends StatelessWidget {
             color: context.colorScheme.muted,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Padding(
-            padding: EdgeInsets.all(4),
+          child: Padding(
+            padding: const EdgeInsets.all(4),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -256,11 +255,13 @@ class Switcher extends StatelessWidget {
                   title: 'Chat',
                   icon: HeroIcons.sparkles,
                   index: 0,
+                  activeIndex: index,
                 ),
                 SwitchTab(
                   title: 'Search',
                   icon: HeroIcons.documentText,
                   index: 1,
+                  activeIndex: index,
                 ),
               ],
             ),
@@ -275,12 +276,14 @@ class SwitchTab extends StatelessWidget {
   const SwitchTab({
     required this.index,
     required this.title,
+    required this.activeIndex,
     required this.icon,
     super.key,
   });
   final String title;
   final HeroIcons icon;
   final int index;
+  final int activeIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -293,14 +296,14 @@ class SwitchTab extends StatelessWidget {
         width: context.width * widthRatio / 2,
         height: 40,
         decoration: BoxDecoration(
-          color: focusIndex.value == index ? context.colorScheme.card : null,
+          color: activeIndex == index ? context.colorScheme.card : null,
           borderRadius: BorderRadius.circular(4),
         ),
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (focusIndex.value == index) ...[
+              if (activeIndex == index) ...[
                 HeroIcon(
                   icon,
                   color: context.colorScheme.primary,
