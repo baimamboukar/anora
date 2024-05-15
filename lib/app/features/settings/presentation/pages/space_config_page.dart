@@ -126,14 +126,12 @@ class _MembersPageState extends State<MembersPage> {
               TextButton(
                 onPressed: () {
                   final fruits = {
-                    'apple': 'Apple',
-                    'banana': 'Banana',
-                    'blueberry': 'Blueberry',
-                    'grapes': 'Grapes',
-                    'pineapple': 'Pineapple',
+                    'ADMIN': 'Admin',
+                    'MANAGER': 'Manager',
+                    'MEMBER': 'Member',
                   };
 
-                  showShadDialog(
+                  showShadDialog<void>(
                     context: context,
                     builder: (context) => ShadDialog(
                       title: const Text('Add New Member'),
@@ -141,78 +139,35 @@ class _MembersPageState extends State<MembersPage> {
                         'Provide necessary information to add a new member',
                       ),
                       content: Container(
-                        width: 375,
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Email',
-                                    textAlign: TextAlign.end,
-                                    style: context.textTheme.small,
-                                  ),
-                                ),
-                                16.vGap,
-                                const Expanded(
-                                  flex: 3,
-                                  child: ShadInput(),
-                                ),
-                              ],
+                            const ShadInput(
+                              placeholder: Text('alpha.romeo@xenora.org'),
                             ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Permission',
-                                    textAlign: TextAlign.end,
-                                    style: context.textTheme.small,
+                            SizedBox(
+                              height: 44,
+                              width: context.width,
+                              child: ShadSelect<String>(
+                                placeholder: const Text('Select a permission'),
+                                options: [
+                                  ...fruits.entries.map(
+                                    (e) => ShadOption(
+                                      value: e.key,
+                                      child: Text(e.value),
+                                    ),
                                   ),
-                                ),
-                                16.vGap,
-                                Expanded(
-                                  flex: 3,
-                                  child: ShadSelect<String>(
-                                    placeholder: const Text('Select a fruit'),
-                                    options: [
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                          32,
-                                          6,
-                                          6,
-                                          6,
-                                        ),
-                                        child: Text(
-                                          'Fruits',
-                                          style:
-                                              context.textTheme.muted.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: context
-                                                .colorScheme.popoverForeground,
-                                          ),
-                                          textAlign: TextAlign.start,
-                                        ),
-                                      ),
-                                      ...fruits.entries.map(
-                                        (e) => ShadOption(
-                                          value: e.key,
-                                          child: Text(e.value),
-                                        ),
-                                      ),
-                                    ],
-                                    selectedOptionBuilder: (context, value) =>
-                                        Text(fruits[value]!),
-                                  ),
-                                ),
-                              ],
+                                ],
+                                selectedOptionBuilder: (context, value) =>
+                                    Text(fruits[value]!),
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                      actions: const [ShadButton(text: Text('Save changes'))],
+                      ).hPadding,
+                      actions: const [ShadButton(text: Text('Confirm'))],
                     ),
                   );
                 },
