@@ -1,3 +1,4 @@
+import 'package:anora/app/router/router_paths.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -16,30 +17,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Center(
         child: ShadButton.outline(
-          text: const Text('Show Dialog'),
+          text: const Text('Auth'),
           onPressed: () {
-            showShadDialog<void>(
-              context: context,
-              builder: (context) => ShadDialog.alert(
-                title: const Text('Are you absolutely sure?'),
-                description: const Padding(
-                  padding: EdgeInsets.all(24),
-                  child: Text(
-                    'This action cannot be undone. This will permanently delete your account?',
-                  ),
-                ),
-                actions: [
-                  ShadButton.outline(
-                    text: const Text('Cancel'),
-                    onPressed: () => Navigator.of(context).pop(false),
-                  ),
-                  ShadButton(
-                    text: const Text('Continue'),
-                    onPressed: () => Navigator.of(context).pop(true),
-                  ),
-                ],
-              ),
-            );
+            context.router.pushNamed(LOGIN_ROUTE);
           },
         ),
       ),

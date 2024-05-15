@@ -54,5 +54,15 @@ class AppRouter extends $AppRouter {
           page: MemberDetailsRoute.page,
           path: MEMBER_DETAILS_ROUTE,
         ),
+
+        // Auth Routes
+        AutoRoute(
+          page: LoginRoute.page,
+          path: LOGIN_ROUTE,
+        ),
+        AutoRoute(
+          page: SignupRoute.page,
+          path: SIGNUP_ROUTE,
+        ),
       ];
 }

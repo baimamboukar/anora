@@ -8,4 +8,7 @@ get:
 	flutter pub get
 clean:
 	flutter clean
+	rm -r ios/Podfile.lock
+	flutter pub get
+	pod install --repo-update
 slang:
