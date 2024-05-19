@@ -2,11 +2,8 @@ import 'package:anora/app/features/anora/data/local_data_sources/anora_local_dat
 import 'package:anora/app/features/anora/data/models/models.dart';
 import 'package:anora/app/features/anora/data/remote_data_sources/anora_remote_data_source.dart';
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 
-@injectable
 abstract class AnoraRepository {
-  @factoryMethod
   static AnoraRepositoryImlp create(
     AnoraRemoteDataSource remoteDataSource,
     AnoraLocalDataSource localDataSource,

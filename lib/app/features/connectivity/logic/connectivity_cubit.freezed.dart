@@ -12,7 +12,7 @@ part of 'connectivity_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ConnectivityState {
@@ -93,24 +93,25 @@ class _$ConnectivityStateCopyWithImpl<$Res, $Val extends ConnectivityState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$ConnectivityStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$ConnectivityStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -118,9 +119,9 @@ class _$_Initial implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -208,29 +209,29 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements ConnectivityState {
-  const factory _Initial() = _$_Initial;
+  const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$_CheckingCopyWith<$Res> {
-  factory _$$_CheckingCopyWith(
-          _$_Checking value, $Res Function(_$_Checking) then) =
-      __$$_CheckingCopyWithImpl<$Res>;
+abstract class _$$CheckingImplCopyWith<$Res> {
+  factory _$$CheckingImplCopyWith(
+          _$CheckingImpl value, $Res Function(_$CheckingImpl) then) =
+      __$$CheckingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_CheckingCopyWithImpl<$Res>
-    extends _$ConnectivityStateCopyWithImpl<$Res, _$_Checking>
-    implements _$$_CheckingCopyWith<$Res> {
-  __$$_CheckingCopyWithImpl(
-      _$_Checking _value, $Res Function(_$_Checking) _then)
+class __$$CheckingImplCopyWithImpl<$Res>
+    extends _$ConnectivityStateCopyWithImpl<$Res, _$CheckingImpl>
+    implements _$$CheckingImplCopyWith<$Res> {
+  __$$CheckingImplCopyWithImpl(
+      _$CheckingImpl _value, $Res Function(_$CheckingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Checking implements _Checking {
-  const _$_Checking();
+class _$CheckingImpl implements _Checking {
+  const _$CheckingImpl();
 
   @override
   String toString() {
@@ -238,9 +239,9 @@ class _$_Checking implements _Checking {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Checking);
+        (other.runtimeType == runtimeType && other is _$CheckingImpl);
   }
 
   @override
@@ -328,29 +329,29 @@ class _$_Checking implements _Checking {
 }
 
 abstract class _Checking implements ConnectivityState {
-  const factory _Checking() = _$_Checking;
+  const factory _Checking() = _$CheckingImpl;
 }
 
 /// @nodoc
-abstract class _$$_ConnectedCopyWith<$Res> {
-  factory _$$_ConnectedCopyWith(
-          _$_Connected value, $Res Function(_$_Connected) then) =
-      __$$_ConnectedCopyWithImpl<$Res>;
+abstract class _$$ConnectedImplCopyWith<$Res> {
+  factory _$$ConnectedImplCopyWith(
+          _$ConnectedImpl value, $Res Function(_$ConnectedImpl) then) =
+      __$$ConnectedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ConnectedCopyWithImpl<$Res>
-    extends _$ConnectivityStateCopyWithImpl<$Res, _$_Connected>
-    implements _$$_ConnectedCopyWith<$Res> {
-  __$$_ConnectedCopyWithImpl(
-      _$_Connected _value, $Res Function(_$_Connected) _then)
+class __$$ConnectedImplCopyWithImpl<$Res>
+    extends _$ConnectivityStateCopyWithImpl<$Res, _$ConnectedImpl>
+    implements _$$ConnectedImplCopyWith<$Res> {
+  __$$ConnectedImplCopyWithImpl(
+      _$ConnectedImpl _value, $Res Function(_$ConnectedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Connected implements _Connected {
-  const _$_Connected();
+class _$ConnectedImpl implements _Connected {
+  const _$ConnectedImpl();
 
   @override
   String toString() {
@@ -358,9 +359,9 @@ class _$_Connected implements _Connected {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Connected);
+        (other.runtimeType == runtimeType && other is _$ConnectedImpl);
   }
 
   @override
@@ -448,29 +449,29 @@ class _$_Connected implements _Connected {
 }
 
 abstract class _Connected implements ConnectivityState {
-  const factory _Connected() = _$_Connected;
+  const factory _Connected() = _$ConnectedImpl;
 }
 
 /// @nodoc
-abstract class _$$_ReconnectedCopyWith<$Res> {
-  factory _$$_ReconnectedCopyWith(
-          _$_Reconnected value, $Res Function(_$_Reconnected) then) =
-      __$$_ReconnectedCopyWithImpl<$Res>;
+abstract class _$$ReconnectedImplCopyWith<$Res> {
+  factory _$$ReconnectedImplCopyWith(
+          _$ReconnectedImpl value, $Res Function(_$ReconnectedImpl) then) =
+      __$$ReconnectedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ReconnectedCopyWithImpl<$Res>
-    extends _$ConnectivityStateCopyWithImpl<$Res, _$_Reconnected>
-    implements _$$_ReconnectedCopyWith<$Res> {
-  __$$_ReconnectedCopyWithImpl(
-      _$_Reconnected _value, $Res Function(_$_Reconnected) _then)
+class __$$ReconnectedImplCopyWithImpl<$Res>
+    extends _$ConnectivityStateCopyWithImpl<$Res, _$ReconnectedImpl>
+    implements _$$ReconnectedImplCopyWith<$Res> {
+  __$$ReconnectedImplCopyWithImpl(
+      _$ReconnectedImpl _value, $Res Function(_$ReconnectedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Reconnected implements _Reconnected {
-  const _$_Reconnected();
+class _$ReconnectedImpl implements _Reconnected {
+  const _$ReconnectedImpl();
 
   @override
   String toString() {
@@ -478,9 +479,9 @@ class _$_Reconnected implements _Reconnected {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Reconnected);
+        (other.runtimeType == runtimeType && other is _$ReconnectedImpl);
   }
 
   @override
@@ -568,29 +569,29 @@ class _$_Reconnected implements _Reconnected {
 }
 
 abstract class _Reconnected implements ConnectivityState {
-  const factory _Reconnected() = _$_Reconnected;
+  const factory _Reconnected() = _$ReconnectedImpl;
 }
 
 /// @nodoc
-abstract class _$$_DisconnectedCopyWith<$Res> {
-  factory _$$_DisconnectedCopyWith(
-          _$_Disconnected value, $Res Function(_$_Disconnected) then) =
-      __$$_DisconnectedCopyWithImpl<$Res>;
+abstract class _$$DisconnectedImplCopyWith<$Res> {
+  factory _$$DisconnectedImplCopyWith(
+          _$DisconnectedImpl value, $Res Function(_$DisconnectedImpl) then) =
+      __$$DisconnectedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_DisconnectedCopyWithImpl<$Res>
-    extends _$ConnectivityStateCopyWithImpl<$Res, _$_Disconnected>
-    implements _$$_DisconnectedCopyWith<$Res> {
-  __$$_DisconnectedCopyWithImpl(
-      _$_Disconnected _value, $Res Function(_$_Disconnected) _then)
+class __$$DisconnectedImplCopyWithImpl<$Res>
+    extends _$ConnectivityStateCopyWithImpl<$Res, _$DisconnectedImpl>
+    implements _$$DisconnectedImplCopyWith<$Res> {
+  __$$DisconnectedImplCopyWithImpl(
+      _$DisconnectedImpl _value, $Res Function(_$DisconnectedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Disconnected implements _Disconnected {
-  const _$_Disconnected();
+class _$DisconnectedImpl implements _Disconnected {
+  const _$DisconnectedImpl();
 
   @override
   String toString() {
@@ -598,9 +599,9 @@ class _$_Disconnected implements _Disconnected {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Disconnected);
+        (other.runtimeType == runtimeType && other is _$DisconnectedImpl);
   }
 
   @override
@@ -688,5 +689,5 @@ class _$_Disconnected implements _Disconnected {
 }
 
 abstract class _Disconnected implements ConnectivityState {
-  const factory _Disconnected() = _$_Disconnected;
+  const factory _Disconnected() = _$DisconnectedImpl;
 }

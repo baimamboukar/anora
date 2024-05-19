@@ -2,11 +2,8 @@ import 'package:anora/app/features/settings/data/local_data_sources/settings_loc
 import 'package:anora/app/features/settings/data/models/models.dart';
 import 'package:anora/app/features/settings/data/remote_data_sources/settings_remote_data_source.dart';
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 
-@injectable
 abstract class SettingsRepository {
-  @factoryMethod
   static SettingsRepositoryImlp create(
     SettingsRemoteDataSource remoteDataSource,
     SettingsLocalDataSource localDataSource,
