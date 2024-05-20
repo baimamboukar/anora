@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Welcome to Anora, ${context.user!.names}'),
-            Text('Organization ${context.org}'),
+            Text('Organization: ${context.org!.name}'),
           ],
         ),
       ),

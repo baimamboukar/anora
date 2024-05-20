@@ -1,33 +1,42 @@
 import 'dart:math' as math;
 
+import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/core/core.dart';
+import 'package:anora/core/extensions/authx.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 @RoutePage()
-class ChatPage extends StatefulWidget {
+class ChatPage extends StatefulWidget implements AutoRouteWrapper {
   const ChatPage({super.key});
 
   @override
   State<ChatPage> createState() => _ChatPageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider<AuthCubit>(
+      create: (context) => AuthCubit(),
+      child: this,
+    );
+  }
 }
 
 class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
-    const userAvatar =
-        'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
     return AnoraPage(
       withoutSingleScroll: true,
       withPadding: false,
       appBar: AppBar(
         title: const Switcher(),
         centerTitle: true,
-        actions: const [
+        actions: [
           CircleAvatar(
-            backgroundImage: NetworkImage(userAvatar),
+            backgroundImage: NetworkImage(context.user!.photo),
           ),
         ],
       ),
