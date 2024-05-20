@@ -53,7 +53,7 @@ class Invitation {
           .toList(),
       'organization': organization,
       'subject': subject,
-      'text': text,
+      'html': text,
       'uid': uid,
       'on': on.millisecondsSinceEpoch,
       'role': role,
