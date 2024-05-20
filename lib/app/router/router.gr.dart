@@ -123,7 +123,7 @@ abstract class $AppRouter extends _i15.RootStackRouter {
     SpaceRoute.name: (routeData) {
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i14.SpacePage(),
+        child: _i15.WrappedRoute(child: const _i14.SpacePage()),
       );
     },
   };

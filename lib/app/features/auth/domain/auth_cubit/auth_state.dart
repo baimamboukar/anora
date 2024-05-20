@@ -15,4 +15,9 @@ abstract class AuthState with _$AuthState {
       _Authenticated;
   const factory AuthState.failure() = _Failure;
   const factory AuthState.logoutFailure() = _LogoutFailure;
+
+  /// Invitations
+  const factory AuthState.inviting() = _Inviting;
+  const factory AuthState.invited() = _Invited;
+  const factory AuthState.invitingFailed() = _InvitingFailed;
 }

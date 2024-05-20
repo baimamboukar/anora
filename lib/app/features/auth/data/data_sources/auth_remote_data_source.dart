@@ -1,8 +1,10 @@
+import 'package:anora/app/features/auth/data/models/invitation_model.dart';
 import 'package:anora/app/features/auth/data/models/organization_model.dart';
 import 'package:anora/app/features/auth/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:uuid/uuid.dart';
 
 class AuthRemoteDataSource {
@@ -102,5 +104,67 @@ class AuthRemoteDataSource {
     } catch (err) {
       return false;
     }
+  }
+
+  Future<Either<String, bool>> inviteUser(
+    String email,
+    String name,
+    String role,
+    String sender,
+    String org,
+    String orguid,
+  ) async {
+    final template = await _loadTemplate();
+    final templatex = _replacePlaceholders(template, {
+      'name': name,
+      'sender': sender,
+      'org': org,
+      'role': role,
+    });
+    try {
+      final invitation = Invitation(
+        on: DateTime.now(),
+        uid: const Uuid().v4(),
+        text: templatex,
+        subject: 'Invitation to Join $org on AnoraAI 💐',
+        organization: org,
+        from: From(
+          name: sender,
+          email: 'MS_RiPgsi@trial-yzkq340opj24d796.mlsender.net',
+        ),
+        role: role,
+        to: [
+          To(
+            email: email,
+            name: name,
+          ),
+        ],
+      );
+
+      await _firestore
+          .collection('invitations')
+          .doc(orguid)
+          .set(invitation.toMap());
+      return const Right(true);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<String> _loadTemplate() async {
+    try {
+      final file = rootBundle.loadString('assets/invitation.html');
+      return file;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  String _replacePlaceholders(String template, Map<String, String> variables) {
+    var templatex = '';
+    variables.forEach((key, value) {
+      templatex = template.replaceAll('{{$key}}', value);
+    });
+    return templatex;
   }
 }

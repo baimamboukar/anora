@@ -53,4 +53,25 @@ class AuthCubit extends Cubit<AuthState> {
       ),
     );
   }
+
+  ///===INVITATIONS===///
+  Future<void> sendInvitation(
+    String email,
+    String name,
+    String role,
+    String sender,
+    String org,
+    String orguid,
+  ) async {
+    final useCase = AuthUseCase(repo);
+    emit(const AuthState.inviting());
+    final result =
+        await useCase.inviteUser(email, name, role, sender, org, orguid);
+    result.fold(
+      (String error) => emit(const AuthState.invitingFailed()),
+      (bool success) => emit(
+        const AuthState.invited(),
+      ),
+    );
+  }
 }

@@ -1,56 +1,107 @@
-// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: lines_longer_than_80_chars, use_build_context_synchronously
 
 import 'dart:math' as math;
 
+import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/app/features/settings/settings.dart';
 import 'package:anora/app/router/router_paths.dart';
 import 'package:anora/core/core.dart';
 import 'package:anora/src/app/assets.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:image_stack/image_stack.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 @RoutePage()
-class SpacePage extends StatefulWidget {
+class SpacePage extends StatefulWidget implements AutoRouteWrapper {
   const SpacePage({super.key});
 
   @override
   State<SpacePage> createState() => _SpacePageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (context) => AuthCubit(),
+      child: this,
+    );
+  }
 }
 
 class _SpacePageState extends State<SpacePage> {
   @override
   Widget build(BuildContext context) {
-    return AnoraPage(
-      appBar: AppBar(
-        title: const Text('My Space'),
-      ),
-      child: Column(
-        children: [
-          const SpaceSumarry(),
-          14.vGap,
-          const ConfigBloc(
-            title: 'Integrations',
-            desc:
-                'Integrations let you contextualize your prompts based on your custom Entrepise Data. Browse Integrations and add the ones you care about',
-            content: IntegrationsList(),
-          ),
-          const ConfigBloc(
-            title: 'Members',
-            desc:
-                'Members are the people who have access to this space. You can add or remove members from this space',
-            content: MembersList(),
-          ),
-        ],
+    return BlocListener<AuthCubit, AuthState>(
+      listener: (context, state) {
+        state.maybeWhen(
+          orElse: () {},
+          invited: () async {
+            await context.router.maybePop();
+            ShadToaster.of(context).show(
+              ShadToast(
+                title: const Text('Success'),
+                description: const Text('The Invitation has been send'),
+                action: ShadButton.outline(
+                  text: const Text('Okay'),
+                  onPressed: () => ShadToaster.of(context).hide(),
+                ),
+              ),
+            );
+          },
+          invitingFailed: () {
+            ShadToaster.of(context).show(
+              ShadToast.destructive(
+                title: const Text('Uh oh! Something went wrong'),
+                description:
+                    const Text('There was a problem sending the invitation'),
+                action: ShadButton.destructive(
+                  text: const Text('Try again'),
+                  decoration: ShadDecoration(
+                    border: ShadBorder(
+                      color: context.colorScheme.destructiveForeground,
+                    ),
+                  ),
+                  onPressed: () => ShadToaster.of(context).hide(),
+                ),
+              ),
+            );
+          },
+        );
+      },
+      child: AnoraPage(
+        appBar: AppBar(
+          title: const Text('My Space'),
+        ),
+        child: Column(
+          children: [
+            const SpaceSumarry(),
+            14.vGap,
+            const ConfigBloc(
+              title: 'Integrations',
+              desc:
+                  'Integrations let you contextualize your prompts based on your custom Entrepise Data. Browse Integrations and add the ones you care about',
+              content: IntegrationsList(),
+            ),
+            ConfigBloc(
+              title: 'Members',
+              desc:
+                  'Members are the people who have access to this space. You can add or remove members from this space',
+              content: MembersList(contextX: context),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 class MembersList extends StatelessWidget {
-  const MembersList({super.key});
+  const MembersList({required this.contextX, super.key});
+  final BuildContext contextX;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +114,7 @@ class MembersList extends StatelessWidget {
           showDragHandle: true,
           //side: ShadSheetSide.bottom,
           context: context,
-          builder: (context) => const MembersPage(),
+          builder: (context) => MembersPage(contextX: contextX),
         );
       },
       child: Container(
@@ -99,8 +150,10 @@ class MembersList extends StatelessWidget {
 
 class MembersPage extends StatefulWidget {
   const MembersPage({
+    required this.contextX,
     super.key,
   });
+  final BuildContext contextX;
 
   @override
   State<MembersPage> createState() => _MembersPageState();
@@ -125,7 +178,7 @@ class _MembersPageState extends State<MembersPage> {
               const Spacer(),
               TextButton(
                 onPressed: () {
-                  final fruits = {
+                  final roles = {
                     'ADMIN': 'Admin',
                     'MANAGER': 'Manager',
                     'MEMBER': 'Member',
@@ -133,41 +186,9 @@ class _MembersPageState extends State<MembersPage> {
 
                   showShadDialog<void>(
                     context: context,
-                    builder: (context) => ShadDialog(
-                      title: const Text('Add New Member'),
-                      description: const Text(
-                        'Provide necessary information to add a new member',
-                      ),
-                      content: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            const ShadInput(
-                              placeholder: Text('alpha.romeo@xenora.org'),
-                            ),
-                            SizedBox(
-                              height: 44,
-                              width: context.width,
-                              child: ShadSelect<String>(
-                                placeholder: const Text('Select a permission'),
-                                options: [
-                                  ...fruits.entries.map(
-                                    (e) => ShadOption(
-                                      value: e.key,
-                                      child: Text(e.value),
-                                    ),
-                                  ),
-                                ],
-                                selectedOptionBuilder: (context, value) =>
-                                    Text(fruits[value]!),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ).hPadding,
-                      actions: const [ShadButton(text: Text('Confirm'))],
+                    builder: (context) => AddMemberAction(
+                      roles: roles,
+                      contextX: widget.contextX,
                     ),
                   );
                 },
@@ -219,6 +240,132 @@ class _MembersPageState extends State<MembersPage> {
           ),
         ],
       ).hPadding,
+    );
+  }
+}
+
+class AddMemberAction extends StatefulWidget {
+  const AddMemberAction({
+    required this.roles,
+    required this.contextX,
+    super.key,
+  });
+
+  final Map<String, String> roles;
+  final BuildContext contextX;
+
+  @override
+  State<AddMemberAction> createState() => _AddMemberActionState();
+}
+
+class _AddMemberActionState extends State<AddMemberAction> {
+  final formKey = GlobalKey<ShadFormState>();
+  late final TextEditingController nameController;
+  late final TextEditingController emailController;
+  late final TextEditingController permissionController;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController();
+    emailController = TextEditingController();
+    permissionController = TextEditingController();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => AuthCubit(),
+      child: ShadForm(
+        key: formKey,
+        child: ShadDialog(
+          title: const Text('Add New Member'),
+          description: const Text(
+            'Provide necessary information to add a new member',
+          ),
+          content: Container(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                ShadInputFormField(
+                  controller: nameController,
+                  placeholder: const Text('Name of Invitee'),
+                  validator: ValidationBuilder().required().build(),
+                ),
+                ShadInputFormField(
+                  controller: emailController,
+                  placeholder: const Text('alpha.romeo@xenora.org'),
+                  keyboardType: TextInputType.emailAddress,
+                  validator: ValidationBuilder()
+                      .email()
+                      .required()
+                      .maxLength(25)
+                      .build(),
+                ),
+                SizedBox(
+                  height: 50,
+                  width: context.width,
+                  child: ShadSelectFormField<String>(
+                    minWidth: context.width,
+                    onSaved: (industry) {
+                      if (industry != null) {
+                        permissionController.text = industry;
+                      }
+                    },
+                    onChanged: (industry) {
+                      if (industry != null) {
+                        permissionController.text = industry;
+                      }
+                    },
+                    onReset: () => permissionController.clear(),
+                    placeholder: const Text('Select a permission'),
+                    options: [
+                      ...widget.roles.entries.map(
+                        (role) => ShadOption(
+                          value: role.key,
+                          child: Text(role.value),
+                        ),
+                      ),
+                    ],
+                    selectedOptionBuilder: (context, value) =>
+                        Text(widget.roles[value]!),
+                  ),
+                ),
+              ],
+            ),
+          ).hPadding,
+          actions: [
+            BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  orElse: () => ShadButton(
+                    onPressed: () async {
+                      if (formKey.currentState!.saveAndValidate()) {
+                        await widget.contextX.read<AuthCubit>().sendInvitation(
+                              emailController.text,
+                              nameController.text.trim(),
+                              permissionController.text,
+                              'Baimam Boukar',
+                              'Xenora',
+                              'afnr-adej83-adef',
+                            );
+                      }
+                    },
+                    text: const Text('Confirm'),
+                  ),
+                  inviting: () => ShadButton(
+                    enabled: false,
+                    icon: const CupertinoActivityIndicator().hPaddingx(8),
+                    text: const Text('Inviting...'),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

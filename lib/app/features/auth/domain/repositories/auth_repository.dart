@@ -24,6 +24,14 @@ abstract class AuthRepository {
     String password,
     String industry,
   );
+  Future<Either<String, bool>> inviteUser(
+    String email,
+    String name,
+    String role,
+    String sender,
+    String org,
+    String orguid,
+  );
 }
 
 class AuthRepositoryImlp extends AuthRepository {
@@ -83,6 +91,29 @@ class AuthRepositoryImlp extends AuthRepository {
   @override
   Future<Either<String, bool>> logout() async {
     final result = await _remoteDataSource.logout();
+    return result.fold(
+      (error) => Left(error),
+      (success) => Right(success),
+    );
+  }
+
+  @override
+  Future<Either<String, bool>> inviteUser(
+    String email,
+    String name,
+    String role,
+    String sender,
+    String org,
+    String orguid,
+  ) async {
+    final result = await _remoteDataSource.inviteUser(
+      email,
+      name,
+      role,
+      sender,
+      org,
+      orguid,
+    );
     return result.fold(
       (error) => Left(error),
       (success) => Right(success),
