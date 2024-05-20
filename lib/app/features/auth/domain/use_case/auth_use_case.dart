@@ -12,7 +12,7 @@ class AuthUseCase {
 
   Future<Either<String, AnoraUser>> login(String email, String password) =>
       _repository.login(email, password);
-
+  Future<Either<String, bool>> logout() => _repository.logout();
   Future<Either<String, AnoraUser>> signup(
     String name,
     String email,

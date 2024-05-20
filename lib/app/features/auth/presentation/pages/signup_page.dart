@@ -3,6 +3,7 @@ import 'package:anora/app/router/router_paths.dart';
 import 'package:anora/core/core.dart';
 import 'package:anora/src/app/assets.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
@@ -74,6 +75,9 @@ class _SignupPageState extends State<SignupPage> {
           listener: (context, state) {
             state.maybeMap(
               orElse: () {},
+              authenticated: (user) {
+                context.router.replaceNamed('/');
+              },
               failure: (failure) async {
                 await showShadDialog<void>(
                   context: context,
@@ -175,52 +179,12 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
                   14.vGap,
-                  BlocBuilder<AuthCubit, AuthState>(
-                    builder: (context, state) {
-                      final isLoading =
-                          state.whenOrNull(singinUp: () => true) ?? false;
-                      return ShadButton(
-                        enabled: !isLoading,
-                        icon: const CircularProgressIndicator.adaptive(
-                          strokeWidth: 2,
-                        ),
-                        size: ShadButtonSize.sm,
-                        width: context.width,
-                        text: const Text('Signup'),
-                        onPressed: () async {
-                          if (formKey.currentState!.saveAndValidate()) {
-                            // Send to Firebase
-                            await context.read<AuthCubit>().signup(
-                                  nameController.text.trim(),
-                                  emailController.text.trim(),
-                                  passwordController.text,
-                                  industryController.text,
-                                );
-                          } else {
-                            // Process
-                            ShadToaster.of(context).show(
-                              ShadToast.destructive(
-                                title: const Text('Input Validation'),
-                                description: const Text(
-                                  'Please make sure all fields are filled correctly',
-                                ),
-                                action: ShadButton.destructive(
-                                  text: const Text('Try again'),
-                                  decoration: ShadDecoration(
-                                    border: ShadBorder(
-                                      color: context
-                                          .colorScheme.destructiveForeground,
-                                    ),
-                                  ),
-                                  onPressed: () =>
-                                      ShadToaster.of(context).hide(),
-                                ),
-                              ),
-                            );
-                          }
-                        },
-                      );
-                    },
+                  SingupAction(
+                    formKey: formKey,
+                    nameController: nameController,
+                    emailController: emailController,
+                    passwordController: passwordController,
+                    industryController: industryController,
                   ).floatC,
                   34.vGap,
                   TextButton(
@@ -244,6 +208,67 @@ class _SignupPageState extends State<SignupPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SingupAction extends StatelessWidget {
+  const SingupAction({
+    required this.formKey,
+    required this.nameController,
+    required this.emailController,
+    required this.passwordController,
+    required this.industryController,
+    super.key,
+  });
+
+  final GlobalKey<ShadFormState> formKey;
+  final TextEditingController nameController;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final TextEditingController industryController;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthCubit, AuthState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          orElse: () => ShadButton(
+            size: ShadButtonSize.sm,
+            width: context.width,
+            text: const Text('Signup'),
+            onPressed: () async {
+              if (formKey.currentState!.saveAndValidate()) {
+                // Send to Firebase
+                await context.read<AuthCubit>().signup(
+                      nameController.text.trim(),
+                      emailController.text.trim(),
+                      passwordController.text,
+                      industryController.text,
+                    );
+              }
+            },
+          ),
+          singinUp: () => ShadButton(
+            enabled: false,
+            icon: const CupertinoActivityIndicator().hPaddingx(8),
+            size: ShadButtonSize.sm,
+            width: context.width,
+            text: const Text('Please wait...'),
+            onPressed: () async {
+              if (formKey.currentState!.saveAndValidate()) {
+                // Send to Firebase
+                await context.read<AuthCubit>().signup(
+                      nameController.text.trim(),
+                      emailController.text.trim(),
+                      passwordController.text,
+                      industryController.text,
+                    );
+              }
+            },
+          ),
+        );
+      },
     );
   }
 }

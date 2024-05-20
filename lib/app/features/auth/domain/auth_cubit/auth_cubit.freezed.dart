@@ -21,8 +21,11 @@ mixin _$AuthState {
     required TResult Function() initial,
     required TResult Function() logginIn,
     required TResult Function() singinUp,
+    required TResult Function() loginOut,
+    required TResult Function() loggedOut,
     required TResult Function(AnoraUser user) authenticated,
     required TResult Function() failure,
+    required TResult Function() logoutFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,8 +33,11 @@ mixin _$AuthState {
     TResult? Function()? initial,
     TResult? Function()? logginIn,
     TResult? Function()? singinUp,
+    TResult? Function()? loginOut,
+    TResult? Function()? loggedOut,
     TResult? Function(AnoraUser user)? authenticated,
     TResult? Function()? failure,
+    TResult? Function()? logoutFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,8 +45,11 @@ mixin _$AuthState {
     TResult Function()? initial,
     TResult Function()? logginIn,
     TResult Function()? singinUp,
+    TResult Function()? loginOut,
+    TResult Function()? loggedOut,
     TResult Function(AnoraUser user)? authenticated,
     TResult Function()? failure,
+    TResult Function()? logoutFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,8 +58,11 @@ mixin _$AuthState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_LogginIn value) logginIn,
     required TResult Function(_SigninUp value) singinUp,
+    required TResult Function(_LoginOut value) loginOut,
+    required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_LogoutFailure value) logoutFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,8 +70,11 @@ mixin _$AuthState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LogginIn value)? logginIn,
     TResult? Function(_SigninUp value)? singinUp,
+    TResult? Function(_LoginOut value)? loginOut,
+    TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_Authenticated value)? authenticated,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_LogoutFailure value)? logoutFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,8 +82,11 @@ mixin _$AuthState {
     TResult Function(_Initial value)? initial,
     TResult Function(_LogginIn value)? logginIn,
     TResult Function(_SigninUp value)? singinUp,
+    TResult Function(_LoginOut value)? loginOut,
+    TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Failure value)? failure,
+    TResult Function(_LogoutFailure value)? logoutFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -132,8 +150,11 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() logginIn,
     required TResult Function() singinUp,
+    required TResult Function() loginOut,
+    required TResult Function() loggedOut,
     required TResult Function(AnoraUser user) authenticated,
     required TResult Function() failure,
+    required TResult Function() logoutFailure,
   }) {
     return initial();
   }
@@ -144,8 +165,11 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? logginIn,
     TResult? Function()? singinUp,
+    TResult? Function()? loginOut,
+    TResult? Function()? loggedOut,
     TResult? Function(AnoraUser user)? authenticated,
     TResult? Function()? failure,
+    TResult? Function()? logoutFailure,
   }) {
     return initial?.call();
   }
@@ -156,8 +180,11 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? logginIn,
     TResult Function()? singinUp,
+    TResult Function()? loginOut,
+    TResult Function()? loggedOut,
     TResult Function(AnoraUser user)? authenticated,
     TResult Function()? failure,
+    TResult Function()? logoutFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -172,8 +199,11 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_LogginIn value) logginIn,
     required TResult Function(_SigninUp value) singinUp,
+    required TResult Function(_LoginOut value) loginOut,
+    required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_LogoutFailure value) logoutFailure,
   }) {
     return initial(this);
   }
@@ -184,8 +214,11 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LogginIn value)? logginIn,
     TResult? Function(_SigninUp value)? singinUp,
+    TResult? Function(_LoginOut value)? loginOut,
+    TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_Authenticated value)? authenticated,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_LogoutFailure value)? logoutFailure,
   }) {
     return initial?.call(this);
   }
@@ -196,8 +229,11 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_LogginIn value)? logginIn,
     TResult Function(_SigninUp value)? singinUp,
+    TResult Function(_LoginOut value)? loginOut,
+    TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Failure value)? failure,
+    TResult Function(_LogoutFailure value)? logoutFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -252,8 +288,11 @@ class _$LogginInImpl implements _LogginIn {
     required TResult Function() initial,
     required TResult Function() logginIn,
     required TResult Function() singinUp,
+    required TResult Function() loginOut,
+    required TResult Function() loggedOut,
     required TResult Function(AnoraUser user) authenticated,
     required TResult Function() failure,
+    required TResult Function() logoutFailure,
   }) {
     return logginIn();
   }
@@ -264,8 +303,11 @@ class _$LogginInImpl implements _LogginIn {
     TResult? Function()? initial,
     TResult? Function()? logginIn,
     TResult? Function()? singinUp,
+    TResult? Function()? loginOut,
+    TResult? Function()? loggedOut,
     TResult? Function(AnoraUser user)? authenticated,
     TResult? Function()? failure,
+    TResult? Function()? logoutFailure,
   }) {
     return logginIn?.call();
   }
@@ -276,8 +318,11 @@ class _$LogginInImpl implements _LogginIn {
     TResult Function()? initial,
     TResult Function()? logginIn,
     TResult Function()? singinUp,
+    TResult Function()? loginOut,
+    TResult Function()? loggedOut,
     TResult Function(AnoraUser user)? authenticated,
     TResult Function()? failure,
+    TResult Function()? logoutFailure,
     required TResult orElse(),
   }) {
     if (logginIn != null) {
@@ -292,8 +337,11 @@ class _$LogginInImpl implements _LogginIn {
     required TResult Function(_Initial value) initial,
     required TResult Function(_LogginIn value) logginIn,
     required TResult Function(_SigninUp value) singinUp,
+    required TResult Function(_LoginOut value) loginOut,
+    required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_LogoutFailure value) logoutFailure,
   }) {
     return logginIn(this);
   }
@@ -304,8 +352,11 @@ class _$LogginInImpl implements _LogginIn {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LogginIn value)? logginIn,
     TResult? Function(_SigninUp value)? singinUp,
+    TResult? Function(_LoginOut value)? loginOut,
+    TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_Authenticated value)? authenticated,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_LogoutFailure value)? logoutFailure,
   }) {
     return logginIn?.call(this);
   }
@@ -316,8 +367,11 @@ class _$LogginInImpl implements _LogginIn {
     TResult Function(_Initial value)? initial,
     TResult Function(_LogginIn value)? logginIn,
     TResult Function(_SigninUp value)? singinUp,
+    TResult Function(_LoginOut value)? loginOut,
+    TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Failure value)? failure,
+    TResult Function(_LogoutFailure value)? logoutFailure,
     required TResult orElse(),
   }) {
     if (logginIn != null) {
@@ -372,8 +426,11 @@ class _$SigninUpImpl implements _SigninUp {
     required TResult Function() initial,
     required TResult Function() logginIn,
     required TResult Function() singinUp,
+    required TResult Function() loginOut,
+    required TResult Function() loggedOut,
     required TResult Function(AnoraUser user) authenticated,
     required TResult Function() failure,
+    required TResult Function() logoutFailure,
   }) {
     return singinUp();
   }
@@ -384,8 +441,11 @@ class _$SigninUpImpl implements _SigninUp {
     TResult? Function()? initial,
     TResult? Function()? logginIn,
     TResult? Function()? singinUp,
+    TResult? Function()? loginOut,
+    TResult? Function()? loggedOut,
     TResult? Function(AnoraUser user)? authenticated,
     TResult? Function()? failure,
+    TResult? Function()? logoutFailure,
   }) {
     return singinUp?.call();
   }
@@ -396,8 +456,11 @@ class _$SigninUpImpl implements _SigninUp {
     TResult Function()? initial,
     TResult Function()? logginIn,
     TResult Function()? singinUp,
+    TResult Function()? loginOut,
+    TResult Function()? loggedOut,
     TResult Function(AnoraUser user)? authenticated,
     TResult Function()? failure,
+    TResult Function()? logoutFailure,
     required TResult orElse(),
   }) {
     if (singinUp != null) {
@@ -412,8 +475,11 @@ class _$SigninUpImpl implements _SigninUp {
     required TResult Function(_Initial value) initial,
     required TResult Function(_LogginIn value) logginIn,
     required TResult Function(_SigninUp value) singinUp,
+    required TResult Function(_LoginOut value) loginOut,
+    required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_LogoutFailure value) logoutFailure,
   }) {
     return singinUp(this);
   }
@@ -424,8 +490,11 @@ class _$SigninUpImpl implements _SigninUp {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LogginIn value)? logginIn,
     TResult? Function(_SigninUp value)? singinUp,
+    TResult? Function(_LoginOut value)? loginOut,
+    TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_Authenticated value)? authenticated,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_LogoutFailure value)? logoutFailure,
   }) {
     return singinUp?.call(this);
   }
@@ -436,8 +505,11 @@ class _$SigninUpImpl implements _SigninUp {
     TResult Function(_Initial value)? initial,
     TResult Function(_LogginIn value)? logginIn,
     TResult Function(_SigninUp value)? singinUp,
+    TResult Function(_LoginOut value)? loginOut,
+    TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Failure value)? failure,
+    TResult Function(_LogoutFailure value)? logoutFailure,
     required TResult orElse(),
   }) {
     if (singinUp != null) {
@@ -449,6 +521,282 @@ class _$SigninUpImpl implements _SigninUp {
 
 abstract class _SigninUp implements AuthState {
   const factory _SigninUp() = _$SigninUpImpl;
+}
+
+/// @nodoc
+abstract class _$$LoginOutImplCopyWith<$Res> {
+  factory _$$LoginOutImplCopyWith(
+          _$LoginOutImpl value, $Res Function(_$LoginOutImpl) then) =
+      __$$LoginOutImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoginOutImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$LoginOutImpl>
+    implements _$$LoginOutImplCopyWith<$Res> {
+  __$$LoginOutImplCopyWithImpl(
+      _$LoginOutImpl _value, $Res Function(_$LoginOutImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoginOutImpl implements _LoginOut {
+  const _$LoginOutImpl();
+
+  @override
+  String toString() {
+    return 'AuthState.loginOut()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoginOutImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() logginIn,
+    required TResult Function() singinUp,
+    required TResult Function() loginOut,
+    required TResult Function() loggedOut,
+    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function() failure,
+    required TResult Function() logoutFailure,
+  }) {
+    return loginOut();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? logginIn,
+    TResult? Function()? singinUp,
+    TResult? Function()? loginOut,
+    TResult? Function()? loggedOut,
+    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function()? failure,
+    TResult? Function()? logoutFailure,
+  }) {
+    return loginOut?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? logginIn,
+    TResult Function()? singinUp,
+    TResult Function()? loginOut,
+    TResult Function()? loggedOut,
+    TResult Function(AnoraUser user)? authenticated,
+    TResult Function()? failure,
+    TResult Function()? logoutFailure,
+    required TResult orElse(),
+  }) {
+    if (loginOut != null) {
+      return loginOut();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LogginIn value) logginIn,
+    required TResult Function(_SigninUp value) singinUp,
+    required TResult Function(_LoginOut value) loginOut,
+    required TResult Function(_LoggedOut value) loggedOut,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Failure value) failure,
+    required TResult Function(_LogoutFailure value) logoutFailure,
+  }) {
+    return loginOut(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LogginIn value)? logginIn,
+    TResult? Function(_SigninUp value)? singinUp,
+    TResult? Function(_LoginOut value)? loginOut,
+    TResult? Function(_LoggedOut value)? loggedOut,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_Failure value)? failure,
+    TResult? Function(_LogoutFailure value)? logoutFailure,
+  }) {
+    return loginOut?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LogginIn value)? logginIn,
+    TResult Function(_SigninUp value)? singinUp,
+    TResult Function(_LoginOut value)? loginOut,
+    TResult Function(_LoggedOut value)? loggedOut,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_LogoutFailure value)? logoutFailure,
+    required TResult orElse(),
+  }) {
+    if (loginOut != null) {
+      return loginOut(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoginOut implements AuthState {
+  const factory _LoginOut() = _$LoginOutImpl;
+}
+
+/// @nodoc
+abstract class _$$LoggedOutImplCopyWith<$Res> {
+  factory _$$LoggedOutImplCopyWith(
+          _$LoggedOutImpl value, $Res Function(_$LoggedOutImpl) then) =
+      __$$LoggedOutImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoggedOutImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$LoggedOutImpl>
+    implements _$$LoggedOutImplCopyWith<$Res> {
+  __$$LoggedOutImplCopyWithImpl(
+      _$LoggedOutImpl _value, $Res Function(_$LoggedOutImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoggedOutImpl implements _LoggedOut {
+  const _$LoggedOutImpl();
+
+  @override
+  String toString() {
+    return 'AuthState.loggedOut()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoggedOutImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() logginIn,
+    required TResult Function() singinUp,
+    required TResult Function() loginOut,
+    required TResult Function() loggedOut,
+    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function() failure,
+    required TResult Function() logoutFailure,
+  }) {
+    return loggedOut();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? logginIn,
+    TResult? Function()? singinUp,
+    TResult? Function()? loginOut,
+    TResult? Function()? loggedOut,
+    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function()? failure,
+    TResult? Function()? logoutFailure,
+  }) {
+    return loggedOut?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? logginIn,
+    TResult Function()? singinUp,
+    TResult Function()? loginOut,
+    TResult Function()? loggedOut,
+    TResult Function(AnoraUser user)? authenticated,
+    TResult Function()? failure,
+    TResult Function()? logoutFailure,
+    required TResult orElse(),
+  }) {
+    if (loggedOut != null) {
+      return loggedOut();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LogginIn value) logginIn,
+    required TResult Function(_SigninUp value) singinUp,
+    required TResult Function(_LoginOut value) loginOut,
+    required TResult Function(_LoggedOut value) loggedOut,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Failure value) failure,
+    required TResult Function(_LogoutFailure value) logoutFailure,
+  }) {
+    return loggedOut(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LogginIn value)? logginIn,
+    TResult? Function(_SigninUp value)? singinUp,
+    TResult? Function(_LoginOut value)? loginOut,
+    TResult? Function(_LoggedOut value)? loggedOut,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_Failure value)? failure,
+    TResult? Function(_LogoutFailure value)? logoutFailure,
+  }) {
+    return loggedOut?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LogginIn value)? logginIn,
+    TResult Function(_SigninUp value)? singinUp,
+    TResult Function(_LoginOut value)? loginOut,
+    TResult Function(_LoggedOut value)? loggedOut,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_LogoutFailure value)? logoutFailure,
+    required TResult orElse(),
+  }) {
+    if (loggedOut != null) {
+      return loggedOut(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoggedOut implements AuthState {
+  const factory _LoggedOut() = _$LoggedOutImpl;
 }
 
 /// @nodoc
@@ -518,8 +866,11 @@ class _$AuthenticatedImpl implements _Authenticated {
     required TResult Function() initial,
     required TResult Function() logginIn,
     required TResult Function() singinUp,
+    required TResult Function() loginOut,
+    required TResult Function() loggedOut,
     required TResult Function(AnoraUser user) authenticated,
     required TResult Function() failure,
+    required TResult Function() logoutFailure,
   }) {
     return authenticated(user);
   }
@@ -530,8 +881,11 @@ class _$AuthenticatedImpl implements _Authenticated {
     TResult? Function()? initial,
     TResult? Function()? logginIn,
     TResult? Function()? singinUp,
+    TResult? Function()? loginOut,
+    TResult? Function()? loggedOut,
     TResult? Function(AnoraUser user)? authenticated,
     TResult? Function()? failure,
+    TResult? Function()? logoutFailure,
   }) {
     return authenticated?.call(user);
   }
@@ -542,8 +896,11 @@ class _$AuthenticatedImpl implements _Authenticated {
     TResult Function()? initial,
     TResult Function()? logginIn,
     TResult Function()? singinUp,
+    TResult Function()? loginOut,
+    TResult Function()? loggedOut,
     TResult Function(AnoraUser user)? authenticated,
     TResult Function()? failure,
+    TResult Function()? logoutFailure,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -558,8 +915,11 @@ class _$AuthenticatedImpl implements _Authenticated {
     required TResult Function(_Initial value) initial,
     required TResult Function(_LogginIn value) logginIn,
     required TResult Function(_SigninUp value) singinUp,
+    required TResult Function(_LoginOut value) loginOut,
+    required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_LogoutFailure value) logoutFailure,
   }) {
     return authenticated(this);
   }
@@ -570,8 +930,11 @@ class _$AuthenticatedImpl implements _Authenticated {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LogginIn value)? logginIn,
     TResult? Function(_SigninUp value)? singinUp,
+    TResult? Function(_LoginOut value)? loginOut,
+    TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_Authenticated value)? authenticated,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_LogoutFailure value)? logoutFailure,
   }) {
     return authenticated?.call(this);
   }
@@ -582,8 +945,11 @@ class _$AuthenticatedImpl implements _Authenticated {
     TResult Function(_Initial value)? initial,
     TResult Function(_LogginIn value)? logginIn,
     TResult Function(_SigninUp value)? singinUp,
+    TResult Function(_LoginOut value)? loginOut,
+    TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Failure value)? failure,
+    TResult Function(_LogoutFailure value)? logoutFailure,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -644,8 +1010,11 @@ class _$FailureImpl implements _Failure {
     required TResult Function() initial,
     required TResult Function() logginIn,
     required TResult Function() singinUp,
+    required TResult Function() loginOut,
+    required TResult Function() loggedOut,
     required TResult Function(AnoraUser user) authenticated,
     required TResult Function() failure,
+    required TResult Function() logoutFailure,
   }) {
     return failure();
   }
@@ -656,8 +1025,11 @@ class _$FailureImpl implements _Failure {
     TResult? Function()? initial,
     TResult? Function()? logginIn,
     TResult? Function()? singinUp,
+    TResult? Function()? loginOut,
+    TResult? Function()? loggedOut,
     TResult? Function(AnoraUser user)? authenticated,
     TResult? Function()? failure,
+    TResult? Function()? logoutFailure,
   }) {
     return failure?.call();
   }
@@ -668,8 +1040,11 @@ class _$FailureImpl implements _Failure {
     TResult Function()? initial,
     TResult Function()? logginIn,
     TResult Function()? singinUp,
+    TResult Function()? loginOut,
+    TResult Function()? loggedOut,
     TResult Function(AnoraUser user)? authenticated,
     TResult Function()? failure,
+    TResult Function()? logoutFailure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -684,8 +1059,11 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_Initial value) initial,
     required TResult Function(_LogginIn value) logginIn,
     required TResult Function(_SigninUp value) singinUp,
+    required TResult Function(_LoginOut value) loginOut,
+    required TResult Function(_LoggedOut value) loggedOut,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_LogoutFailure value) logoutFailure,
   }) {
     return failure(this);
   }
@@ -696,8 +1074,11 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LogginIn value)? logginIn,
     TResult? Function(_SigninUp value)? singinUp,
+    TResult? Function(_LoginOut value)? loginOut,
+    TResult? Function(_LoggedOut value)? loggedOut,
     TResult? Function(_Authenticated value)? authenticated,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_LogoutFailure value)? logoutFailure,
   }) {
     return failure?.call(this);
   }
@@ -708,8 +1089,11 @@ class _$FailureImpl implements _Failure {
     TResult Function(_Initial value)? initial,
     TResult Function(_LogginIn value)? logginIn,
     TResult Function(_SigninUp value)? singinUp,
+    TResult Function(_LoginOut value)? loginOut,
+    TResult Function(_LoggedOut value)? loggedOut,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Failure value)? failure,
+    TResult Function(_LogoutFailure value)? logoutFailure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -721,4 +1105,142 @@ class _$FailureImpl implements _Failure {
 
 abstract class _Failure implements AuthState {
   const factory _Failure() = _$FailureImpl;
+}
+
+/// @nodoc
+abstract class _$$LogoutFailureImplCopyWith<$Res> {
+  factory _$$LogoutFailureImplCopyWith(
+          _$LogoutFailureImpl value, $Res Function(_$LogoutFailureImpl) then) =
+      __$$LogoutFailureImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LogoutFailureImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$LogoutFailureImpl>
+    implements _$$LogoutFailureImplCopyWith<$Res> {
+  __$$LogoutFailureImplCopyWithImpl(
+      _$LogoutFailureImpl _value, $Res Function(_$LogoutFailureImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LogoutFailureImpl implements _LogoutFailure {
+  const _$LogoutFailureImpl();
+
+  @override
+  String toString() {
+    return 'AuthState.logoutFailure()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LogoutFailureImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() logginIn,
+    required TResult Function() singinUp,
+    required TResult Function() loginOut,
+    required TResult Function() loggedOut,
+    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function() failure,
+    required TResult Function() logoutFailure,
+  }) {
+    return logoutFailure();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? logginIn,
+    TResult? Function()? singinUp,
+    TResult? Function()? loginOut,
+    TResult? Function()? loggedOut,
+    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function()? failure,
+    TResult? Function()? logoutFailure,
+  }) {
+    return logoutFailure?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? logginIn,
+    TResult Function()? singinUp,
+    TResult Function()? loginOut,
+    TResult Function()? loggedOut,
+    TResult Function(AnoraUser user)? authenticated,
+    TResult Function()? failure,
+    TResult Function()? logoutFailure,
+    required TResult orElse(),
+  }) {
+    if (logoutFailure != null) {
+      return logoutFailure();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LogginIn value) logginIn,
+    required TResult Function(_SigninUp value) singinUp,
+    required TResult Function(_LoginOut value) loginOut,
+    required TResult Function(_LoggedOut value) loggedOut,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Failure value) failure,
+    required TResult Function(_LogoutFailure value) logoutFailure,
+  }) {
+    return logoutFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LogginIn value)? logginIn,
+    TResult? Function(_SigninUp value)? singinUp,
+    TResult? Function(_LoginOut value)? loginOut,
+    TResult? Function(_LoggedOut value)? loggedOut,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_Failure value)? failure,
+    TResult? Function(_LogoutFailure value)? logoutFailure,
+  }) {
+    return logoutFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LogginIn value)? logginIn,
+    TResult Function(_SigninUp value)? singinUp,
+    TResult Function(_LoginOut value)? loginOut,
+    TResult Function(_LoggedOut value)? loggedOut,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_LogoutFailure value)? logoutFailure,
+    required TResult orElse(),
+  }) {
+    if (logoutFailure != null) {
+      return logoutFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LogoutFailure implements AuthState {
+  const factory _LogoutFailure() = _$LogoutFailureImpl;
 }

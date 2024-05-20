@@ -29,6 +29,16 @@ class AuthRemoteDataSource {
     }
   }
 
+  Future<Either<String, bool>> logout() async {
+    try {
+      await _auth.signOut();
+
+      return const Right(true);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
   Future<Either<String, AnoraUser>> signup(
     String name,
     String email,

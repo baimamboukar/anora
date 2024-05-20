@@ -1,3 +1,4 @@
+import 'package:anora/app/router/guards/auth_guard.dart';
 import 'package:anora/app/router/router.gr.dart';
 import 'package:anora/app/router/router_paths.dart';
 import 'package:auto_route/auto_route.dart';
@@ -10,6 +11,7 @@ class AppRouter extends $AppRouter {
           page: RootRoute.page,
           path: '/',
           initial: true,
+          guards: [AuthGuard()],
           children: [
             AutoRoute(
               page: HomeRoute.page,

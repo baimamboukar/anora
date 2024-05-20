@@ -14,6 +14,8 @@ abstract class AuthRepository {
       AuthRepositoryImlp(remoteDataSource, localDataSource);
 
   Future<Either<String, AuthModel>> get(String id);
+
+  Future<Either<String, bool>> logout();
   Future<Either<String, AnoraUser>> login(String email, String password);
 
   Future<Either<String, AnoraUser>> signup(
@@ -76,5 +78,14 @@ class AuthRepositoryImlp extends AuthRepository {
     } catch (e) {
       return Left(e.toString());
     }
+  }
+
+  @override
+  Future<Either<String, bool>> logout() async {
+    final result = await _remoteDataSource.logout();
+    return result.fold(
+      (error) => Left(error),
+      (success) => Right(success),
+    );
   }
 }

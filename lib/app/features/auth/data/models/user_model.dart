@@ -57,7 +57,7 @@ class AnoraUser {
       role: (map['role'] ?? '') as String,
       photo: (map['photo'] ?? '') as String,
       organizations: List<UserOrganization>.from(
-        (map['organizations'] as List<int>).map<UserOrganization>(
+        (map['organizations'] as List).map<UserOrganization>(
           (x) => UserOrganization.fromMap(x as Map<String, dynamic>),
         ),
       ),

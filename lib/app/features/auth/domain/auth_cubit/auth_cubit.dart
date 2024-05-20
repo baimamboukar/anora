@@ -24,6 +24,7 @@ class AuthCubit extends Cubit<AuthState> {
     String industry,
   ) async {
     final useCase = AuthUseCase(repo);
+    emit(const AuthState.singinUp());
     final result = await useCase.signup(name, email, password, industry);
     result.fold(
       (String error) => emit(const AuthState.failure()),
@@ -33,10 +34,23 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> login(String email, String pass) async {
     final useCase = AuthUseCase(repo);
+    emit(const AuthState.logginIn());
     final result = await useCase.login(email, pass);
     result.fold(
       (String error) => emit(const AuthState.failure()),
       (AnoraUser user) => emit(AuthState.authenticated(user: user)),
+    );
+  }
+
+  Future<void> logout() async {
+    final useCase = AuthUseCase(repo);
+    emit(const AuthState.loginOut());
+    final result = await useCase.logout();
+    result.fold(
+      (String error) => emit(const AuthState.logoutFailure()),
+      (bool success) => emit(
+        const AuthState.loggedOut(),
+      ),
     );
   }
 }

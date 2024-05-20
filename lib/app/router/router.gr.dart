@@ -87,7 +87,7 @@ abstract class $AppRouter extends _i15.RootStackRouter {
     LoginRoute.name: (routeData) {
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.LoginPage(),
+        child: _i15.WrappedRoute(child: const _i8.LoginPage()),
       );
     },
     MemberDetailsRoute.name: (routeData) {
@@ -105,7 +105,7 @@ abstract class $AppRouter extends _i15.RootStackRouter {
     ProfileRoute.name: (routeData) {
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i11.ProfilePage(),
+        child: _i15.WrappedRoute(child: const _i11.ProfilePage()),
       );
     },
     RootRoute.name: (routeData) {
@@ -117,7 +117,7 @@ abstract class $AppRouter extends _i15.RootStackRouter {
     SignupRoute.name: (routeData) {
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i13.SignupPage(),
+        child: _i15.WrappedRoute(child: const _i13.SignupPage()),
       );
     },
     SpaceRoute.name: (routeData) {
