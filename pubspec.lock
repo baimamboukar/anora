@@ -113,14 +113,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  boxy:
-    dependency: transitive
-    description:
-      name: boxy
-      sha256: eaa774ff591191b86f2eb8e8eae878aec50604404b74388a27e655cf3aadf758
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   build:
     dependency: transitive
     description:
@@ -1201,10 +1193,10 @@ packages:
     dependency: "direct main"
     description:
       name: shadcn_ui
-      sha256: af7956e5045ef81fbcafcce7733875e904547cd401141cd91d574ca5107392f2
+      sha256: fcae01dac0a3120c36458e6082b0554f5bca26400c3f768ae96b87c6f3553296
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.3"
+    version: "0.4.7"
   shelf:
     dependency: transitive
     description:
