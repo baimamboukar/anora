@@ -6,7 +6,10 @@ class UserOrganization {
   final String logo;
   final String uid;
   final bool verified;
+  final String industry;
+
   UserOrganization({
+    required this.industry,
     required this.name,
     required this.logo,
     required this.uid,
@@ -18,8 +21,10 @@ class UserOrganization {
     String? logo,
     String? uid,
     bool? verified,
+    String? industry,
   }) {
     return UserOrganization(
+      industry: industry ?? this.industry,
       name: name ?? this.name,
       logo: logo ?? this.logo,
       uid: uid ?? this.uid,
@@ -32,6 +37,7 @@ class UserOrganization {
       'name': name,
       'logo': logo,
       'uid': uid,
+      'industry': industry,
       'verified': verified,
     };
   }
@@ -42,6 +48,7 @@ class UserOrganization {
       logo: (map['logo'] ?? '') as String,
       uid: (map['uid'] ?? '') as String,
       verified: (map['verified'] ?? false) as bool,
+      industry: (map['industry'] ?? '') as String,
     );
   }
 

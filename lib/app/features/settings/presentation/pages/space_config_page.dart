@@ -6,6 +6,7 @@ import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/app/features/settings/settings.dart';
 import 'package:anora/app/router/router_paths.dart';
 import 'package:anora/core/core.dart';
+import 'package:anora/core/extensions/authx.dart';
 import 'package:anora/src/app/assets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
@@ -74,7 +75,7 @@ class _SpacePageState extends State<SpacePage> {
       },
       child: AnoraPage(
         appBar: AppBar(
-          title: const Text('My Space'),
+          title: Text(context.org!.name),
         ),
         child: Column(
           children: [
@@ -427,16 +428,19 @@ class SpaceSumarry extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text('Xenora AI', style: context.title),
-                        4.hGap,
-                        const HeroIcon(
-                          HeroIcons.checkBadge,
-                          color: Colors.blue,
-                          size: 20,
+                        Text(context.org!.name, style: context.title),
+                        8.hGap,
+                        Visibility(
+                          visible: context.org!.verified,
+                          child: const HeroIcon(
+                            HeroIcons.checkBadge,
+                            color: Colors.green,
+                            size: 20,
+                          ),
                         ),
                       ],
                     ),
-                    Text('AI and Technologies', style: context.paragraph),
+                    Text(context.org!.industry, style: context.paragraph),
                     Text('54 Members', style: context.desc),
                   ],
                 ),

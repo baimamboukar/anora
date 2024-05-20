@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:anora/app/features/auth/data/models/organization_model.dart';
 
 class AnoraUser {
+  final String org;
   final String uid;
   final String names;
   final String email;
@@ -12,6 +13,7 @@ class AnoraUser {
 
   final List<UserOrganization> organizations;
   AnoraUser({
+    required this.org,
     required this.uid,
     required this.names,
     required this.email,
@@ -27,8 +29,10 @@ class AnoraUser {
     String? role,
     String? photo,
     List<UserOrganization>? organizations,
+    String? org,
   }) {
     return AnoraUser(
+      org: org ?? this.org,
       uid: uid ?? this.uid,
       names: names ?? this.names,
       email: email ?? this.email,
@@ -45,12 +49,14 @@ class AnoraUser {
       'email': email,
       'role': role,
       'photo': photo,
+      'org': org,
       'organizations': organizations.map((x) => x.toMap()).toList(),
     };
   }
 
   factory AnoraUser.fromMap(Map<String, dynamic> map) {
     return AnoraUser(
+      org: (map['org'] ?? '') as String,
       uid: (map['uid'] ?? '') as String,
       names: (map['names'] ?? '') as String,
       email: (map['email'] ?? '') as String,

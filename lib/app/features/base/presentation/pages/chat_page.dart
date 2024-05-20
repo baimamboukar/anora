@@ -24,6 +24,7 @@ class _ChatPageState extends State<ChatPage> {
       withPadding: false,
       appBar: AppBar(
         title: const Switcher(),
+        centerTitle: true,
         actions: const [
           CircleAvatar(
             backgroundImage: NetworkImage(userAvatar),

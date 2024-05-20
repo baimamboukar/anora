@@ -2,6 +2,7 @@ import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/app/features/settings/settings.dart';
 import 'package:anora/app/router/router_paths.dart';
 import 'package:anora/core/core.dart';
+import 'package:anora/core/extensions/authx.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,12 +64,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   leading: const CircleAvatar(
                     backgroundImage: NetworkImage(userAvatar),
                   ),
-                  title: const Text('Baimam Boukar JJ'),
-                  subtitle: const Text('baimamboukar@xenora.org'),
-                  trailing: HeroIcon(
-                    HeroIcons.checkBadge,
-                    color: theme.colorScheme.ring,
-                  ),
+                  title: Text(context.user!.names),
+                  subtitle: Text(context.user!.email),
+                  trailing: (context.org?.verified ?? false)
+                      ? const HeroIcon(
+                          HeroIcons.checkBadge,
+                          color: Colors.green,
+                        )
+                      : null,
                 ),
               ],
             ),

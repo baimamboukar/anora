@@ -1,4 +1,5 @@
 import 'package:anora/core/core.dart';
+import 'package:anora/core/extensions/authx.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class _ApperanceConfigPageState extends State<ApperanceConfigPage> {
   Widget build(BuildContext context) {
     return AnoraPage(
       appBar: AppBar(
-        title: const Text('My Space'),
+        title: Text(context.org!.name),
       ),
       child: const Column(
         children: [

@@ -1,6 +1,8 @@
 import 'package:anora/app/features/auth/data/models/invitation_model.dart';
 import 'package:anora/app/features/auth/data/models/organization_model.dart';
 import 'package:anora/app/features/auth/data/models/user_model.dart';
+import 'package:anora/core/constants/anora_constants.dart';
+import 'package:anora/core/extensions/stringx.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -55,17 +57,20 @@ class AuthRemoteDataSource {
       final user = userCredential.user;
       if (user != null) {
         // If signup is successful, save user data to Firestore
+        final orgidentifier = const Uuid().v4();
         final userData = AnoraUser(
+          org: orgidentifier,
           uid: user.uid,
           email: user.email!,
           names: name,
           role: 'ADMIN',
-          photo: 'USER_IMAGE',
+          photo: DEFAULT_PROFILE,
           organizations: [
             UserOrganization(
-              logo: 'ORG_LOGO',
-              name: 'Xenora',
-              uid: const Uuid().v4(),
+              logo: DEFAULT_ORG,
+              industry: industry,
+              name: name.toOrganizationName,
+              uid: orgidentifier,
               verified: false,
             ),
           ],
