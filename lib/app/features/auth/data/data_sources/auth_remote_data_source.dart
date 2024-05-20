@@ -119,20 +119,13 @@ class AuthRemoteDataSource {
     String org,
     String orguid,
   ) async {
-    final template = await _loadTemplate();
-    final templatex = _replacePlaceholders(template, {
-      'name': name,
-      'sender': sender,
-      'org': org,
-      'role': role,
-    });
     try {
       final id = const Uuid().v4();
 
       final invitation = Invitation(
         on: DateTime.now(),
         uid: id,
-        text: templatex,
+        text: '',
         subject: 'Invitation to Join $org on AnoraAI 💐',
         organization: org,
         from: From(
@@ -147,11 +140,23 @@ class AuthRemoteDataSource {
           ),
         ],
       );
-
-      await _firestore
-          .collection('invitations')
-          .doc('$orguid-$id')
-          .set(invitation.toMap());
+      final link = Uri(
+        scheme: 'https',
+        host: 'anora.baimamboukar.dev',
+        path: 'invitation',
+        queryParameters: invitation.toMap(),
+      );
+      final template = await _loadTemplate();
+      final templatex = _replacePlaceholders(template, {
+        'name': name,
+        'sender': sender,
+        'org': org,
+        'role': role,
+        'link': link.toString(),
+      });
+      await _firestore.collection('invitations').doc('$orguid-$id').set(
+            invitation.copyWith(text: templatex).toMap(),
+          );
       return const Right(true);
     } catch (e) {
       return Left(e.toString());
@@ -160,7 +165,7 @@ class AuthRemoteDataSource {
 
   Future<String> _loadTemplate() async {
     try {
-      final file = rootBundle.loadString('assets/invitation.html');
+      final file = rootBundle.loadString('assets/email.html');
       return file;
     } catch (e) {
       rethrow;

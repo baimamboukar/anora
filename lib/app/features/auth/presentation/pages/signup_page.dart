@@ -1,3 +1,4 @@
+import 'package:anora/app/features/auth/data/models/invitation_model.dart';
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/app/router/router_paths.dart';
 import 'package:anora/core/constants/anora_constants.dart';
@@ -12,7 +13,8 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 
 @RoutePage()
 class SignupPage extends StatefulWidget implements AutoRouteWrapper {
-  const SignupPage({super.key});
+  const SignupPage({super.key, this.invitation});
+  final Invitation? invitation;
 
   @override
   State<SignupPage> createState() => _SignupPageState();
@@ -53,6 +55,7 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final fromInvitation = widget.invitation != null;
     return Scaffold(
       body: Center(
         child: BlocListener<AuthCubit, AuthState>(

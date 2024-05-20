@@ -8,6 +8,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:anora/app/features/auth/data/models/invitation_model.dart'
+    as _i17;
 import 'package:anora/app/features/auth/presentation/pages/login_page.dart'
     as _i8;
 import 'package:anora/app/features/auth/presentation/pages/signup_page.dart'
@@ -36,6 +38,7 @@ import 'package:anora/app/features/settings/presentation/pages/notifications_con
 import 'package:anora/app/features/settings/presentation/pages/space_config_page.dart'
     as _i14;
 import 'package:auto_route/auto_route.dart' as _i15;
+import 'package:flutter/cupertino.dart' as _i16;
 
 abstract class $AppRouter extends _i15.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -57,7 +60,7 @@ abstract class $AppRouter extends _i15.RootStackRouter {
     ChatRoute.name: (routeData) {
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.ChatPage(),
+        child: _i15.WrappedRoute(child: const _i3.ChatPage()),
       );
     },
     ChatsConfigRoute.name: (routeData) {
@@ -75,7 +78,7 @@ abstract class $AppRouter extends _i15.RootStackRouter {
     HomeRoute.name: (routeData) {
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.HomePage(),
+        child: _i15.WrappedRoute(child: const _i6.HomePage()),
       );
     },
     LanguageConfigRoute.name: (routeData) {
@@ -115,9 +118,15 @@ abstract class $AppRouter extends _i15.RootStackRouter {
       );
     },
     SignupRoute.name: (routeData) {
+      final args = routeData.argsAs<SignupRouteArgs>(
+          orElse: () => const SignupRouteArgs());
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(child: const _i13.SignupPage()),
+        child: _i15.WrappedRoute(
+            child: _i13.SignupPage(
+          key: args.key,
+          invitation: args.invitation,
+        )),
       );
     },
     SpaceRoute.name: (routeData) {
@@ -299,16 +308,40 @@ class RootRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i13.SignupPage]
-class SignupRoute extends _i15.PageRouteInfo<void> {
-  const SignupRoute({List<_i15.PageRouteInfo>? children})
-      : super(
+class SignupRoute extends _i15.PageRouteInfo<SignupRouteArgs> {
+  SignupRoute({
+    _i16.Key? key,
+    _i17.Invitation? invitation,
+    List<_i15.PageRouteInfo>? children,
+  }) : super(
           SignupRoute.name,
+          args: SignupRouteArgs(
+            key: key,
+            invitation: invitation,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'SignupRoute';
 
-  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
+  static const _i15.PageInfo<SignupRouteArgs> page =
+      _i15.PageInfo<SignupRouteArgs>(name);
+}
+
+class SignupRouteArgs {
+  const SignupRouteArgs({
+    this.key,
+    this.invitation,
+  });
+
+  final _i16.Key? key;
+
+  final _i17.Invitation? invitation;
+
+  @override
+  String toString() {
+    return 'SignupRouteArgs{key: $key, invitation: $invitation}';
+  }
 }
 
 /// generated route for

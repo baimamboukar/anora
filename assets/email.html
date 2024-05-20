@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Invitation</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+    <style>
+      .accept-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #28a745;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+      }
+      .accept-button:hover {
+        background-color: #218838;
+      }
+      .expect-section {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 20px 0;
+      }
+      .expect-item {
+        text-align: center;
+        width: 30%;
+      }
+      .expect-item img {
+        max-width: 100px;
+        height: auto;
+      }
+      .footer {
+        width: 100%;
+        height: 15%;
+        text-align: center;
+        margin-top: 20px;
+        background-color: "#020818";
+      }
+      .footer img {
+        width: 24px;
+        height: 24px;
+        margin: 0 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+
+    <center>
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/anora-ai.appspot.com/o/icons8-sparkle-96.png?alt=media&token=6260b4a6-e57b-4107-88e2-6852199f29d0"
+        alt="AnoraAI"
+      />
+      <h1>Anora AI</h1>
+
+      <h2>Hello {{name}} 👋,</h2>
+      <p>You have been invited by {{sender}} to join {{org}} on AnoraAI ✨</p>
+    </center>
+    <center>
+      <a href="{{link}}" target="_blank" class="accept-button"
+        >Accept Invitation</a
+      >
+    </center>
+
+    <center><h2>What to Expect on AnoraAI</h2></center>
+    <div class="expect-section">
+      <div class="expect-item">
+        <img src="https://via.placeholder.com/100" alt="Feature 1" />
+        <h3>Organize Your Data</h3>
+        <p>Description of feature 1.</p>
+      </div>
+      <div class="expect-item">
+        <img src="https://via.placeholder.com/100" alt="Feature 2" />
+        <h3>Collaborate With Your Team</h3>
+        <p>Description of feature 2.</p>
+      </div>
+      <div class="expect-item">
+        <img src="https://via.placeholder.com/100" alt="Feature 3" />
+        <h3>Unlock 10x Productivity</h3>
+        <p>Description of feature 3.</p>
+      </div>
+    </div>
+
+    If you could not accept the invitation from the CTA, please click on this
+    link {{link}}
+    <div class="footer">
+      <hr
+        style="
+          border: 0;
+          border-top: 1px solid #eee;
+          margin: 20px 0;
+          background-color: #020818;
+        "
+      />
+      <p style="font-size: 18px; color: #888">Follow us on</p>
+      <div style="display: flex; justify-content: center; align-items: center">
+        <a href="https://x.com/anora" style="margin: 0 10px">
+          <img
+            src="https://via.placeholder.com/24/0000FF/FFFFFF?text=X"
+            alt="X"
+            style="width: 24px; height: 24px"
+          />
+        </a>
+        <a href="https://wa.me/+237690535759" style="margin: 0 10px">
+          <img
+            src="https://via.placeholder.com/24/25D366/FFFFFF?text=W"
+            alt="WhatsApp"
+            style="width: 24px; height: 24px"
+          />
+        </a>
+        <a href="https://instagram.com/anora" style="margin: 0 10px">
+          <img
+            src="https://via.placeholder.com/24/E1306C/FFFFFF?text=I"
+            alt="Instagram"
+            style="width: 24px; height: 24px"
+          />
+        </a>
+      </div>
+      <p style="font-size: 12px; color: #888; margin-top: 10px">
+        &copy; 2024 AnoraAI. All rights reserved.
+      </p>
+    </div>
+
+    <script src="" async defer></script>
+  </body>
+</html>
