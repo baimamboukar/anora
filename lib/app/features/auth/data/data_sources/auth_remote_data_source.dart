@@ -127,9 +127,11 @@ class AuthRemoteDataSource {
       'role': role,
     });
     try {
+      final id = const Uuid().v4();
+
       final invitation = Invitation(
         on: DateTime.now(),
-        uid: const Uuid().v4(),
+        uid: id,
         text: templatex,
         subject: 'Invitation to Join $org on AnoraAI 💐',
         organization: org,
@@ -148,7 +150,7 @@ class AuthRemoteDataSource {
 
       await _firestore
           .collection('invitations')
-          .doc(orguid)
+          .doc('$orguid-$id')
           .set(invitation.toMap());
       return const Right(true);
     } catch (e) {

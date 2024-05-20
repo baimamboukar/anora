@@ -7,7 +7,7 @@ import 'package:anora/app/features/settings/settings.dart';
 import 'package:anora/app/router/router_paths.dart';
 import 'package:anora/core/core.dart';
 import 'package:anora/core/extensions/authx.dart';
-import 'package:anora/src/app/assets.dart';
+import 'package:anora/core/extensions/stringx.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -348,9 +348,9 @@ class _AddMemberActionState extends State<AddMemberAction> {
                               emailController.text,
                               nameController.text.trim(),
                               permissionController.text,
-                              'Baimam Boukar',
-                              'Xenora',
-                              'message-id-001',
+                              context.user!.names,
+                              context.org!.name,
+                              context.org!.uid,
                             );
                       }
                     },
@@ -419,7 +419,7 @@ class SpaceSumarry extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: context.colorScheme.foreground,
                     ),
-                    child: Image.asset(Assets.assetsLauncherIcon),
+                    child: Image.network(context.org!.logo),
                   ),
                 ),
                 8.hGap,
@@ -440,8 +440,11 @@ class SpaceSumarry extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Text(context.org!.industry, style: context.paragraph),
-                    Text('54 Members', style: context.desc),
+                    Text(
+                      context.org!.industry.toIndustryDisplayName,
+                      style: context.paragraph,
+                    ),
+                    Text('04 Members', style: context.desc),
                   ],
                 ),
               ],

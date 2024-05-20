@@ -1,5 +1,6 @@
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/app/router/router_paths.dart';
+import 'package:anora/core/constants/anora_constants.dart';
 import 'package:anora/core/core.dart';
 import 'package:anora/src/app/assets.dart';
 import 'package:auto_route/auto_route.dart';
@@ -52,23 +53,6 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    final industries = {
-      'TECH': 'Technologies',
-      'COMMUNITY-MANAGEMENT': 'Community Management',
-      'TECHNICAL-WRITING': 'Technical Writing',
-      'HEALTHCARE': 'Healthcare',
-      'EDUCATION': 'Education',
-      'CUSTOMER-SERVICE': 'Customer Service',
-      'FINANCE': 'Finance',
-      'E-COMMERCE': 'E-commerce',
-      'HUMAN-RESOURCES': 'Human Resources',
-      'TRAVEL': 'Travel',
-      'REAL-ESTATE': 'Real Estate',
-      'LEGAL': 'Legal',
-      'MARKETING': 'Marketing',
-      'OTHER': 'Other',
-    };
-
     return Scaffold(
       body: Center(
         child: BlocListener<AuthCubit, AuthState>(
