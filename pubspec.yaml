@@ -89,3 +89,11 @@ flutter_assets:
   assets_path: assets/
   output_path: lib/src/app/
   filename: assets.dart
+
+flutter_native_splash:
+  color: "#020818"
+  image: assets/launcher_icon.png
+  color_dark: "#121212"
+  image_dark: assets/launcher_icon.png
+
+  web: false
