@@ -1,3 +1,5 @@
+// ignore_for_file: parameter_assignments
+
 import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
@@ -66,30 +68,32 @@ class Invitation {
     };
   }
 
+  static Map<String, dynamic> _parseJsonString(String jsonString) {
+    jsonString = jsonString
+        .replaceAll('{', '{"')
+        .replaceAll('}', '"}')
+        .replaceAll(': ', '": "')
+        .replaceAll(', ', '", "');
+    return json.decode(jsonString) as Map<String, dynamic>;
+  }
+
   factory Invitation.fromMap(
     Map<String, dynamic> map, {
     bool fromInvite = false,
   }) {
+    var fromMap = <String, dynamic>{};
+    var toMap = <String, dynamic>{};
+    if (fromInvite) {
+      fromMap = _parseJsonString(map['from'] as String);
+      toMap = _parseJsonString(map['to'] as String);
+    } else {
+      fromMap = map['from'] as Map<String, dynamic>;
+      toMap = map['to'] as Map<String, dynamic>;
+    }
     return Invitation(
       role: (map['role'] ?? '') as String,
-      from: fromInvite
-          ? From.fromMap(
-              json.decode(map['from'] as String) as Map<String, dynamic>,
-            )
-          : From.fromMap(map['from'] as Map<String, dynamic>),
-      to: fromInvite
-          ? List<To>.from(
-              (map['to'] as List).map<To>(
-                (x) => To.fromMap(
-                  json.decode(x as String) as Map<String, dynamic>,
-                ),
-              ),
-            )
-          : List<To>.from(
-              (map['to'] as List).map<To>(
-                (x) => To.fromMap(x as Map<String, dynamic>),
-              ),
-            ),
+      from: From.fromMap(fromMap),
+      to: [To.fromMap(toMap)],
       organization: (map['organization'] ?? '') as String,
       subject: (map['subject'] ?? '') as String,
       text: (map['text'] ?? '') as String,

@@ -34,7 +34,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="https" />
-                <data android:host="baimamboukar.dev" />
+                <data android:host="anora.baimamboukar.dev" />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.

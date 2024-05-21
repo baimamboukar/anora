@@ -279,8 +279,11 @@ class _AddMemberActionState extends State<AddMemberAction> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<InvitationsCubit>(create: (context) => InvitationsCubit()),
+        BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
+      ],
       child: ShadForm(
         key: formKey,
         child: ShadDialog(
