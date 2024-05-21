@@ -8,4 +8,14 @@ class SettingsUseCase {
 
   final SettingsRepository _repository;
   Future<Either<String, dynamic>> get(String id) => _repository.get(id);
+
+  Future<Either<String, bool>> inviteUser(
+    String email,
+    String name,
+    String role,
+    String sender,
+    String org,
+    String orguid,
+  ) =>
+      _repository.inviteUser(email, name, role, sender, org, orguid);
 }

@@ -3,6 +3,7 @@
 import 'dart:math' as math;
 
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
+import 'package:anora/app/features/settings/domain/auth_cubit/invitation_cubit.dart';
 import 'package:anora/app/features/settings/settings.dart';
 import 'package:anora/app/router/router_paths.dart';
 import 'package:anora/core/core.dart';
@@ -26,8 +27,11 @@ class SpacePage extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<InvitationsCubit>(create: (context) => InvitationsCubit()),
+        BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
+      ],
       child: this,
     );
   }
@@ -344,7 +348,9 @@ class _AddMemberActionState extends State<AddMemberAction> {
                   orElse: () => ShadButton(
                     onPressed: () async {
                       if (formKey.currentState!.saveAndValidate()) {
-                        await widget.contextX.read<AuthCubit>().sendInvitation(
+                        await widget.contextX
+                            .read<InvitationsCubit>()
+                            .sendInvitation(
                               emailController.text,
                               nameController.text.trim(),
                               permissionController.text,

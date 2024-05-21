@@ -25,13 +25,4 @@ class AuthUseCase {
         password,
         industry,
       );
-  Future<Either<String, bool>> inviteUser(
-    String email,
-    String name,
-    String role,
-    String sender,
-    String org,
-    String orguid,
-  ) =>
-      _repository.inviteUser(email, name, role, sender, org, orguid);
 }

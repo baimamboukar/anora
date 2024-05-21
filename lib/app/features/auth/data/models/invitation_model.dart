@@ -43,37 +43,58 @@ class Invitation {
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap({bool forInvite = false}) {
     return <String, dynamic>{
-      'from': from.toMap(),
-      'to': to
-          .map(
-            (x) => x.toMap(),
-          )
-          .toList(),
+      'from': forInvite ? from.toMap().toString() : from.toMap(),
+      'to': forInvite
+          ? to
+              .map(
+                (x) => x.toMap().toString(),
+              )
+              .toList()
+          : to
+              .map(
+                (x) => x.toMap(),
+              )
+              .toList(),
       'organization': organization,
       'subject': subject,
       'html': text,
       'uid': uid,
-      'on': on.millisecondsSinceEpoch,
+      'on': on.toIso8601String(),
       'role': role,
     };
   }
 
-  factory Invitation.fromMap(Map<String, dynamic> map) {
+  factory Invitation.fromMap(
+    Map<String, dynamic> map, {
+    bool fromInvite = false,
+  }) {
     return Invitation(
       role: (map['role'] ?? '') as String,
-      from: From.fromMap(map['from'] as Map<String, dynamic>),
-      to: List<To>.from(
-        (map['to'] as List).map<To>(
-          (x) => To.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      from: fromInvite
+          ? From.fromMap(
+              json.decode(map['from'] as String) as Map<String, dynamic>,
+            )
+          : From.fromMap(map['from'] as Map<String, dynamic>),
+      to: fromInvite
+          ? List<To>.from(
+              (map['to'] as List).map<To>(
+                (x) => To.fromMap(
+                  json.decode(x as String) as Map<String, dynamic>,
+                ),
+              ),
+            )
+          : List<To>.from(
+              (map['to'] as List).map<To>(
+                (x) => To.fromMap(x as Map<String, dynamic>),
+              ),
+            ),
       organization: (map['organization'] ?? '') as String,
       subject: (map['subject'] ?? '') as String,
       text: (map['text'] ?? '') as String,
       uid: (map['uid'] ?? '') as String,
-      on: DateTime.fromMillisecondsSinceEpoch((map['on'] ?? 0) as int),
+      on: DateTime.parse((map['on'] ?? '') as String),
     );
   }
 

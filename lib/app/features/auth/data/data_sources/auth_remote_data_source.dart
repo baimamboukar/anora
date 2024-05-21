@@ -1,4 +1,5 @@
-import 'package:anora/app/features/auth/data/models/invitation_model.dart';
+// ignore_for_file: parameter_assignments
+
 import 'package:anora/app/features/auth/data/models/organization_model.dart';
 import 'package:anora/app/features/auth/data/models/user_model.dart';
 import 'package:anora/core/constants/anora_constants.dart';
@@ -6,7 +7,6 @@ import 'package:anora/core/extensions/stringx.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:uuid/uuid.dart';
 
 class AuthRemoteDataSource {
@@ -109,74 +109,5 @@ class AuthRemoteDataSource {
     } catch (err) {
       return false;
     }
-  }
-
-  Future<Either<String, bool>> inviteUser(
-    String email,
-    String name,
-    String role,
-    String sender,
-    String org,
-    String orguid,
-  ) async {
-    try {
-      final id = const Uuid().v4();
-
-      final invitation = Invitation(
-        on: DateTime.now(),
-        uid: id,
-        text: '',
-        subject: 'Invitation to Join $org on AnoraAI 💐',
-        organization: org,
-        from: From(
-          name: sender,
-          email: 'MS_RiPgsi@trial-yzkq340opj24d796.mlsender.net',
-        ),
-        role: role,
-        to: [
-          To(
-            email: email,
-            name: name,
-          ),
-        ],
-      );
-      final link = Uri(
-        scheme: 'https',
-        host: 'anora.baimamboukar.dev',
-        path: 'invitation',
-        queryParameters: invitation.toMap(),
-      );
-      final template = await _loadTemplate();
-      final templatex = _replacePlaceholders(template, {
-        'name': name,
-        'sender': sender,
-        'org': org,
-        'role': role,
-        'link': link.toString(),
-      });
-      await _firestore.collection('invitations').doc('$orguid-$id').set(
-            invitation.copyWith(text: templatex).toMap(),
-          );
-      return const Right(true);
-    } catch (e) {
-      return Left(e.toString());
-    }
-  }
-
-  Future<String> _loadTemplate() async {
-    try {
-      final file = rootBundle.loadString('assets/email.html');
-      return file;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  String _replacePlaceholders(String template, Map<String, String> variables) {
-    var templatex = '';
-    variables.forEach((key, value) {
-      templatex = template.replaceAll('{{$key}}', value);
-    });
-    return templatex;
   }
 }

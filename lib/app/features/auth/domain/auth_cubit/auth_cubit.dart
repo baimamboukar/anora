@@ -54,27 +54,6 @@ class AuthCubit extends HydratedCubit<AuthState> {
     );
   }
 
-  ///===INVITATIONS===///
-  Future<void> sendInvitation(
-    String email,
-    String name,
-    String role,
-    String sender,
-    String org,
-    String orguid,
-  ) async {
-    final useCase = AuthUseCase(repo);
-    emit(const AuthState.inviting());
-    final result =
-        await useCase.inviteUser(email, name, role, sender, org, orguid);
-    result.fold(
-      (String error) => emit(const AuthState.invitingFailed()),
-      (bool success) => emit(
-        const AuthState.invited(),
-      ),
-    );
-  }
-
   @override
   AuthState? fromJson(Map<String, dynamic> json) {
     final userJson = json['user'] as Map<String, dynamic>;
@@ -86,10 +65,13 @@ class AuthCubit extends HydratedCubit<AuthState> {
 
   @override
   Map<String, dynamic>? toJson(AuthState state) {
-    return {
-      'user': state.mapOrNull(
-        authenticated: (authenticated) => authenticated.user.toMap(),
-      ),
-    };
+    return state.maybeMap(
+      authenticated: (state) => {
+        'user': state.user.toMap(),
+      },
+      orElse: () => {
+        'user': null,
+      },
+    );
   }
 }

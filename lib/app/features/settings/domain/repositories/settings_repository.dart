@@ -11,6 +11,15 @@ abstract class SettingsRepository {
       SettingsRepositoryImlp(remoteDataSource, localDataSource);
 
   Future<Either<String, SettingsModel>> get(String id);
+
+  Future<Either<String, bool>> inviteUser(
+    String email,
+    String name,
+    String role,
+    String sender,
+    String org,
+    String orguid,
+  );
 }
 
 class SettingsRepositoryImlp extends SettingsRepository {
@@ -33,5 +42,28 @@ class SettingsRepositoryImlp extends SettingsRepository {
     } catch (e) {
       return Left(e.toString());
     }
+  }
+
+  @override
+  Future<Either<String, bool>> inviteUser(
+    String email,
+    String name,
+    String role,
+    String sender,
+    String org,
+    String orguid,
+  ) async {
+    final result = await _remoteDataSource.inviteUser(
+      email,
+      name,
+      role,
+      sender,
+      org,
+      orguid,
+    );
+    return result.fold(
+      Left.new,
+      Right.new,
+    );
   }
 }
