@@ -32,7 +32,7 @@ class _AppState extends State<App> {
         deepLinkBuilder: (link) {
           if (link.path.contains('/invitation')) {
             final args = link.uri.queryParameters;
-            final invitation = Invitation.fromMap(args);
+            final invitation = Invitation.fromMap(args, fromInvite: true);
             return DeepLink(
               [
                 SignupRoute(invitation: invitation),

@@ -40,7 +40,7 @@ class SpacePage extends StatefulWidget implements AutoRouteWrapper {
 class _SpacePageState extends State<SpacePage> {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, AuthState>(
+    return BlocListener<InvitationsCubit, InvitationState>(
       listener: (context, state) {
         state.maybeWhen(
           orElse: () {},
@@ -342,7 +342,7 @@ class _AddMemberActionState extends State<AddMemberAction> {
             ),
           ).hPadding,
           actions: [
-            BlocBuilder<AuthCubit, AuthState>(
+            BlocBuilder<InvitationsCubit, InvitationState>(
               builder: (context, state) {
                 return state.maybeWhen(
                   orElse: () => ShadButton(
