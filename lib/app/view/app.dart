@@ -29,8 +29,9 @@ class _AppState extends State<App> {
         placeholder: (context) => const Center(
           child: CupertinoActivityIndicator(),
         ),
+        rebuildStackOnDeepLink: true,
         deepLinkBuilder: (link) {
-          if (link.path.contains('/invitation')) {
+          if (link.path.contains('invitation')) {
             final args = link.uri.queryParameters;
             final invitation = Invitation.fromMap(args, fromInvite: true);
             return DeepLink(
