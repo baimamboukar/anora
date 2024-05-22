@@ -28,7 +28,13 @@ class AuthCubit extends HydratedCubit<AuthState> {
   }) async {
     final useCase = AuthUseCase(repo);
     emit(const AuthState.singinUp());
-    final result = await useCase.signup(name, email, password, industry);
+    final result = await useCase.signup(
+      name,
+      email,
+      password,
+      industry,
+      invitation: invitation,
+    );
     result.fold(
       (String error) => emit(const AuthState.failure()),
       (tuple) => emit(

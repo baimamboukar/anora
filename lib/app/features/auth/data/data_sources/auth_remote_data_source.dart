@@ -67,6 +67,15 @@ class AuthRemoteDataSource {
         // If signup is successful, save user data to Firestore
         final orgidentifier = const Uuid().v4();
         final spaceID = const Uuid().v4();
+        final userSpace = fromInvitation
+            ? UserSpace(
+                spaceID: invitation.uid,
+                role: ADMIN_ROLE,
+              )
+            : UserSpace(
+                spaceID: spaceID,
+                role: ADMIN_ROLE,
+              );
         final userData = AnoraUser(
           org: orgidentifier,
           uid: user.uid,
@@ -74,13 +83,12 @@ class AuthRemoteDataSource {
           names: name,
           photo: DEFAULT_PROFILE,
           organizations: [
-            UserSpace(
-              spaceID: spaceID,
-              role: ADMIN_ROLE,
-            ),
+            userSpace,
           ],
         );
-        final member = SpaceMember(role: ADMIN_ROLE, userID: user.uid);
+        final member = fromInvitation
+            ? SpaceMember(role: invitation.role, userID: user.uid)
+            : SpaceMember(role: ADMIN_ROLE, userID: user.uid);
         final space = AnoraSpace(
           industry: industry,
           verified: false,
@@ -96,6 +104,8 @@ class AuthRemoteDataSource {
         final savedUser = await _saveUser(userData);
         if (!fromInvitation) {
           await _saveSpace(space);
+        } else {
+          await _addUserToSpace(member, invitation.orguid);
         }
 
         if (!savedUser) throw Exception('User data not saved');
@@ -160,6 +170,23 @@ class AuthRemoteDataSource {
       return allSpaces;
     } catch (err) {
       rethrow;
+    }
+  }
+
+  Future<bool> _addUserToSpace(SpaceMember member, String orguid) async {
+    try {
+      await _firestore.collection('spaces').doc(orguid).update(
+        {
+          'members': FieldValue.arrayUnion(
+            [
+              member.toMap(),
+            ],
+          ),
+        },
+      );
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 }

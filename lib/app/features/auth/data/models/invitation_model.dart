@@ -11,8 +11,10 @@ class Invitation {
   final String text;
   final String uid;
   final String role;
+  final String orguid;
   final DateTime on;
   Invitation({
+    required this.orguid,
     required this.from,
     required this.role,
     required this.to,
@@ -31,9 +33,11 @@ class Invitation {
     String? text,
     String? uid,
     DateTime? on,
+    String? orguid,
     String? role,
   }) {
     return Invitation(
+      orguid: orguid ?? this.orguid,
       role: role ?? this.role,
       from: from ?? this.from,
       to: to ?? this.to,
@@ -65,6 +69,7 @@ class Invitation {
       'uid': uid,
       'on': on.toIso8601String(),
       'role': role,
+      'orguid': orguid,
     };
   }
 
@@ -91,6 +96,7 @@ class Invitation {
       toMap = map['to'] as Map<String, dynamic>;
     }
     return Invitation(
+      orguid: (map['orguid'] ?? '') as String,
       role: (map['role'] ?? '') as String,
       from: From.fromMap(fromMap),
       to: [To.fromMap(toMap)],

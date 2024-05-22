@@ -40,6 +40,7 @@ class SettingsRemoteDataSource {
       final id = const Uuid().v4();
 
       final invitation = Invitation(
+        orguid: orguid,
         on: DateTime.now(),
         uid: id,
         text: '',
