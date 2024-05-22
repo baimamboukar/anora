@@ -6,12 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 extension AuthX on BuildContext {
   AnoraUser? get user => read<AuthCubit>().state.maybeWhen(
-        authenticated: (user) => user,
+        authenticated: (user, spaces) => user,
         orElse: () => null,
       );
 
-  UserOrganization? get org => read<AuthCubit>().state.maybeWhen(
-        authenticated: (user) => user.organizations.firstOrNull,
-        orElse: () => null,
+  List<AnoraSpace> get orgs => read<AuthCubit>().state.maybeWhen(
+        authenticated: (user, spaces) => spaces,
+        orElse: () => [],
       );
 }

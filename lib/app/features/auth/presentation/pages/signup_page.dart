@@ -38,8 +38,13 @@ class _SignupPageState extends State<SignupPage> {
   @override
   void initState() {
     super.initState();
-    nameController = TextEditingController();
-    emailController = TextEditingController();
+    final hasInvitation = widget.invitation != null;
+    nameController = TextEditingController(
+      text: hasInvitation ? widget.invitation!.to.first.name : null,
+    );
+    emailController = TextEditingController(
+      text: hasInvitation ? widget.invitation!.to.first.email : null,
+    );
     passwordController = TextEditingController();
     industryController = TextEditingController();
   }
@@ -98,12 +103,37 @@ class _SignupPageState extends State<SignupPage> {
                 children: [
                   Image.asset(Assets.assetsLauncherIcon).floatC,
                   Text(
-                    'Create an Account',
+                    fromInvitation
+                        ? 'Signup and Accept Invitation'
+                        : 'Create an Account',
                     style: context.head,
                   ).floatC,
-                  Text(
-                    'We need few information. Please enter necessary information to create your account',
-                    style: context.desc,
+                  14.vGap,
+                  Visibility(
+                    visible: !fromInvitation,
+                    replacement: Container(
+                      //height: 120,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: context.colorScheme.ring,
+                        borderRadius: BorderRadius.circular(12),
+                        //border: Border.all(color: theme.colorScheme.primary, width: .4),
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Hey ${widget.invitation!.to.first.name} 👋',
+                            style: context.title,
+                          ).format.floatL,
+                          Text('You have been Invited by **${widget.invitation!.from.name}** to Join **${widget.invitation!.organization}**')
+                              .format,
+                        ],
+                      ).hPadding.vPadding,
+                    ),
+                    child: Text(
+                      'We need few information. Please enter necessary information to create your account',
+                      style: context.desc,
+                    ),
                   ).floatC,
                   24.vGap,
                   ShadInputFormField(
@@ -116,6 +146,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   ShadInputFormField(
                     id: 'email',
+                    readOnly: !fromInvitation,
                     controller: emailController,
                     label: const Text('Email'),
                     placeholder: const Text('alpha.romeo@gmail.com'),

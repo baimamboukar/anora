@@ -1,6 +1,8 @@
 // ignore_for_file: parameter_assignments
 
+import 'package:anora/app/features/auth/data/models/invitation_model.dart';
 import 'package:anora/app/features/auth/data/models/organization_model.dart';
+import 'package:anora/app/features/auth/data/models/space_models.dart';
 import 'package:anora/app/features/auth/data/models/user_model.dart';
 import 'package:anora/core/constants/anora_constants.dart';
 import 'package:anora/core/extensions/stringx.dart';
@@ -14,7 +16,10 @@ class AuthRemoteDataSource {
   final FirebaseAuth _auth;
   final FirebaseFirestore _firestore;
 
-  Future<Either<String, AnoraUser>> login(String email, String password) async {
+  Future<Either<String, (AnoraUser, List<AnoraSpace>)>> login(
+    String email,
+    String password,
+  ) async {
     try {
       final userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
@@ -24,7 +29,8 @@ class AuthRemoteDataSource {
       if (user != null) {
         // If login is successful, return the user data
         final appUser = await _getUser(user.uid);
-        return Right(appUser);
+        final spaces = await _getSpaces(appUser.organizations);
+        return Right((appUser, spaces));
       } else {
         return const Left('User not found');
       }
@@ -43,13 +49,15 @@ class AuthRemoteDataSource {
     }
   }
 
-  Future<Either<String, AnoraUser>> signup(
+  Future<Either<String, (AnoraUser, List<AnoraSpace>)>> signup(
     String name,
     String email,
     String password,
-    String industry,
-  ) async {
+    String industry, {
+    Invitation? invitation,
+  }) async {
     try {
+      final fromInvitation = invitation != null;
       final userCredential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
@@ -58,26 +66,42 @@ class AuthRemoteDataSource {
       if (user != null) {
         // If signup is successful, save user data to Firestore
         final orgidentifier = const Uuid().v4();
+        final spaceID = const Uuid().v4();
         final userData = AnoraUser(
           org: orgidentifier,
           uid: user.uid,
           email: user.email!,
           names: name,
-          role: 'ADMIN',
           photo: DEFAULT_PROFILE,
           organizations: [
-            UserOrganization(
-              logo: DEFAULT_ORG,
-              industry: industry,
-              name: name.toOrganizationName,
-              uid: orgidentifier,
-              verified: false,
+            UserSpace(
+              spaceID: spaceID,
+              role: ADMIN_ROLE,
             ),
           ],
         );
-        final saved = await _saveUser(userData);
-        if (!saved) throw Exception('User data not saved');
-        return Right(userData);
+        final member = SpaceMember(role: ADMIN_ROLE, userID: user.uid);
+        final space = AnoraSpace(
+          industry: industry,
+          verified: false,
+          premium: false,
+          desc: userData.email.toOrganizationName,
+          uid: spaceID,
+          logo: DEFAULT_ORG,
+          name: userData.email.toOrganizationName,
+          integrations: [],
+          knowledges: [],
+          members: [member],
+        );
+        final savedUser = await _saveUser(userData);
+        if (!fromInvitation) {
+          await _saveSpace(space);
+        }
+
+        if (!savedUser) throw Exception('User data not saved');
+        return Right(
+          (userData, [space]),
+        );
       } else {
         return const Left('Signup failed');
       }
@@ -108,6 +132,34 @@ class AuthRemoteDataSource {
       return true;
     } catch (err) {
       return false;
+    }
+  }
+
+  Future<bool> _saveSpace(AnoraSpace space) async {
+    try {
+      await _firestore.collection('spaces').doc(space.uid).set(space.toMap());
+
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  Future<List<AnoraSpace>> _getSpaces(List<UserSpace> spaces) async {
+    try {
+      // for each space, fetch its data and return the List of all Spaces
+      final allSpaces = <AnoraSpace>[];
+      for (final space in spaces) {
+        final shot =
+            await _firestore.collection('spaces').doc(space.spaceID).get();
+        final data = shot.data();
+        if (data == null) throw Exception('Space data not found');
+        final spaceData = AnoraSpace.fromMap(data);
+        allSpaces.add(spaceData);
+      }
+      return allSpaces;
+    } catch (err) {
+      rethrow;
     }
   }
 }

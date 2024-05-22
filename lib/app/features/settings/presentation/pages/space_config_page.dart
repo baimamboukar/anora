@@ -79,7 +79,7 @@ class _SpacePageState extends State<SpacePage> {
       },
       child: AnoraPage(
         appBar: AppBar(
-          title: Text(context.org!.name),
+          title: Text(context.orgs.first.name),
         ),
         child: Column(
           children: [
@@ -358,8 +358,8 @@ class _AddMemberActionState extends State<AddMemberAction> {
                               nameController.text.trim(),
                               permissionController.text,
                               context.user!.names,
-                              context.org!.name,
-                              context.org!.uid,
+                              context.orgs.first.name,
+                              context.orgs.first.uid,
                             );
                       }
                     },
@@ -428,7 +428,7 @@ class SpaceSumarry extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: context.colorScheme.foreground,
                     ),
-                    child: Image.network(context.org!.logo),
+                    child: Image.network(context.orgs.first.logo),
                   ),
                 ),
                 8.hGap,
@@ -437,10 +437,10 @@ class SpaceSumarry extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(context.org!.name, style: context.title),
+                        Text(context.orgs.first.name, style: context.title),
                         8.hGap,
                         Visibility(
-                          visible: context.org!.verified,
+                          visible: context.orgs.first.verified,
                           child: const HeroIcon(
                             HeroIcons.checkBadge,
                             color: Colors.green,
@@ -450,7 +450,7 @@ class SpaceSumarry extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      context.org!.industry.toIndustryDisplayName,
+                      context.orgs.first.industry.toIndustryDisplayName,
                       style: context.paragraph,
                     ),
                     Text('04 Members', style: context.desc),

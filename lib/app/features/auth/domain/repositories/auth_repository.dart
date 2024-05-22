@@ -2,7 +2,9 @@
 
 import 'package:anora/app/features/auth/data/data_sources/auth_local_data_source.dart';
 import 'package:anora/app/features/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:anora/app/features/auth/data/models/invitation_model.dart';
 import 'package:anora/app/features/auth/data/models/models.dart';
+import 'package:anora/app/features/auth/data/models/organization_model.dart';
 import 'package:anora/app/features/auth/data/models/user_model.dart';
 import 'package:dartz/dartz.dart';
 
@@ -16,14 +18,18 @@ abstract class AuthRepository {
   Future<Either<String, AuthModel>> get(String id);
 
   Future<Either<String, bool>> logout();
-  Future<Either<String, AnoraUser>> login(String email, String password);
+  Future<Either<String, (AnoraUser, List<AnoraSpace>)>> login(
+    String email,
+    String password,
+  );
 
-  Future<Either<String, AnoraUser>> signup(
+  Future<Either<String, (AnoraUser, List<AnoraSpace>)>> signup(
     String name,
     String email,
     String password,
-    String industry,
-  );
+    String industry, {
+    Invitation? invitation,
+  });
 }
 
 class AuthRepositoryImlp extends AuthRepository {
@@ -49,7 +55,10 @@ class AuthRepositoryImlp extends AuthRepository {
   }
 
   @override
-  Future<Either<String, AnoraUser>> login(String email, String password) async {
+  Future<Either<String, (AnoraUser, List<AnoraSpace>)>> login(
+    String email,
+    String password,
+  ) async {
     try {
       final resultRemote = await _remoteDataSource.login(email, password);
       return resultRemote.fold(
@@ -62,18 +71,19 @@ class AuthRepositoryImlp extends AuthRepository {
   }
 
   @override
-  Future<Either<String, AnoraUser>> signup(
+  Future<Either<String, (AnoraUser, List<AnoraSpace>)>> signup(
     String name,
     String email,
     String password,
-    String industry,
-  ) async {
+    String industry, {
+    Invitation? invitation,
+  }) async {
     try {
-      final resultRemote =
-          await _remoteDataSource.signup(name, email, password, industry);
+      final resultRemote = await _remoteDataSource
+          .signup(name, email, password, industry, invitation: invitation);
       return resultRemote.fold(
-        (error) => Left(error),
-        (user) => Right(user),
+        (err) => Left(err),
+        (tuple) => Right(tuple),
       );
     } catch (e) {
       return Left(e.toString());

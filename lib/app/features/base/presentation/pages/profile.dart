@@ -64,12 +64,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   title: Text(context.user!.names),
                   subtitle: Text(context.user!.email),
-                  trailing: (context.org?.verified ?? false)
-                      ? const HeroIcon(
-                          HeroIcons.checkBadge,
-                          color: Colors.green,
-                        )
-                      : null,
+                  // trailing: (context.org?.verified ?? false)
+                  //     ? const HeroIcon(
+                  //         HeroIcons.checkBadge,
+                  //         color: Colors.green,
+                  //       )
+                  //     : null,
                 ),
               ],
             ),

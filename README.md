@@ -1,5 +1,8 @@
 # Anora
 
+TODO: #12 Add app's Privacy Policy and Legal Agreements
+TODO: #14 Add from invitation acceptance page
+TODO: #13 Add Anora Extensions (Sales, Docusearch, etc)
 ![coverage][coverage_badge]
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]

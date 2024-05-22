@@ -1,5 +1,7 @@
 import 'package:anora/app/features/auth/data/data_sources/auth_local_data_source.dart';
 import 'package:anora/app/features/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:anora/app/features/auth/data/models/invitation_model.dart';
+import 'package:anora/app/features/auth/data/models/organization_model.dart';
 import 'package:anora/app/features/auth/data/models/user_model.dart';
 import 'package:anora/app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:anora/app/features/auth/domain/use_case/auth_use_case.dart';
@@ -21,14 +23,17 @@ class AuthCubit extends HydratedCubit<AuthState> {
     String name,
     String email,
     String password,
-    String industry,
-  ) async {
+    String industry, {
+    Invitation? invitation,
+  }) async {
     final useCase = AuthUseCase(repo);
     emit(const AuthState.singinUp());
     final result = await useCase.signup(name, email, password, industry);
     result.fold(
       (String error) => emit(const AuthState.failure()),
-      (AnoraUser user) => emit(AuthState.authenticated(user: user)),
+      (tuple) => emit(
+        AuthState.authenticated(user: tuple.$1, spaces: tuple.$2),
+      ),
     );
   }
 
@@ -38,7 +43,9 @@ class AuthCubit extends HydratedCubit<AuthState> {
     final result = await useCase.login(email, pass);
     result.fold(
       (String error) => emit(const AuthState.failure()),
-      (AnoraUser user) => emit(AuthState.authenticated(user: user)),
+      (tuple) => emit(
+        AuthState.authenticated(user: tuple.$1, spaces: tuple.$2),
+      ),
     );
   }
 
@@ -57,9 +64,13 @@ class AuthCubit extends HydratedCubit<AuthState> {
   @override
   AuthState? fromJson(Map<String, dynamic> json) {
     final userJson = json['user'] as Map<String, dynamic>;
+    final spacesJson = json['spaces'] as List<Map>;
+    final spaces = spacesJson
+        .map((x) => AnoraSpace.fromMap(x as Map<String, dynamic>))
+        .toList();
     final user = AnoraUser.fromMap(userJson);
     return userJson.isNotEmpty
-        ? AuthState.authenticated(user: user)
+        ? AuthState.authenticated(user: user, spaces: spaces)
         : const AuthState.initial();
   }
 
@@ -68,9 +79,11 @@ class AuthCubit extends HydratedCubit<AuthState> {
     return state.maybeMap(
       authenticated: (state) => {
         'user': state.user.toMap(),
+        'spaces': state.spaces.map((space) => space.toMap()),
       },
       orElse: () => {
         'user': null,
+        'spaces': null,
       },
     );
   }

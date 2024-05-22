@@ -23,7 +23,8 @@ mixin _$AuthState {
     required TResult Function() singinUp,
     required TResult Function() loginOut,
     required TResult Function() loggedOut,
-    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function(AnoraUser user, List<AnoraSpace> spaces)
+        authenticated,
     required TResult Function() failure,
     required TResult Function() logoutFailure,
     required TResult Function() inviting,
@@ -38,7 +39,7 @@ mixin _$AuthState {
     TResult? Function()? singinUp,
     TResult? Function()? loginOut,
     TResult? Function()? loggedOut,
-    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult? Function()? failure,
     TResult? Function()? logoutFailure,
     TResult? Function()? inviting,
@@ -53,7 +54,7 @@ mixin _$AuthState {
     TResult Function()? singinUp,
     TResult Function()? loginOut,
     TResult Function()? loggedOut,
-    TResult Function(AnoraUser user)? authenticated,
+    TResult Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult Function()? failure,
     TResult Function()? logoutFailure,
     TResult Function()? inviting,
@@ -170,7 +171,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function() singinUp,
     required TResult Function() loginOut,
     required TResult Function() loggedOut,
-    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function(AnoraUser user, List<AnoraSpace> spaces)
+        authenticated,
     required TResult Function() failure,
     required TResult Function() logoutFailure,
     required TResult Function() inviting,
@@ -188,7 +190,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? singinUp,
     TResult? Function()? loginOut,
     TResult? Function()? loggedOut,
-    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult? Function()? failure,
     TResult? Function()? logoutFailure,
     TResult? Function()? inviting,
@@ -206,7 +208,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? singinUp,
     TResult Function()? loginOut,
     TResult Function()? loggedOut,
-    TResult Function(AnoraUser user)? authenticated,
+    TResult Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult Function()? failure,
     TResult Function()? logoutFailure,
     TResult Function()? inviting,
@@ -326,7 +328,8 @@ class _$LogginInImpl implements _LogginIn {
     required TResult Function() singinUp,
     required TResult Function() loginOut,
     required TResult Function() loggedOut,
-    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function(AnoraUser user, List<AnoraSpace> spaces)
+        authenticated,
     required TResult Function() failure,
     required TResult Function() logoutFailure,
     required TResult Function() inviting,
@@ -344,7 +347,7 @@ class _$LogginInImpl implements _LogginIn {
     TResult? Function()? singinUp,
     TResult? Function()? loginOut,
     TResult? Function()? loggedOut,
-    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult? Function()? failure,
     TResult? Function()? logoutFailure,
     TResult? Function()? inviting,
@@ -362,7 +365,7 @@ class _$LogginInImpl implements _LogginIn {
     TResult Function()? singinUp,
     TResult Function()? loginOut,
     TResult Function()? loggedOut,
-    TResult Function(AnoraUser user)? authenticated,
+    TResult Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult Function()? failure,
     TResult Function()? logoutFailure,
     TResult Function()? inviting,
@@ -482,7 +485,8 @@ class _$SigninUpImpl implements _SigninUp {
     required TResult Function() singinUp,
     required TResult Function() loginOut,
     required TResult Function() loggedOut,
-    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function(AnoraUser user, List<AnoraSpace> spaces)
+        authenticated,
     required TResult Function() failure,
     required TResult Function() logoutFailure,
     required TResult Function() inviting,
@@ -500,7 +504,7 @@ class _$SigninUpImpl implements _SigninUp {
     TResult? Function()? singinUp,
     TResult? Function()? loginOut,
     TResult? Function()? loggedOut,
-    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult? Function()? failure,
     TResult? Function()? logoutFailure,
     TResult? Function()? inviting,
@@ -518,7 +522,7 @@ class _$SigninUpImpl implements _SigninUp {
     TResult Function()? singinUp,
     TResult Function()? loginOut,
     TResult Function()? loggedOut,
-    TResult Function(AnoraUser user)? authenticated,
+    TResult Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult Function()? failure,
     TResult Function()? logoutFailure,
     TResult Function()? inviting,
@@ -638,7 +642,8 @@ class _$LoginOutImpl implements _LoginOut {
     required TResult Function() singinUp,
     required TResult Function() loginOut,
     required TResult Function() loggedOut,
-    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function(AnoraUser user, List<AnoraSpace> spaces)
+        authenticated,
     required TResult Function() failure,
     required TResult Function() logoutFailure,
     required TResult Function() inviting,
@@ -656,7 +661,7 @@ class _$LoginOutImpl implements _LoginOut {
     TResult? Function()? singinUp,
     TResult? Function()? loginOut,
     TResult? Function()? loggedOut,
-    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult? Function()? failure,
     TResult? Function()? logoutFailure,
     TResult? Function()? inviting,
@@ -674,7 +679,7 @@ class _$LoginOutImpl implements _LoginOut {
     TResult Function()? singinUp,
     TResult Function()? loginOut,
     TResult Function()? loggedOut,
-    TResult Function(AnoraUser user)? authenticated,
+    TResult Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult Function()? failure,
     TResult Function()? logoutFailure,
     TResult Function()? inviting,
@@ -794,7 +799,8 @@ class _$LoggedOutImpl implements _LoggedOut {
     required TResult Function() singinUp,
     required TResult Function() loginOut,
     required TResult Function() loggedOut,
-    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function(AnoraUser user, List<AnoraSpace> spaces)
+        authenticated,
     required TResult Function() failure,
     required TResult Function() logoutFailure,
     required TResult Function() inviting,
@@ -812,7 +818,7 @@ class _$LoggedOutImpl implements _LoggedOut {
     TResult? Function()? singinUp,
     TResult? Function()? loginOut,
     TResult? Function()? loggedOut,
-    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult? Function()? failure,
     TResult? Function()? logoutFailure,
     TResult? Function()? inviting,
@@ -830,7 +836,7 @@ class _$LoggedOutImpl implements _LoggedOut {
     TResult Function()? singinUp,
     TResult Function()? loginOut,
     TResult Function()? loggedOut,
-    TResult Function(AnoraUser user)? authenticated,
+    TResult Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult Function()? failure,
     TResult Function()? logoutFailure,
     TResult Function()? inviting,
@@ -913,7 +919,7 @@ abstract class _$$AuthenticatedImplCopyWith<$Res> {
           _$AuthenticatedImpl value, $Res Function(_$AuthenticatedImpl) then) =
       __$$AuthenticatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({AnoraUser user});
+  $Res call({AnoraUser user, List<AnoraSpace> spaces});
 }
 
 /// @nodoc
@@ -928,12 +934,17 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
+    Object? spaces = null,
   }) {
     return _then(_$AuthenticatedImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as AnoraUser,
+      spaces: null == spaces
+          ? _value._spaces
+          : spaces // ignore: cast_nullable_to_non_nullable
+              as List<AnoraSpace>,
     ));
   }
 }
@@ -941,14 +952,23 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AuthenticatedImpl implements _Authenticated {
-  const _$AuthenticatedImpl({required this.user});
+  const _$AuthenticatedImpl(
+      {required this.user, required final List<AnoraSpace> spaces})
+      : _spaces = spaces;
 
   @override
   final AnoraUser user;
+  final List<AnoraSpace> _spaces;
+  @override
+  List<AnoraSpace> get spaces {
+    if (_spaces is EqualUnmodifiableListView) return _spaces;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_spaces);
+  }
 
   @override
   String toString() {
-    return 'AuthState.authenticated(user: $user)';
+    return 'AuthState.authenticated(user: $user, spaces: $spaces)';
   }
 
   @override
@@ -956,11 +976,13 @@ class _$AuthenticatedImpl implements _Authenticated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthenticatedImpl &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality().equals(other._spaces, _spaces));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
+  int get hashCode => Object.hash(
+      runtimeType, user, const DeepCollectionEquality().hash(_spaces));
 
   @JsonKey(ignore: true)
   @override
@@ -976,14 +998,15 @@ class _$AuthenticatedImpl implements _Authenticated {
     required TResult Function() singinUp,
     required TResult Function() loginOut,
     required TResult Function() loggedOut,
-    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function(AnoraUser user, List<AnoraSpace> spaces)
+        authenticated,
     required TResult Function() failure,
     required TResult Function() logoutFailure,
     required TResult Function() inviting,
     required TResult Function() invited,
     required TResult Function() invitingFailed,
   }) {
-    return authenticated(user);
+    return authenticated(user, spaces);
   }
 
   @override
@@ -994,14 +1017,14 @@ class _$AuthenticatedImpl implements _Authenticated {
     TResult? Function()? singinUp,
     TResult? Function()? loginOut,
     TResult? Function()? loggedOut,
-    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult? Function()? failure,
     TResult? Function()? logoutFailure,
     TResult? Function()? inviting,
     TResult? Function()? invited,
     TResult? Function()? invitingFailed,
   }) {
-    return authenticated?.call(user);
+    return authenticated?.call(user, spaces);
   }
 
   @override
@@ -1012,7 +1035,7 @@ class _$AuthenticatedImpl implements _Authenticated {
     TResult Function()? singinUp,
     TResult Function()? loginOut,
     TResult Function()? loggedOut,
-    TResult Function(AnoraUser user)? authenticated,
+    TResult Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult Function()? failure,
     TResult Function()? logoutFailure,
     TResult Function()? inviting,
@@ -1021,7 +1044,7 @@ class _$AuthenticatedImpl implements _Authenticated {
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated(user);
+      return authenticated(user, spaces);
     }
     return orElse();
   }
@@ -1086,10 +1109,12 @@ class _$AuthenticatedImpl implements _Authenticated {
 }
 
 abstract class _Authenticated implements AuthState {
-  const factory _Authenticated({required final AnoraUser user}) =
-      _$AuthenticatedImpl;
+  const factory _Authenticated(
+      {required final AnoraUser user,
+      required final List<AnoraSpace> spaces}) = _$AuthenticatedImpl;
 
   AnoraUser get user;
+  List<AnoraSpace> get spaces;
   @JsonKey(ignore: true)
   _$$AuthenticatedImplCopyWith<_$AuthenticatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1138,7 +1163,8 @@ class _$FailureImpl implements _Failure {
     required TResult Function() singinUp,
     required TResult Function() loginOut,
     required TResult Function() loggedOut,
-    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function(AnoraUser user, List<AnoraSpace> spaces)
+        authenticated,
     required TResult Function() failure,
     required TResult Function() logoutFailure,
     required TResult Function() inviting,
@@ -1156,7 +1182,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function()? singinUp,
     TResult? Function()? loginOut,
     TResult? Function()? loggedOut,
-    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult? Function()? failure,
     TResult? Function()? logoutFailure,
     TResult? Function()? inviting,
@@ -1174,7 +1200,7 @@ class _$FailureImpl implements _Failure {
     TResult Function()? singinUp,
     TResult Function()? loginOut,
     TResult Function()? loggedOut,
-    TResult Function(AnoraUser user)? authenticated,
+    TResult Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult Function()? failure,
     TResult Function()? logoutFailure,
     TResult Function()? inviting,
@@ -1294,7 +1320,8 @@ class _$LogoutFailureImpl implements _LogoutFailure {
     required TResult Function() singinUp,
     required TResult Function() loginOut,
     required TResult Function() loggedOut,
-    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function(AnoraUser user, List<AnoraSpace> spaces)
+        authenticated,
     required TResult Function() failure,
     required TResult Function() logoutFailure,
     required TResult Function() inviting,
@@ -1312,7 +1339,7 @@ class _$LogoutFailureImpl implements _LogoutFailure {
     TResult? Function()? singinUp,
     TResult? Function()? loginOut,
     TResult? Function()? loggedOut,
-    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult? Function()? failure,
     TResult? Function()? logoutFailure,
     TResult? Function()? inviting,
@@ -1330,7 +1357,7 @@ class _$LogoutFailureImpl implements _LogoutFailure {
     TResult Function()? singinUp,
     TResult Function()? loginOut,
     TResult Function()? loggedOut,
-    TResult Function(AnoraUser user)? authenticated,
+    TResult Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult Function()? failure,
     TResult Function()? logoutFailure,
     TResult Function()? inviting,
@@ -1450,7 +1477,8 @@ class _$InvitingImpl implements _Inviting {
     required TResult Function() singinUp,
     required TResult Function() loginOut,
     required TResult Function() loggedOut,
-    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function(AnoraUser user, List<AnoraSpace> spaces)
+        authenticated,
     required TResult Function() failure,
     required TResult Function() logoutFailure,
     required TResult Function() inviting,
@@ -1468,7 +1496,7 @@ class _$InvitingImpl implements _Inviting {
     TResult? Function()? singinUp,
     TResult? Function()? loginOut,
     TResult? Function()? loggedOut,
-    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult? Function()? failure,
     TResult? Function()? logoutFailure,
     TResult? Function()? inviting,
@@ -1486,7 +1514,7 @@ class _$InvitingImpl implements _Inviting {
     TResult Function()? singinUp,
     TResult Function()? loginOut,
     TResult Function()? loggedOut,
-    TResult Function(AnoraUser user)? authenticated,
+    TResult Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult Function()? failure,
     TResult Function()? logoutFailure,
     TResult Function()? inviting,
@@ -1606,7 +1634,8 @@ class _$InvitedImpl implements _Invited {
     required TResult Function() singinUp,
     required TResult Function() loginOut,
     required TResult Function() loggedOut,
-    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function(AnoraUser user, List<AnoraSpace> spaces)
+        authenticated,
     required TResult Function() failure,
     required TResult Function() logoutFailure,
     required TResult Function() inviting,
@@ -1624,7 +1653,7 @@ class _$InvitedImpl implements _Invited {
     TResult? Function()? singinUp,
     TResult? Function()? loginOut,
     TResult? Function()? loggedOut,
-    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult? Function()? failure,
     TResult? Function()? logoutFailure,
     TResult? Function()? inviting,
@@ -1642,7 +1671,7 @@ class _$InvitedImpl implements _Invited {
     TResult Function()? singinUp,
     TResult Function()? loginOut,
     TResult Function()? loggedOut,
-    TResult Function(AnoraUser user)? authenticated,
+    TResult Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult Function()? failure,
     TResult Function()? logoutFailure,
     TResult Function()? inviting,
@@ -1762,7 +1791,8 @@ class _$InvitingFailedImpl implements _InvitingFailed {
     required TResult Function() singinUp,
     required TResult Function() loginOut,
     required TResult Function() loggedOut,
-    required TResult Function(AnoraUser user) authenticated,
+    required TResult Function(AnoraUser user, List<AnoraSpace> spaces)
+        authenticated,
     required TResult Function() failure,
     required TResult Function() logoutFailure,
     required TResult Function() inviting,
@@ -1780,7 +1810,7 @@ class _$InvitingFailedImpl implements _InvitingFailed {
     TResult? Function()? singinUp,
     TResult? Function()? loginOut,
     TResult? Function()? loggedOut,
-    TResult? Function(AnoraUser user)? authenticated,
+    TResult? Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult? Function()? failure,
     TResult? Function()? logoutFailure,
     TResult? Function()? inviting,
@@ -1798,7 +1828,7 @@ class _$InvitingFailedImpl implements _InvitingFailed {
     TResult Function()? singinUp,
     TResult Function()? loginOut,
     TResult Function()? loggedOut,
-    TResult Function(AnoraUser user)? authenticated,
+    TResult Function(AnoraUser user, List<AnoraSpace> spaces)? authenticated,
     TResult Function()? failure,
     TResult Function()? logoutFailure,
     TResult Function()? inviting,
