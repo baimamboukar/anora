@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_cast
+
 import 'package:anora/app/features/auth/data/data_sources/auth_local_data_source.dart';
 import 'package:anora/app/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:anora/app/features/auth/data/models/invitation_model.dart';
@@ -35,12 +37,14 @@ class AuthCubit extends HydratedCubit<AuthState> {
       industry,
       invitation: invitation,
     );
-    result.fold(
-      (String error) => emit(const AuthState.failure()),
-      (tuple) => emit(
-        AuthState.authenticated(user: tuple.$1, spaces: tuple.$2),
-      ),
-    );
+    result.fold((String error) => emit(const AuthState.failure()),
+        ((AnoraUser, List<AnoraSpace>) tuple) {
+      final user = tuple.$1 as AnoraUser;
+      final spaces = tuple.$2 as List<AnoraSpace>;
+      emit(
+        AuthState.authenticated(user: user, spaces: spaces),
+      );
+    });
   }
 
   Future<void> login(String email, String pass) async {
@@ -70,10 +74,12 @@ class AuthCubit extends HydratedCubit<AuthState> {
   @override
   AuthState? fromJson(Map<String, dynamic> json) {
     final userJson = json['user'] as Map<String, dynamic>;
-    final spacesJson = json['spaces'] as List<Map>;
-    final spaces = spacesJson
-        .map((x) => AnoraSpace.fromMap(x as Map<String, dynamic>))
-        .toList();
+    final spacesJson = json['spaces'] as List<dynamic>;
+    final spaces = List<AnoraSpace>.from(
+      spacesJson.map(
+        (spaceMap) => AnoraSpace.fromMap(spaceMap as Map<String, dynamic>),
+      ),
+    );
     final user = AnoraUser.fromMap(userJson);
     return userJson.isNotEmpty
         ? AuthState.authenticated(user: user, spaces: spaces)
@@ -85,7 +91,7 @@ class AuthCubit extends HydratedCubit<AuthState> {
     return state.maybeMap(
       authenticated: (state) => {
         'user': state.user.toMap(),
-        'spaces': state.spaces.map((space) => space.toMap()),
+        'spaces': state.spaces.map((space) => space.toMap()).toList(),
       },
       orElse: () => {
         'user': null,

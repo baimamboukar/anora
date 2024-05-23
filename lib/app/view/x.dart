@@ -5,13 +5,14 @@ void main() {
   final x = {
     'from':
         '{email: MS_RiPgsi@trial-yzkq340opj24d796.mlsender.net, name: Baimam Boukar}',
-    'to': '{email: baimamboukar@gmail.com, name: Baimam JJ}',
-    'organization': "Baimam's Space",
-    'subject': "Invitation to Join Baimam's Space on AnoraAI 💐",
+    'to': '{email: baimamboukar@gmail.com, name: Joubenti}',
+    'organization': "baimamboukar@anora.io's Space",
+    'subject': "Invitation to Join baimamboukar@anora.io's Space on AnoraAI 💐",
     'html': '',
-    'uid': '233f8be6-b74a-4e0c-9942-be6dcace2264',
-    'on': '2024-05-21T11:09:55.633907',
+    'uid': 'f89a38cc-8c43-4878-814d-93a54039aa57',
+    'on': '2024-05-23T00:55:11.569706',
     'role': 'MANAGER',
+    'orguid': '46a919d3-c26e-4d82-82b5-4ff2126ed67d',
   };
   final invitation = Invitation.fromMap(x, fromInvite: true);
   print(invitation);

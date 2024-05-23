@@ -70,7 +70,7 @@ class AuthRemoteDataSource {
         final userSpace = fromInvitation
             ? UserSpace(
                 spaceID: invitation.uid,
-                role: ADMIN_ROLE,
+                role: invitation.role,
               )
             : UserSpace(
                 spaceID: spaceID,
@@ -93,10 +93,10 @@ class AuthRemoteDataSource {
           industry: industry,
           verified: false,
           premium: false,
-          desc: userData.email.toOrganizationName,
+          desc: userData.names.toOrganizationName,
           uid: spaceID,
           logo: DEFAULT_ORG,
-          name: userData.email.toOrganizationName,
+          name: userData.names.toOrganizationName,
           integrations: [],
           knowledges: [],
           members: [member],
@@ -116,6 +116,7 @@ class AuthRemoteDataSource {
         return const Left('Signup failed');
       }
     } catch (e) {
+      print('errrrr $e');
       return Left(e.toString());
     }
   }
@@ -151,6 +152,7 @@ class AuthRemoteDataSource {
 
       return true;
     } catch (err) {
+      print('errrrr $err');
       return false;
     }
   }

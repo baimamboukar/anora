@@ -109,9 +109,8 @@ class _SignupPageState extends State<SignupPage> {
                     style: context.head,
                   ).floatC,
                   14.vGap,
-                  Visibility(
-                    visible: !fromInvitation,
-                    replacement: Container(
+                  if (fromInvitation)
+                    Container(
                       //height: 120,
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -129,12 +128,12 @@ class _SignupPageState extends State<SignupPage> {
                               .format,
                         ],
                       ).hPadding.vPadding,
-                    ),
-                    child: Text(
+                    )
+                  else
+                    Text(
                       'We need few information. Please enter necessary information to create your account',
                       style: context.desc,
                     ),
-                  ).floatC,
                   24.vGap,
                   ShadInputFormField(
                     id: 'name',
@@ -146,7 +145,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   ShadInputFormField(
                     id: 'email',
-                    readOnly: !fromInvitation,
+                    readOnly: fromInvitation,
                     controller: emailController,
                     label: const Text('Email'),
                     placeholder: const Text('alpha.romeo@gmail.com'),
