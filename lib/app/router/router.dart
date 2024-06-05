@@ -66,5 +66,11 @@ class AppRouter extends $AppRouter {
           page: SignupRoute.page,
           path: SIGNUP_ROUTE,
         ),
+        // CHAT ROUTES
+
+        AutoRoute(
+          page: ChatroomRoute.page,
+          path: CHAT_ROUTE,
+        ),
       ];
 }

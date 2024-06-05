@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
+import 'package:anora/app/router/router.gr.dart';
 import 'package:anora/core/core.dart';
 import 'package:anora/core/data.dart';
 import 'package:anora/core/extensions/authx.dart';
@@ -27,6 +28,14 @@ class ChatPage extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnoraPage(
@@ -44,84 +53,116 @@ class _ChatPageState extends State<ChatPage> {
       child: Column(
         children: [
           const ChatHome(),
-          Container(
-            width: context.width,
-            height: context.height * .175,
-            decoration: BoxDecoration(
-              color: context.colorScheme.muted,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(24),
-                topRight: Radius.circular(24),
-              ),
-            ),
-            child: Column(
-              children: [
-                Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Type, talk or upload an image...',
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          hintStyle: context.desc.copyWith(fontSize: 20),
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          contentPadding: const EdgeInsets.all(2),
-                        ),
-                      ),
-                    ),
-                    Transform.rotate(
-                      angle: math.pi / 4,
-                      child: const HeroIcon(HeroIcons.chevronUpDown, size: 24),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                Row(
-                  children: [
-                    const Spacer(),
-                    Container(
-                      // width: context.width * .3,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: context.colorScheme.primary,
-                        borderRadius: BorderRadius.circular(
-                          24,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Icon(Icons.keyboard_alt_outlined, size: 24)
-                              .hPaddingx(8),
-                          // AvatarGlow(
-                          // backgroundColor: context.colorScheme.background,
-                          //child:
-                          const HeroIcon(HeroIcons.microphone, size: 24)
-                              .hPaddingx(8),
-                          //),
-                          const HeroIcon(HeroIcons.camera, size: 24)
-                              .hPaddingx(8),
-                        ],
-                      ).hPadding,
-                    ).vPaddingx(8),
-                    const Spacer(),
-                    ShadButton.outline(
-                      icon: const HeroIcon(HeroIcons.paperAirplane, size: 24),
-                      size: ShadButtonSize.icon,
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ],
-            ).hPadding,
-          ),
+          ChatAction(controller: controller),
         ],
       ),
+    );
+  }
+}
+
+class ChatAction extends StatelessWidget {
+  const ChatAction({
+    super.key,
+    required this.controller,
+  });
+
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: context.width,
+      height: context.height * .175,
+      decoration: BoxDecoration(
+        color: context.colorScheme.muted,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+      ),
+      child: Column(
+        children: [
+          Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: controller,
+                  keyboardType: TextInputType.multiline,
+                  onSubmitted: (query) {
+                    if (query.isNotEmpty) {
+                      context.router.push(
+                        const ChatroomRoute(),
+                      );
+                    }
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Type, talk or upload an image...',
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    hintStyle: context.desc.copyWith(fontSize: 20),
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    contentPadding: const EdgeInsets.all(2),
+                  ),
+                ),
+              ),
+              InkWell(
+                child: Transform.rotate(
+                  angle: math.pi / 4,
+                  child:
+                      const HeroIcon(HeroIcons.chevronUpDown, size: 24),
+                ),
+              ),
+            ],
+          ),
+          const Spacer(),
+          Row(
+            children: [
+              const Spacer(),
+              Container(
+                // width: context.width * .3,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: context.colorScheme.primary,
+                  borderRadius: BorderRadius.circular(
+                    24,
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Icon(Icons.keyboard_alt_outlined, size: 24)
+                        .hPaddingx(8),
+                    // AvatarGlow(
+                    // backgroundColor: context.colorScheme.background,
+                    //child:
+                    const HeroIcon(HeroIcons.microphone, size: 24)
+                        .hPaddingx(8),
+                    //),
+                    const HeroIcon(HeroIcons.camera, size: 24)
+                        .hPaddingx(8),
+                  ],
+                ).hPadding,
+              ).vPaddingx(8),
+              const Spacer(),
+              ShadButton.outline(
+                icon: const HeroIcon(HeroIcons.paperAirplane, size: 24),
+                size: ShadButtonSize.icon,
+                onPressed: () {
+                  if (controller.value.text.isNotEmpty) {
+                    context.router.push(
+                      const ChatroomRoute(),
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
+        ],
+      ).hPadding,
     );
   }
 }

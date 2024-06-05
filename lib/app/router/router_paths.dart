@@ -15,3 +15,4 @@ const String LOGIN_ROUTE = '/login';
 const String SIGNUP_ROUTE = '/signup';
 const String RESET_PASSWORD_ROUTE = '/reset-password';
 const String ACCEPT_INVITATION_ROUTE = '/accept-invitation';
+const String CHAT_ROUTE = '/chat-room';
