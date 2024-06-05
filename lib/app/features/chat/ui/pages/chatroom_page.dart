@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:uuid/uuid.dart';
 
 @RoutePage()
 class ChatroomPage extends StatefulWidget implements AutoRouteWrapper {
@@ -27,18 +28,25 @@ class ChatroomPage extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _ChatroomPageState extends State<ChatroomPage> {
+  late TextEditingController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
+    context.read<ChatCubit>().init(widget.prompt, const Uuid().v4());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Query Chatroom'),
       ),
-      body: const AnoraPage(
-        child: Column(
-          children: [
-            Text('Chatroom'),
-          ],
-        ),
+      body: Column(
+        children: [
+          const Text('Chatroom'),
+          ChatAction(controller: controller),
+        ],
       ),
     );
   }
