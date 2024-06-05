@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/core/core.dart';
+import 'package:anora/core/data.dart';
 import 'package:anora/core/extensions/authx.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -212,9 +213,10 @@ class ChatSuggestions extends StatelessWidget {
     return SizedBox(
       height: 114,
       child: ListView.builder(
-        itemCount: 6,
+        itemCount: suggestions.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
+          final data = suggestions[index].split(':');
           return Padding(
             padding: const EdgeInsets.all(8),
             child: ShadCard(
@@ -226,9 +228,9 @@ class ChatSuggestions extends StatelessWidget {
               width: 184,
               height: 114,
               backgroundColor: context.colorScheme.secondary,
-              description: const Text('Documents'),
+              description: Text(data.first),
               //description: Text(integration.desc),
-              content: const Text('Create a new document based on last chats'),
+              content: Text(data[1]),
             ),
           );
         },
