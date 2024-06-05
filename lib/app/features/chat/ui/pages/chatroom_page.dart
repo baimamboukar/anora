@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:anora/app/features/chat/logic/chat_cubit.dart';
+import 'package:anora/app/features/chat/logic/models/anora_prompt.dart';
 import 'package:anora/core/core.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,8 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 
 @RoutePage()
 class ChatroomPage extends StatefulWidget implements AutoRouteWrapper {
-  const ChatroomPage({super.key});
+  const ChatroomPage({required this.prompt, super.key});
+  final Prompt prompt;
 
   @override
   State<ChatroomPage> createState() => _ChatroomPageState();

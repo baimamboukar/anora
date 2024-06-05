@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:anora/app/features/auth/data/models/invitation_model.dart'
-    as _i18;
+    as _i20;
 import 'package:anora/app/features/auth/presentation/pages/login_page.dart'
     as _i9;
 import 'package:anora/app/features/auth/presentation/pages/signup_page.dart'
@@ -21,6 +21,7 @@ import 'package:anora/app/features/base/presentation/pages/home_page.dart'
 import 'package:anora/app/features/base/presentation/pages/profile.dart'
     as _i12;
 import 'package:anora/app/features/base/presentation/pages/root.dart' as _i13;
+import 'package:anora/app/features/chat/logic/models/anora_prompt.dart' as _i17;
 import 'package:anora/app/features/chat/ui/pages/chatroom_page.dart' as _i4;
 import 'package:anora/app/features/settings/presentation/pages/advanced_configs_page.dart'
     as _i1;
@@ -39,7 +40,8 @@ import 'package:anora/app/features/settings/presentation/pages/notifications_con
 import 'package:anora/app/features/settings/presentation/pages/space_config_page.dart'
     as _i15;
 import 'package:auto_route/auto_route.dart' as _i16;
-import 'package:flutter/cupertino.dart' as _i17;
+import 'package:flutter/cupertino.dart' as _i19;
+import 'package:flutter/material.dart' as _i18;
 
 abstract class $AppRouter extends _i16.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -65,9 +67,14 @@ abstract class $AppRouter extends _i16.RootStackRouter {
       );
     },
     ChatroomRoute.name: (routeData) {
+      final args = routeData.argsAs<ChatroomRouteArgs>();
       return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i16.WrappedRoute(child: const _i4.ChatroomPage()),
+        child: _i16.WrappedRoute(
+            child: _i4.ChatroomPage(
+          prompt: args.prompt,
+          key: args.key,
+        )),
       );
     },
     ChatsConfigRoute.name: (routeData) {
@@ -189,16 +196,40 @@ class ChatRoute extends _i16.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.ChatroomPage]
-class ChatroomRoute extends _i16.PageRouteInfo<void> {
-  const ChatroomRoute({List<_i16.PageRouteInfo>? children})
-      : super(
+class ChatroomRoute extends _i16.PageRouteInfo<ChatroomRouteArgs> {
+  ChatroomRoute({
+    required _i17.Prompt prompt,
+    _i18.Key? key,
+    List<_i16.PageRouteInfo>? children,
+  }) : super(
           ChatroomRoute.name,
+          args: ChatroomRouteArgs(
+            prompt: prompt,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ChatroomRoute';
 
-  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
+  static const _i16.PageInfo<ChatroomRouteArgs> page =
+      _i16.PageInfo<ChatroomRouteArgs>(name);
+}
+
+class ChatroomRouteArgs {
+  const ChatroomRouteArgs({
+    required this.prompt,
+    this.key,
+  });
+
+  final _i17.Prompt prompt;
+
+  final _i18.Key? key;
+
+  @override
+  String toString() {
+    return 'ChatroomRouteArgs{prompt: $prompt, key: $key}';
+  }
 }
 
 /// generated route for
@@ -331,8 +362,8 @@ class RootRoute extends _i16.PageRouteInfo<void> {
 /// [_i14.SignupPage]
 class SignupRoute extends _i16.PageRouteInfo<SignupRouteArgs> {
   SignupRoute({
-    _i17.Key? key,
-    _i18.Invitation? invitation,
+    _i19.Key? key,
+    _i20.Invitation? invitation,
     List<_i16.PageRouteInfo>? children,
   }) : super(
           SignupRoute.name,
@@ -355,9 +386,9 @@ class SignupRouteArgs {
     this.invitation,
   });
 
-  final _i17.Key? key;
+  final _i19.Key? key;
 
-  final _i18.Invitation? invitation;
+  final _i20.Invitation? invitation;
 
   @override
   String toString() {

@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
+import 'package:anora/app/features/chat/logic/models/anora_prompt.dart';
 import 'package:anora/app/router/router.gr.dart';
 import 'package:anora/core/core.dart';
 import 'package:anora/core/data.dart';
@@ -62,8 +63,8 @@ class _ChatPageState extends State<ChatPage> {
 
 class ChatAction extends StatelessWidget {
   const ChatAction({
-    super.key,
     required this.controller,
+    super.key,
   });
 
   final TextEditingController controller;
@@ -92,7 +93,9 @@ class ChatAction extends StatelessWidget {
                   onSubmitted: (query) {
                     if (query.isNotEmpty) {
                       context.router.push(
-                        const ChatroomRoute(),
+                        ChatroomRoute(
+                          prompt: Prompt(text: controller.value.text),
+                        ),
                       );
                     }
                   },
@@ -111,8 +114,7 @@ class ChatAction extends StatelessWidget {
               InkWell(
                 child: Transform.rotate(
                   angle: math.pi / 4,
-                  child:
-                      const HeroIcon(HeroIcons.chevronUpDown, size: 24),
+                  child: const HeroIcon(HeroIcons.chevronUpDown, size: 24),
                 ),
               ),
             ],
@@ -139,11 +141,9 @@ class ChatAction extends StatelessWidget {
                     // AvatarGlow(
                     // backgroundColor: context.colorScheme.background,
                     //child:
-                    const HeroIcon(HeroIcons.microphone, size: 24)
-                        .hPaddingx(8),
+                    const HeroIcon(HeroIcons.microphone, size: 24).hPaddingx(8),
                     //),
-                    const HeroIcon(HeroIcons.camera, size: 24)
-                        .hPaddingx(8),
+                    const HeroIcon(HeroIcons.camera, size: 24).hPaddingx(8),
                   ],
                 ).hPadding,
               ).vPaddingx(8),
@@ -154,7 +154,9 @@ class ChatAction extends StatelessWidget {
                 onPressed: () {
                   if (controller.value.text.isNotEmpty) {
                     context.router.push(
-                      const ChatroomRoute(),
+                      ChatroomRoute(
+                        prompt: Prompt(text: controller.value.text),
+                      ),
                     );
                   }
                 },
