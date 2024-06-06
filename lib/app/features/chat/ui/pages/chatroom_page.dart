@@ -3,10 +3,12 @@ import 'dart:math' as math;
 import 'package:anora/app/features/chat/logic/chat_cubit.dart';
 import 'package:anora/app/features/chat/logic/models/anora_prompt.dart';
 import 'package:anora/core/core.dart';
+import 'package:anora/src/app/assets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heroicons/heroicons.dart';
+import 'package:redacted/redacted.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:uuid/uuid.dart';
 
@@ -44,11 +46,59 @@ class _ChatroomPageState extends State<ChatroomPage> {
       ),
       body: Column(
         children: [
-          const Text('Chatroom'),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 6,
+              itemBuilder: (BuildContext context, int index) {
+                return const ChatWidget();
+              },
+            ),
+          ),
+          34.vGap,
           ChatAction(controller: controller),
         ],
       ),
     );
+  }
+}
+
+class ChatWidget extends StatelessWidget {
+  const ChatWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        8.hGap,
+        Image.asset(
+          Assets.assetsLauncherIcon,
+          width: 38,
+        ),
+        4.hGap,
+        Expanded(
+          child: Container(
+            width: context.width * .85,
+            // height: 78,
+            decoration: BoxDecoration(
+              color: context.colorScheme.ring,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            //child: const Center(),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'The Beautiful Thing with learning is that no one can take it away from you.The Beautiful Thing with learning is that no one can take it away from you.  ',
+                ),
+              ],
+            ).hPadding.vPadding,
+          ).redacted(context: context, redact: false).floatR,
+        ),
+      ],
+    ).vPadding;
   }
 }
 

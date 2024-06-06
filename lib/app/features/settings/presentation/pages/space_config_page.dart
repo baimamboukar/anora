@@ -9,6 +9,7 @@ import 'package:anora/app/router/router_paths.dart';
 import 'package:anora/core/core.dart';
 import 'package:anora/core/extensions/authx.dart';
 import 'package:anora/core/extensions/stringx.dart';
+import 'package:anora/src/app/assets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -428,7 +429,8 @@ class SpaceSumarry extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: context.colorScheme.foreground,
                     ),
-                    child: Image.network(context.orgs.first.logo),
+                    child: Image.asset(Assets.assetsLauncherIcon),
+                    // Image.network(context.orgs.first.logo),
                   ),
                 ),
                 8.hGap,

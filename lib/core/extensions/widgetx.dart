@@ -26,6 +26,10 @@ extension WidgetX on Widget {
         alignment: Alignment.centerRight,
         child: this,
       );
+  Widget floatX({required bool left}) => Align(
+        alignment: left ? Alignment.centerLeft : Alignment.centerRight,
+        child: this,
+      );
   Widget get shiftR => Row(
         children: [this],
       );
