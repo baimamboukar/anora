@@ -21,6 +21,7 @@ mixin _$ChatState {
     required TResult Function() initial,
     required TResult Function() completing,
     required TResult Function(String response) completed,
+    required TResult Function(String message) onMessage,
     required TResult Function(String error) failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$ChatState {
     TResult? Function()? initial,
     TResult? Function()? completing,
     TResult? Function(String response)? completed,
+    TResult? Function(String message)? onMessage,
     TResult? Function(String error)? failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$ChatState {
     TResult Function()? initial,
     TResult Function()? completing,
     TResult Function(String response)? completed,
+    TResult Function(String message)? onMessage,
     TResult Function(String error)? failed,
     required TResult orElse(),
   }) =>
@@ -46,6 +49,7 @@ mixin _$ChatState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Completing value) completing,
     required TResult Function(_Completed value) completed,
+    required TResult Function(_OnMessage value) onMessage,
     required TResult Function(_Failed value) failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +58,7 @@ mixin _$ChatState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Completing value)? completing,
     TResult? Function(_Completed value)? completed,
+    TResult? Function(_OnMessage value)? onMessage,
     TResult? Function(_Failed value)? failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +67,7 @@ mixin _$ChatState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Completing value)? completing,
     TResult Function(_Completed value)? completed,
+    TResult Function(_OnMessage value)? onMessage,
     TResult Function(_Failed value)? failed,
     required TResult orElse(),
   }) =>
@@ -126,6 +132,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() completing,
     required TResult Function(String response) completed,
+    required TResult Function(String message) onMessage,
     required TResult Function(String error) failed,
   }) {
     return initial();
@@ -137,6 +144,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? completing,
     TResult? Function(String response)? completed,
+    TResult? Function(String message)? onMessage,
     TResult? Function(String error)? failed,
   }) {
     return initial?.call();
@@ -148,6 +156,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? completing,
     TResult Function(String response)? completed,
+    TResult Function(String message)? onMessage,
     TResult Function(String error)? failed,
     required TResult orElse(),
   }) {
@@ -163,6 +172,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Completing value) completing,
     required TResult Function(_Completed value) completed,
+    required TResult Function(_OnMessage value) onMessage,
     required TResult Function(_Failed value) failed,
   }) {
     return initial(this);
@@ -174,6 +184,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Completing value)? completing,
     TResult? Function(_Completed value)? completed,
+    TResult? Function(_OnMessage value)? onMessage,
     TResult? Function(_Failed value)? failed,
   }) {
     return initial?.call(this);
@@ -185,6 +196,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Completing value)? completing,
     TResult Function(_Completed value)? completed,
+    TResult Function(_OnMessage value)? onMessage,
     TResult Function(_Failed value)? failed,
     required TResult orElse(),
   }) {
@@ -240,6 +252,7 @@ class _$CompletingImpl implements _Completing {
     required TResult Function() initial,
     required TResult Function() completing,
     required TResult Function(String response) completed,
+    required TResult Function(String message) onMessage,
     required TResult Function(String error) failed,
   }) {
     return completing();
@@ -251,6 +264,7 @@ class _$CompletingImpl implements _Completing {
     TResult? Function()? initial,
     TResult? Function()? completing,
     TResult? Function(String response)? completed,
+    TResult? Function(String message)? onMessage,
     TResult? Function(String error)? failed,
   }) {
     return completing?.call();
@@ -262,6 +276,7 @@ class _$CompletingImpl implements _Completing {
     TResult Function()? initial,
     TResult Function()? completing,
     TResult Function(String response)? completed,
+    TResult Function(String message)? onMessage,
     TResult Function(String error)? failed,
     required TResult orElse(),
   }) {
@@ -277,6 +292,7 @@ class _$CompletingImpl implements _Completing {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Completing value) completing,
     required TResult Function(_Completed value) completed,
+    required TResult Function(_OnMessage value) onMessage,
     required TResult Function(_Failed value) failed,
   }) {
     return completing(this);
@@ -288,6 +304,7 @@ class _$CompletingImpl implements _Completing {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Completing value)? completing,
     TResult? Function(_Completed value)? completed,
+    TResult? Function(_OnMessage value)? onMessage,
     TResult? Function(_Failed value)? failed,
   }) {
     return completing?.call(this);
@@ -299,6 +316,7 @@ class _$CompletingImpl implements _Completing {
     TResult Function(_Initial value)? initial,
     TResult Function(_Completing value)? completing,
     TResult Function(_Completed value)? completed,
+    TResult Function(_OnMessage value)? onMessage,
     TResult Function(_Failed value)? failed,
     required TResult orElse(),
   }) {
@@ -381,6 +399,7 @@ class _$CompletedImpl implements _Completed {
     required TResult Function() initial,
     required TResult Function() completing,
     required TResult Function(String response) completed,
+    required TResult Function(String message) onMessage,
     required TResult Function(String error) failed,
   }) {
     return completed(response);
@@ -392,6 +411,7 @@ class _$CompletedImpl implements _Completed {
     TResult? Function()? initial,
     TResult? Function()? completing,
     TResult? Function(String response)? completed,
+    TResult? Function(String message)? onMessage,
     TResult? Function(String error)? failed,
   }) {
     return completed?.call(response);
@@ -403,6 +423,7 @@ class _$CompletedImpl implements _Completed {
     TResult Function()? initial,
     TResult Function()? completing,
     TResult Function(String response)? completed,
+    TResult Function(String message)? onMessage,
     TResult Function(String error)? failed,
     required TResult orElse(),
   }) {
@@ -418,6 +439,7 @@ class _$CompletedImpl implements _Completed {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Completing value) completing,
     required TResult Function(_Completed value) completed,
+    required TResult Function(_OnMessage value) onMessage,
     required TResult Function(_Failed value) failed,
   }) {
     return completed(this);
@@ -429,6 +451,7 @@ class _$CompletedImpl implements _Completed {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Completing value)? completing,
     TResult? Function(_Completed value)? completed,
+    TResult? Function(_OnMessage value)? onMessage,
     TResult? Function(_Failed value)? failed,
   }) {
     return completed?.call(this);
@@ -440,6 +463,7 @@ class _$CompletedImpl implements _Completed {
     TResult Function(_Initial value)? initial,
     TResult Function(_Completing value)? completing,
     TResult Function(_Completed value)? completed,
+    TResult Function(_OnMessage value)? onMessage,
     TResult Function(_Failed value)? failed,
     required TResult orElse(),
   }) {
@@ -456,6 +480,157 @@ abstract class _Completed implements ChatState {
   String get response;
   @JsonKey(ignore: true)
   _$$CompletedImplCopyWith<_$CompletedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OnMessageImplCopyWith<$Res> {
+  factory _$$OnMessageImplCopyWith(
+          _$OnMessageImpl value, $Res Function(_$OnMessageImpl) then) =
+      __$$OnMessageImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$OnMessageImplCopyWithImpl<$Res>
+    extends _$ChatStateCopyWithImpl<$Res, _$OnMessageImpl>
+    implements _$$OnMessageImplCopyWith<$Res> {
+  __$$OnMessageImplCopyWithImpl(
+      _$OnMessageImpl _value, $Res Function(_$OnMessageImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$OnMessageImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OnMessageImpl implements _OnMessage {
+  const _$OnMessageImpl({required this.message});
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'ChatState.onMessage(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnMessageImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnMessageImplCopyWith<_$OnMessageImpl> get copyWith =>
+      __$$OnMessageImplCopyWithImpl<_$OnMessageImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() completing,
+    required TResult Function(String response) completed,
+    required TResult Function(String message) onMessage,
+    required TResult Function(String error) failed,
+  }) {
+    return onMessage(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? completing,
+    TResult? Function(String response)? completed,
+    TResult? Function(String message)? onMessage,
+    TResult? Function(String error)? failed,
+  }) {
+    return onMessage?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? completing,
+    TResult Function(String response)? completed,
+    TResult Function(String message)? onMessage,
+    TResult Function(String error)? failed,
+    required TResult orElse(),
+  }) {
+    if (onMessage != null) {
+      return onMessage(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Completing value) completing,
+    required TResult Function(_Completed value) completed,
+    required TResult Function(_OnMessage value) onMessage,
+    required TResult Function(_Failed value) failed,
+  }) {
+    return onMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Completing value)? completing,
+    TResult? Function(_Completed value)? completed,
+    TResult? Function(_OnMessage value)? onMessage,
+    TResult? Function(_Failed value)? failed,
+  }) {
+    return onMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Completing value)? completing,
+    TResult Function(_Completed value)? completed,
+    TResult Function(_OnMessage value)? onMessage,
+    TResult Function(_Failed value)? failed,
+    required TResult orElse(),
+  }) {
+    if (onMessage != null) {
+      return onMessage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnMessage implements ChatState {
+  const factory _OnMessage({required final String message}) = _$OnMessageImpl;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$$OnMessageImplCopyWith<_$OnMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -526,6 +701,7 @@ class _$FailedImpl implements _Failed {
     required TResult Function() initial,
     required TResult Function() completing,
     required TResult Function(String response) completed,
+    required TResult Function(String message) onMessage,
     required TResult Function(String error) failed,
   }) {
     return failed(error);
@@ -537,6 +713,7 @@ class _$FailedImpl implements _Failed {
     TResult? Function()? initial,
     TResult? Function()? completing,
     TResult? Function(String response)? completed,
+    TResult? Function(String message)? onMessage,
     TResult? Function(String error)? failed,
   }) {
     return failed?.call(error);
@@ -548,6 +725,7 @@ class _$FailedImpl implements _Failed {
     TResult Function()? initial,
     TResult Function()? completing,
     TResult Function(String response)? completed,
+    TResult Function(String message)? onMessage,
     TResult Function(String error)? failed,
     required TResult orElse(),
   }) {
@@ -563,6 +741,7 @@ class _$FailedImpl implements _Failed {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Completing value) completing,
     required TResult Function(_Completed value) completed,
+    required TResult Function(_OnMessage value) onMessage,
     required TResult Function(_Failed value) failed,
   }) {
     return failed(this);
@@ -574,6 +753,7 @@ class _$FailedImpl implements _Failed {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Completing value)? completing,
     TResult? Function(_Completed value)? completed,
+    TResult? Function(_OnMessage value)? onMessage,
     TResult? Function(_Failed value)? failed,
   }) {
     return failed?.call(this);
@@ -585,6 +765,7 @@ class _$FailedImpl implements _Failed {
     TResult Function(_Initial value)? initial,
     TResult Function(_Completing value)? completing,
     TResult Function(_Completed value)? completed,
+    TResult Function(_OnMessage value)? onMessage,
     TResult Function(_Failed value)? failed,
     required TResult orElse(),
   }) {

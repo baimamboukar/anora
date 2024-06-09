@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:anora/app/features/auth/data/models/invitation_model.dart'
-    as _i20;
+    as _i19;
 import 'package:anora/app/features/auth/presentation/pages/login_page.dart'
     as _i9;
 import 'package:anora/app/features/auth/presentation/pages/signup_page.dart'
@@ -40,8 +40,7 @@ import 'package:anora/app/features/settings/presentation/pages/notifications_con
 import 'package:anora/app/features/settings/presentation/pages/space_config_page.dart'
     as _i15;
 import 'package:auto_route/auto_route.dart' as _i16;
-import 'package:flutter/cupertino.dart' as _i19;
-import 'package:flutter/material.dart' as _i18;
+import 'package:flutter/cupertino.dart' as _i18;
 
 abstract class $AppRouter extends _i16.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -362,8 +361,8 @@ class RootRoute extends _i16.PageRouteInfo<void> {
 /// [_i14.SignupPage]
 class SignupRoute extends _i16.PageRouteInfo<SignupRouteArgs> {
   SignupRoute({
-    _i19.Key? key,
-    _i20.Invitation? invitation,
+    _i18.Key? key,
+    _i19.Invitation? invitation,
     List<_i16.PageRouteInfo>? children,
   }) : super(
           SignupRoute.name,
@@ -386,9 +385,9 @@ class SignupRouteArgs {
     this.invitation,
   });
 
-  final _i19.Key? key;
+  final _i18.Key? key;
 
-  final _i20.Invitation? invitation;
+  final _i19.Invitation? invitation;
 
   @override
   String toString() {

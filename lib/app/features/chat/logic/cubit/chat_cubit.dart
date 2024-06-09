@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 part 'chat_cubit.freezed.dart';
 part 'chat_state.dart';
@@ -21,10 +22,21 @@ class ChatCubit extends Cubit<ChatState> {
   );
 
   Future<void> completeChat({required Prompt promt}) async {
+    service.session.history.toList().add(
+          Content(
+            'user',
+            [
+              TextPart(promt.text),
+              if (promt.image != null)
+                DataPart('image/jpeg', promt.image!.readAsBytesSync()),
+            ],
+          ),
+        );
+    emit(ChatState.onMessage(message: promt.text));
     emit(const ChatState.completing());
     final response = await service.completeChat(prompt: promt);
 
-    emit(ChatState.completed(response: response));
+    emit(ChatState.completed(response: response.$2));
   }
 
   Future<void> saveMessage(Prompt prompt, String uid) async {

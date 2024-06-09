@@ -8,7 +8,7 @@ class GeminiService {
   });
   static (GenerativeModel, ChatSession) init() {
     final model = GenerativeModel(
-      model: 'gemini-1.5-flash',
+      model: 'gemini-1.5-pro',
       apiKey: 'AIzaSyB3mflnpWaJUWwKI593R15KHqJmROtZx68',
       systemInstruction: Content.system(
         "Your name is Anora AI, you are a chatbot that help users to make sense of their custom business data. Contextualize all your responses to the user's query",
@@ -21,7 +21,7 @@ class GeminiService {
 
   final GenerativeModel model;
   final ChatSession session;
-  Future<String> completeChat({
+  Future<(Content, String)> completeChat({
     required Prompt prompt,
   }) async {
     if (prompt.image != null) {
@@ -29,28 +29,26 @@ class GeminiService {
         prompt: prompt.text,
         dataPart: DataPart('image/jpeg', prompt.image!.readAsBytesSync()),
       );
-      return response ?? 'Somehting went wrong with your request...';
+      return response;
     }
     final response = await generateContentFromText(prompt: prompt.text);
-    return response ?? 'Somehting went wrong with your request...';
+    return response;
   }
 
-  Future<String?> generateContentFromText({
+  Future<(Content, String)> generateContentFromText({
     required String prompt,
   }) async {
     final response = await session.sendMessage(
       Content.text(prompt),
     );
-    session.history.toList().add(
-          Content(
-            'model',
-            response.candidates.first.content.parts,
-          ),
-        );
-    return response.text;
+    final content = Content(
+      'model',
+      response.candidates.first.content.parts,
+    );
+    return (content, response.text ?? 'Something went wrong with your request');
   }
 
-  Future<String?> generateContentFromImage({
+  Future<(Content, String)> generateContentFromImage({
     required String prompt,
     required DataPart dataPart,
   }) async {
@@ -64,12 +62,16 @@ class GeminiService {
     // final response = await model.generateContent([
     //   Content.multi([text, dataPart]),
     // ]);
-    session.history.toList().add(
-          Content(
-            'model',
-            response.candidates.first.content.parts,
-          ),
-        );
-    return response.text;
+    // session.history.toList().add(
+    //       Content(
+    //         'model',
+    //         response.candidates.first.content.parts,
+    //       ),
+    //     );
+    final content = Content(
+      'model',
+      response.candidates.first.content.parts,
+    );
+    return (content, response.text ?? 'Something went wrong with your request');
   }
 }

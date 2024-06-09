@@ -7,6 +7,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_generative_ai/src/chat.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:markdown_widget/config/all.dart';
 import 'package:markdown_widget/config/markdown_generator.dart';
@@ -31,6 +32,23 @@ class ChatroomPage extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _ChatroomPageState extends State<ChatroomPage> {
+  final _controller = ScrollController();
+  bool isBottom = false;
+
+  Future<void> init() async {}
+
+  void checkForAutoScroll() {
+    if (!_controller.hasClients) return;
+    if (_controller.position.atEdge) {
+      isBottom = _controller.position.pixels != 0;
+      if (isBottom) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _controller.jumpTo(_controller.position.maxScrollExtent);
+        });
+      }
+    }
+  }
+
   late TextEditingController controller;
   @override
   void initState() {
@@ -41,47 +59,104 @@ class _ChatroomPageState extends State<ChatroomPage> {
 
   @override
   Widget build(BuildContext context) {
-    final session = context.read<ChatCubit>().service.session;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Query Chatroom'),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: session.history.length,
-              itemBuilder: (BuildContext context, int index) {
-                final message = session.history.toList()[index];
-
-                return ChatWidget(
-                  isAnora: message.role == 'model',
-                  message: (message.parts.first.toJson()
-                      as Map<String, dynamic>)['text'] as String,
-                  // 'The _Beautiful_ `Thing` with learning is that no one can take it away from you.The Beautiful Thing with **learning** is that no one can take it away from you. ![Anora Image](assets/launcher_icon.png)',
+    checkForAutoScroll();
+    return BlocListener<ChatCubit, ChatState>(
+      listener: (context, state) {
+        state.maybeWhen(
+          completed: (response) {
+            _controller.jumpTo(_controller.position.maxScrollExtent);
+          },
+          onMessage: (message) {
+            _controller.jumpTo(_controller.position.maxScrollExtent);
+          },
+          orElse: () {},
+          failed: (error) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(error),
+              ),
+            );
+          },
+        );
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Query Chatroom'),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: BlocBuilder<ChatCubit, ChatState>(
+                builder: (context, state) {
+                  final chatSession = context.read<ChatCubit>().service.session;
+                  return state.maybeWhen(
+                    completed: (response) {
+                      return BuildChats(
+                        session: chatSession,
+                        scroller: _controller,
+                      );
+                    },
+                    onMessage: (message) {
+                      return BuildChats(
+                        session: chatSession,
+                        scroller: _controller,
+                      );
+                    },
+                    orElse: () =>
+                        BuildChats(session: chatSession, scroller: _controller),
+                  );
+                },
+              ),
+            ),
+            BlocBuilder<ChatCubit, ChatState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  completing: () => Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Please Wait...'),
+                      8.hGap,
+                      const CupertinoActivityIndicator(),
+                    ],
+                  ),
+                  orElse: () => const SizedBox.shrink(),
                 );
               },
             ),
-          ),
-          BlocBuilder<ChatCubit, ChatState>(
-            builder: (context, state) {
-              return state.maybeWhen(
-                completing: () => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Please Wait...'),
-                    8.hGap,
-                    const CupertinoActivityIndicator(),
-                  ],
-                ),
-                orElse: () => const SizedBox.shrink(),
-              );
-            },
-          ),
-          34.vGap,
-          ChatAction(controller: controller),
-        ],
+            34.vGap,
+            ChatAction(controller: controller),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class BuildChats extends StatelessWidget {
+  const BuildChats({
+    required this.session,
+    required this.scroller,
+    super.key,
+  });
+
+  final ChatSession session;
+  final ScrollController scroller;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      controller: scroller,
+      itemCount: session.history.length,
+      itemBuilder: (BuildContext context, int index) {
+        final message = session.history.toList()[index];
+
+        return ChatWidget(
+          isAnora: message.role == 'model',
+          message: (message.parts.first.toJson()
+              as Map<String, dynamic>)['text'] as String,
+          // 'The _Beautiful_ `Thing` with learning is that no one can take it away from you.The Beautiful Thing with **learning** is that no one can take it away from you. ![Anora Image](assets/launcher_icon.png)',
+        );
+      },
     );
   }
 }
@@ -102,7 +177,7 @@ class ChatWidget extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment:
-          !isAnora ? MainAxisAlignment.start : MainAxisAlignment.end,
+          isAnora ? MainAxisAlignment.start : MainAxisAlignment.end,
       children: [
         // 8.hGap,
         // if (isAnora)
@@ -213,11 +288,13 @@ class ChatAction extends StatelessWidget {
               ShadButton.outline(
                 icon: const HeroIcon(HeroIcons.paperAirplane, size: 24),
                 size: ShadButtonSize.icon,
-                onPressed: () {
+                onPressed: () async {
                   if (controller.value.text.isNotEmpty) {
                     // call Gemeni
-                    context.read<ChatCubit>().completeChat(
-                          promt: Prompt(text: controller.value.text),
+                    final data = controller.value.text;
+                    controller.clear();
+                    await context.read<ChatCubit>().completeChat(
+                          promt: Prompt(text: data),
                         );
                   }
                 },

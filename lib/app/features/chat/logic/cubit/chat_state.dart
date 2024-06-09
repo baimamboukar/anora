@@ -8,5 +8,6 @@ abstract class ChatState with _$ChatState {
 
   const factory ChatState.completed({required String response}) = _Completed;
 
+  const factory ChatState.onMessage({required String message}) = _OnMessage;
   const factory ChatState.failed({required String error}) = _Failed;
 }
