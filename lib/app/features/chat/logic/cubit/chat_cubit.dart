@@ -1,3 +1,4 @@
+import 'package:anora/app/features/chat/data/service/chat_services.dart';
 import 'package:anora/app/features/chat/logic/models/anora_prompt.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,8 +11,25 @@ part 'chat_state.dart';
 class ChatCubit extends Cubit<ChatState> {
   ChatCubit() : super(const ChatState.initial());
   final _firestore = FirebaseFirestore.instance;
-  Future<void> init(Prompt prompt, String uid) async {
+
+  final id = FirebaseAuth.instance.currentUser!.uid;
+  String chatUID = '';
+  //late ChatSession session;
+  final service = GeminiService(
+    model: GeminiService.init().$1,
+    session: GeminiService.init().$2,
+  );
+
+  Future<void> completeChat({required Prompt promt}) async {
     emit(const ChatState.completing());
+    final response = await service.completeChat(prompt: promt);
+
+    emit(ChatState.completed(response: response));
+  }
+
+  Future<void> saveMessage(Prompt prompt, String uid) async {
+    emit(const ChatState.completing());
+    chatUID = uid;
     final id = FirebaseAuth.instance.currentUser!.uid;
     await _firestore.collection('chats').doc(id).set(
       {

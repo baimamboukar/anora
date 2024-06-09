@@ -1,16 +1,17 @@
 import 'dart:math' as math;
 
-import 'package:anora/app/features/chat/logic/chat_cubit.dart';
+import 'package:anora/app/features/chat/logic/cubit/chat_cubit.dart';
 import 'package:anora/app/features/chat/logic/models/anora_prompt.dart';
 import 'package:anora/core/core.dart';
-import 'package:anora/src/app/assets.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heroicons/heroicons.dart';
+import 'package:markdown_widget/config/all.dart';
+import 'package:markdown_widget/config/markdown_generator.dart';
 import 'package:redacted/redacted.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:uuid/uuid.dart';
 
 @RoutePage()
 class ChatroomPage extends StatefulWidget implements AutoRouteWrapper {
@@ -35,11 +36,12 @@ class _ChatroomPageState extends State<ChatroomPage> {
   void initState() {
     super.initState();
     controller = TextEditingController();
-    context.read<ChatCubit>().init(widget.prompt, const Uuid().v4());
+    context.read<ChatCubit>().completeChat(promt: widget.prompt);
   }
 
   @override
   Widget build(BuildContext context) {
+    final session = context.read<ChatCubit>().service.session;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Query Chatroom'),
@@ -48,11 +50,33 @@ class _ChatroomPageState extends State<ChatroomPage> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: 6,
+              itemCount: session.history.length,
               itemBuilder: (BuildContext context, int index) {
-                return const ChatWidget();
+                final message = session.history.toList()[index];
+
+                return ChatWidget(
+                  isAnora: message.role == 'model',
+                  message: (message.parts.first.toJson()
+                      as Map<String, dynamic>)['text'] as String,
+                  // 'The _Beautiful_ `Thing` with learning is that no one can take it away from you.The Beautiful Thing with **learning** is that no one can take it away from you. ![Anora Image](assets/launcher_icon.png)',
+                );
               },
             ),
+          ),
+          BlocBuilder<ChatCubit, ChatState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                completing: () => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Please Wait...'),
+                    8.hGap,
+                    const CupertinoActivityIndicator(),
+                  ],
+                ),
+                orElse: () => const SizedBox.shrink(),
+              );
+            },
           ),
           34.vGap,
           ChatAction(controller: controller),
@@ -64,39 +88,45 @@ class _ChatroomPageState extends State<ChatroomPage> {
 
 class ChatWidget extends StatelessWidget {
   const ChatWidget({
+    required this.message,
+    required this.isAnora,
     super.key,
   });
+  final String message;
+  final bool isAnora;
 
   @override
   Widget build(BuildContext context) {
+    final generator = MarkdownGenerator();
+    final widgets = generator.buildWidgets(message);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment:
+          !isAnora ? MainAxisAlignment.start : MainAxisAlignment.end,
       children: [
-        8.hGap,
-        Image.asset(
-          Assets.assetsLauncherIcon,
-          width: 38,
-        ),
-        4.hGap,
-        Expanded(
-          child: Container(
-            width: context.width * .85,
-            // height: 78,
-            decoration: BoxDecoration(
-              color: context.colorScheme.ring,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            //child: const Center(),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'The Beautiful Thing with learning is that no one can take it away from you.The Beautiful Thing with learning is that no one can take it away from you.  ',
-                ),
-              ],
-            ).hPadding.vPadding,
-          ).redacted(context: context, redact: false).floatR,
-        ),
+        // 8.hGap,
+        // if (isAnora)
+        //   Image.asset(
+        //     Assets.assetsLauncherIcon,
+        //     width: 38,
+        //   ),
+        // 4.hGap,
+        Container(
+          width: context.width * .85,
+          // height: 78,
+          decoration: BoxDecoration(
+            color:
+                isAnora ? context.colorScheme.muted : context.colorScheme.ring,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          //child: const Center(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ...widgets,
+            ],
+          ).hPadding.vPaddingx(8),
+        ).redacted(context: context, redact: false).floatR.hPaddingx(8),
       ],
     ).vPadding;
   }
@@ -186,6 +216,9 @@ class ChatAction extends StatelessWidget {
                 onPressed: () {
                   if (controller.value.text.isNotEmpty) {
                     // call Gemeni
+                    context.read<ChatCubit>().completeChat(
+                          promt: Prompt(text: controller.value.text),
+                        );
                   }
                 },
               ),
@@ -196,3 +229,5 @@ class ChatAction extends StatelessWidget {
     );
   }
 }
+
+/// Generator Config
