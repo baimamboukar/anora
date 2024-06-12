@@ -5,6 +5,7 @@ import 'dart:math' as math;
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/app/features/settings/domain/auth_cubit/invitation_cubit.dart';
 import 'package:anora/app/features/settings/settings.dart';
+import 'package:anora/app/router/router.gr.dart';
 import 'package:anora/app/router/router_paths.dart';
 import 'package:anora/core/core.dart';
 import 'package:anora/core/extensions/authx.dart';
@@ -514,8 +515,15 @@ class IntegrationsList extends StatelessWidget {
           final integration = integrations[index];
           return Padding(
             padding: const EdgeInsets.all(10),
-            child: IntegrationCard(
-              integration: integration,
+            child: GestureDetector(
+              onTap: () async {
+                await context.router.push(
+                  IntegrationTypeRoute(integration: integration),
+                );
+              },
+              child: IntegrationCard(
+                integration: integration,
+              ),
             ),
           );
         },

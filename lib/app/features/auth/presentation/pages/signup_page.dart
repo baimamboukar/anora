@@ -96,7 +96,7 @@ class _SignupPageState extends State<SignupPage> {
           child: ShadForm(
             key: formKey,
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 350),
+              constraints: BoxConstraints(maxWidth: context.width * .9),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,

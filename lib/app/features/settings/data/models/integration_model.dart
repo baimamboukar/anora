@@ -19,6 +19,27 @@ class Integration {
 final integrations = <Integration>[
   Integration(
     authorized: true,
+    integrated: false,
+    title: 'Telegram',
+    desc: 'Telegram Chats',
+    icon: Assets.assetsIconsTelegram,
+  ),
+  Integration(
+    authorized: true,
+    integrated: false,
+    title: 'WhatsApp',
+    desc: 'Business Data',
+    icon: Assets.assetsIconsWhatsapp,
+  ),
+  Integration(
+    authorized: true,
+    integrated: true,
+    title: 'Excel',
+    desc: 'Sales Data',
+    icon: Assets.assetsIconsExcel,
+  ),
+  Integration(
+    authorized: true,
     integrated: true,
     title: 'Drive',
     desc: 'Google Drive',

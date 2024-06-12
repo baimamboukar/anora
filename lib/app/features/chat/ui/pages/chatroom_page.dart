@@ -58,16 +58,32 @@ class _ChatroomPageState extends State<ChatroomPage> {
   }
 
   @override
+  void didUpdateWidget(covariant ChatroomPage oldWidget) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // final history = context.read<ChatCubit>().service.session.history;
+      if (_controller.hasClients) {
+        _controller.animateTo(
+          _controller.position.maxScrollExtent + 1000,
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 300),
+        );
+      }
+    });
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     checkForAutoScroll();
     return BlocListener<ChatCubit, ChatState>(
       listener: (context, state) {
         state.maybeWhen(
           completed: (response) {
-            _controller.jumpTo(_controller.position.maxScrollExtent);
+            _controller.jumpTo(_controller.position.maxScrollExtent + 1000);
           },
           onMessage: (message) {
-            _controller.jumpTo(_controller.position.maxScrollExtent);
+            setState(() {});
+            _controller.jumpTo(_controller.position.maxScrollExtent + 1000);
           },
           orElse: () {},
           failed: (error) {
@@ -92,36 +108,23 @@ class _ChatroomPageState extends State<ChatroomPage> {
                   return state.maybeWhen(
                     completed: (response) {
                       return BuildChats(
-                        session: chatSession,
+                        session: context.read<ChatCubit>().service.session,
                         scroller: _controller,
                       );
                     },
                     onMessage: (message) {
                       return BuildChats(
-                        session: chatSession,
+                        session: context.read<ChatCubit>().service.session,
                         scroller: _controller,
                       );
                     },
-                    orElse: () =>
-                        BuildChats(session: chatSession, scroller: _controller),
+                    orElse: () => BuildChats(
+                      session: context.read<ChatCubit>().service.session,
+                      scroller: _controller,
+                    ),
                   );
                 },
               ),
-            ),
-            BlocBuilder<ChatCubit, ChatState>(
-              builder: (context, state) {
-                return state.maybeWhen(
-                  completing: () => Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Please Wait...'),
-                      8.hGap,
-                      const CupertinoActivityIndicator(),
-                    ],
-                  ),
-                  orElse: () => const SizedBox.shrink(),
-                );
-              },
             ),
             34.vGap,
             ChatAction(controller: controller),
@@ -285,18 +288,32 @@ class ChatAction extends StatelessWidget {
                 ).hPadding,
               ).vPaddingx(8),
               const Spacer(),
-              ShadButton.outline(
-                icon: const HeroIcon(HeroIcons.paperAirplane, size: 24),
-                size: ShadButtonSize.icon,
-                onPressed: () async {
-                  if (controller.value.text.isNotEmpty) {
-                    // call Gemeni
-                    final data = controller.value.text;
-                    controller.clear();
-                    await context.read<ChatCubit>().completeChat(
-                          promt: Prompt(text: data),
-                        );
-                  }
+              BlocBuilder<ChatCubit, ChatState>(
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    completing: () => Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Please Wait...'),
+                        8.hGap,
+                        const CupertinoActivityIndicator(),
+                      ],
+                    ),
+                    orElse: () => ShadButton.outline(
+                      icon: const HeroIcon(HeroIcons.paperAirplane, size: 24),
+                      size: ShadButtonSize.icon,
+                      onPressed: () async {
+                        if (controller.value.text.isNotEmpty) {
+                          // call Gemeni
+                          final data = controller.value.text;
+                          controller.clear();
+                          await context.read<ChatCubit>().completeChat(
+                                promt: Prompt(text: data),
+                              );
+                        }
+                      },
+                    ),
+                  );
                 },
               ),
             ],

@@ -25,6 +25,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return ShadApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: _router.config(
         placeholder: (context) => const Center(
           child: CupertinoActivityIndicator(),
