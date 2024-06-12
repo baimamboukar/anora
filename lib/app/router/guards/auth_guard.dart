@@ -10,7 +10,7 @@ class AuthGuard extends AutoRouteGuard {
     if (user != null) {
       resolver.next();
     } else {
-      router.replaceNamed(LOGIN_ROUTE);
+      router.replaceNamed(WELCOME_ROUTE);
     }
   }
 }

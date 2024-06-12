@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+const String WELCOME_ROUTE = '/welcome';
 const String ADVANCED_CONFIGS_ROUTE = '/advanced-configs';
 const String DOWNLOADS_CONFIG_ROUTE = '/downloads-config';
 

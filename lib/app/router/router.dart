@@ -8,6 +8,10 @@ class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
+          page: WelcomeRoute.page,
+          //path: CHAT_ROUTE,
+        ),
+        AutoRoute(
           page: RootRoute.page,
           path: '/',
           initial: true,
