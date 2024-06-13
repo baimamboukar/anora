@@ -1,16 +1,22 @@
 import 'dart:math' as math;
 
+import 'package:anora/app/features/auth/data/models/space_models.dart';
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/app/features/chat/logic/models/anora_prompt.dart';
+import 'package:anora/app/features/integrations/logic/integration_cubit.dart';
 import 'package:anora/app/router/router.gr.dart';
 import 'package:anora/core/core.dart';
 import 'package:anora/core/data.dart';
 import 'package:anora/core/extensions/authx.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heroicons/heroicons.dart';
+import 'package:redacted/redacted.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+
+final knowledgeListener = ValueNotifier<SpaceKnowledgeBase?>(null);
 
 @RoutePage()
 class ChatPage extends StatefulWidget implements AutoRouteWrapper {
@@ -21,8 +27,15 @@ class ChatPage extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return BlocProvider<AuthCubit>(
-      create: (context) => AuthCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(),
+        ),
+        BlocProvider(
+          create: (context) => IntegrationCubit(),
+        ),
+      ],
       child: this,
     );
   }
@@ -35,6 +48,9 @@ class _ChatPageState extends State<ChatPage> {
   void initState() {
     super.initState();
     controller = TextEditingController();
+    context
+        .read<IntegrationCubit>()
+        .getKnowledgeBasesByOrganization(context.orgs.first.uid);
   }
 
   @override
@@ -189,6 +205,75 @@ class ChatHome extends StatelessWidget {
           14.vGap,
           const ChatSuggestions().hPadding,
           14.vGap,
+          BlocBuilder<IntegrationCubit, IntegrationState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                orElse: () => const SizedBox(),
+                gettingKnowledges: () {
+                  return Container(
+                    height: 48,
+                    width: context.width * .7,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      color: context.colorScheme.primary,
+                    ),
+                  ).redacted(context: context, redact: true);
+                },
+                gettingKnowledgeFailure: (err) {
+                  // failure in red and action to retry
+                  return const HeroIcon(
+                    HeroIcons.eyeDropper,
+                    color: Colors.red,
+                  );
+                },
+                gettingKnowledgeSuccess: (knowledgeBases) {
+                  knowledgeListener.value = knowledgeBases.last;
+                  return Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Active Knowledge Base',
+                            style: context.paragraph,
+                          ),
+                          CupertinoContextMenu(
+                            enableHapticFeedback: true,
+                            actions: [
+                              for (int index = 0;
+                                  index < knowledgeBases.length;
+                                  index++)
+                                CupertinoContextMenuAction(
+                                  child: Text(knowledgeBases[index].name),
+                                  onPressed: () {
+                                    context.router.maybePop();
+                                    knowledgeListener.value =
+                                        knowledgeBases[index];
+                                  },
+                                ),
+                            ],
+                            child: const HeroIcon(HeroIcons.cog6Tooth),
+                          ),
+                        ],
+                      ).hPadding,
+                      ValueListenableBuilder(
+                        valueListenable: knowledgeListener,
+                        builder: (context, activeKnowledge, child) {
+                          return Text(
+                            activeKnowledge!.name,
+                            style: context.paragraph
+                                .copyWith(color: context.colorScheme.selection),
+                          ).floatL.hPadding;
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+
+          14.vGap,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -205,6 +290,7 @@ class ChatHome extends StatelessWidget {
           ).hPadding,
           //  8.vGap,
           const RecentChats().hPadding,
+          14.vGap,
           //   const Switcher(),
         ],
       ),
