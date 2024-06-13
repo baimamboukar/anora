@@ -24,4 +24,6 @@ extension StringsX on String {
       _ => 'Industry'
     };
   }
+
+  String get toExtension => split('.').last;
 }

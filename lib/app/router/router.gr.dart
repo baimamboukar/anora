@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:anora/app/features/auth/data/models/invitation_model.dart'
-    as _i25;
+    as _i24;
 import 'package:anora/app/features/auth/data/models/space_models.dart' as _i23;
 import 'package:anora/app/features/auth/presentation/pages/login_page.dart'
     as _i11;
@@ -50,7 +50,6 @@ import 'package:anora/app/features/settings/presentation/pages/space_config_page
     as _i17;
 import 'package:auto_route/auto_route.dart' as _i19;
 import 'package:flutter/cupertino.dart' as _i21;
-import 'package:flutter/material.dart' as _i24;
 
 abstract class $AppRouter extends _i19.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -354,7 +353,7 @@ class IntegrationTypeRouteArgs {
 class KnowledgeBaseRoute extends _i19.PageRouteInfo<KnowledgeBaseRouteArgs> {
   KnowledgeBaseRoute({
     required _i23.SpaceKnowledgeBase knowledgeBase,
-    _i24.Key? key,
+    _i21.Key? key,
     List<_i19.PageRouteInfo>? children,
   }) : super(
           KnowledgeBaseRoute.name,
@@ -379,7 +378,7 @@ class KnowledgeBaseRouteArgs {
 
   final _i23.SpaceKnowledgeBase knowledgeBase;
 
-  final _i24.Key? key;
+  final _i21.Key? key;
 
   @override
   String toString() {
@@ -476,7 +475,7 @@ class RootRoute extends _i19.PageRouteInfo<void> {
 class SignupRoute extends _i19.PageRouteInfo<SignupRouteArgs> {
   SignupRoute({
     _i21.Key? key,
-    _i25.Invitation? invitation,
+    _i24.Invitation? invitation,
     List<_i19.PageRouteInfo>? children,
   }) : super(
           SignupRoute.name,
@@ -501,7 +500,7 @@ class SignupRouteArgs {
 
   final _i21.Key? key;
 
-  final _i25.Invitation? invitation;
+  final _i24.Invitation? invitation;
 
   @override
   String toString() {
