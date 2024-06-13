@@ -9,4 +9,13 @@ class IntegrationState with _$IntegrationState {
   ) = _AddingKnowledgeBaseSuccess;
   const factory IntegrationState.addingKnowledgeBaseFailure(String error) =
       _AddingKnowledgeBaseFailure;
+
+  /// Getting knowledge states
+
+  const factory IntegrationState.gettingKnowledges() = _GettingKnowledges;
+  const factory IntegrationState.gettingKnowledgeSuccess(
+    List<SpaceKnowledgeBase> knowledges,
+  ) = _GettingKnowledgesS;
+  const factory IntegrationState.gettingKnowledgeFailure(String err) =
+      _GettingKnowledgesF;
 }

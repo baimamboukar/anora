@@ -3,6 +3,8 @@
 import 'dart:math' as math;
 
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
+import 'package:anora/app/features/integrations/logic/integration_cubit.dart';
+import 'package:anora/app/features/integrations/ui/pages/integration_type.dart';
 import 'package:anora/app/features/settings/domain/auth_cubit/invitation_cubit.dart';
 import 'package:anora/app/features/settings/settings.dart';
 import 'package:anora/app/router/router.gr.dart';
@@ -32,6 +34,9 @@ class SpacePage extends StatefulWidget implements AutoRouteWrapper {
     return MultiBlocProvider(
       providers: [
         BlocProvider<InvitationsCubit>(create: (context) => InvitationsCubit()),
+        BlocProvider(
+          create: (context) => IntegrationCubit(),
+        ),
         BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
       ],
       child: this,
@@ -40,6 +45,14 @@ class SpacePage extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _SpacePageState extends State<SpacePage> {
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<IntegrationCubit>()
+        .getKnowledgeBasesByOrganization(context.orgs.first.uid);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<InvitationsCubit, InvitationState>(
@@ -93,12 +106,21 @@ class _SpacePageState extends State<SpacePage> {
                   'Integrations let you contextualize your prompts based on your custom Entrepise Data. Browse Integrations and add the ones you care about',
               content: IntegrationsList(),
             ),
+            14.vGap,
+            const ConfigBloc(
+              title: 'Knowledge Bases',
+              desc:
+                  'Knowledge Bases are sets of unstructed data classified by topics. You can add or remove knowledge bases from this space',
+              content: KnowledgeBaseList(),
+            ),
+            14.vGap,
             ConfigBloc(
               title: 'Members',
               desc:
                   'Members are the people who have access to this space. You can add or remove members from this space',
               content: MembersList(contextX: context),
             ),
+            24.vGap,
           ],
         ),
       ),

@@ -113,6 +113,7 @@ class SpaceKnowledgeBase {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'name': name,
       'knowledgeID': knowledgeID,
       'spaceID': spaceID,
       'sources': sources.map((x) => x.toMap()).toList(),

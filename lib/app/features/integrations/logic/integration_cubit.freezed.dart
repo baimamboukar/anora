@@ -23,6 +23,10 @@ mixin _$IntegrationState {
     required TResult Function(SpaceKnowledgeBase base)
         addingKnowledgeBaseSuccess,
     required TResult Function(String error) addingKnowledgeBaseFailure,
+    required TResult Function() gettingKnowledges,
+    required TResult Function(List<SpaceKnowledgeBase> knowledges)
+        gettingKnowledgeSuccess,
+    required TResult Function(String err) gettingKnowledgeFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,6 +35,10 @@ mixin _$IntegrationState {
     TResult? Function()? addingKnowledgeBase,
     TResult? Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
     TResult? Function(String error)? addingKnowledgeBaseFailure,
+    TResult? Function()? gettingKnowledges,
+    TResult? Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult? Function(String err)? gettingKnowledgeFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,6 +47,10 @@ mixin _$IntegrationState {
     TResult Function()? addingKnowledgeBase,
     TResult Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
     TResult Function(String error)? addingKnowledgeBaseFailure,
+    TResult Function()? gettingKnowledges,
+    TResult Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult Function(String err)? gettingKnowledgeFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -50,6 +62,11 @@ mixin _$IntegrationState {
         addingKnowledgeBaseSuccess,
     required TResult Function(_AddingKnowledgeBaseFailure value)
         addingKnowledgeBaseFailure,
+    required TResult Function(_GettingKnowledges value) gettingKnowledges,
+    required TResult Function(_GettingKnowledgesS value)
+        gettingKnowledgeSuccess,
+    required TResult Function(_GettingKnowledgesF value)
+        gettingKnowledgeFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +77,9 @@ mixin _$IntegrationState {
         addingKnowledgeBaseSuccess,
     TResult? Function(_AddingKnowledgeBaseFailure value)?
         addingKnowledgeBaseFailure,
+    TResult? Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult? Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult? Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +90,9 @@ mixin _$IntegrationState {
         addingKnowledgeBaseSuccess,
     TResult Function(_AddingKnowledgeBaseFailure value)?
         addingKnowledgeBaseFailure,
+    TResult Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -136,6 +159,10 @@ class _$InitialImpl implements _Initial {
     required TResult Function(SpaceKnowledgeBase base)
         addingKnowledgeBaseSuccess,
     required TResult Function(String error) addingKnowledgeBaseFailure,
+    required TResult Function() gettingKnowledges,
+    required TResult Function(List<SpaceKnowledgeBase> knowledges)
+        gettingKnowledgeSuccess,
+    required TResult Function(String err) gettingKnowledgeFailure,
   }) {
     return initial();
   }
@@ -147,6 +174,10 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? addingKnowledgeBase,
     TResult? Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
     TResult? Function(String error)? addingKnowledgeBaseFailure,
+    TResult? Function()? gettingKnowledges,
+    TResult? Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult? Function(String err)? gettingKnowledgeFailure,
   }) {
     return initial?.call();
   }
@@ -158,6 +189,10 @@ class _$InitialImpl implements _Initial {
     TResult Function()? addingKnowledgeBase,
     TResult Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
     TResult Function(String error)? addingKnowledgeBaseFailure,
+    TResult Function()? gettingKnowledges,
+    TResult Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult Function(String err)? gettingKnowledgeFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -175,6 +210,11 @@ class _$InitialImpl implements _Initial {
         addingKnowledgeBaseSuccess,
     required TResult Function(_AddingKnowledgeBaseFailure value)
         addingKnowledgeBaseFailure,
+    required TResult Function(_GettingKnowledges value) gettingKnowledges,
+    required TResult Function(_GettingKnowledgesS value)
+        gettingKnowledgeSuccess,
+    required TResult Function(_GettingKnowledgesF value)
+        gettingKnowledgeFailure,
   }) {
     return initial(this);
   }
@@ -188,6 +228,9 @@ class _$InitialImpl implements _Initial {
         addingKnowledgeBaseSuccess,
     TResult? Function(_AddingKnowledgeBaseFailure value)?
         addingKnowledgeBaseFailure,
+    TResult? Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult? Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult? Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
   }) {
     return initial?.call(this);
   }
@@ -201,6 +244,9 @@ class _$InitialImpl implements _Initial {
         addingKnowledgeBaseSuccess,
     TResult Function(_AddingKnowledgeBaseFailure value)?
         addingKnowledgeBaseFailure,
+    TResult Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -258,6 +304,10 @@ class _$AddingKnowledgeBaseImpl implements _AddingKnowledgeBase {
     required TResult Function(SpaceKnowledgeBase base)
         addingKnowledgeBaseSuccess,
     required TResult Function(String error) addingKnowledgeBaseFailure,
+    required TResult Function() gettingKnowledges,
+    required TResult Function(List<SpaceKnowledgeBase> knowledges)
+        gettingKnowledgeSuccess,
+    required TResult Function(String err) gettingKnowledgeFailure,
   }) {
     return addingKnowledgeBase();
   }
@@ -269,6 +319,10 @@ class _$AddingKnowledgeBaseImpl implements _AddingKnowledgeBase {
     TResult? Function()? addingKnowledgeBase,
     TResult? Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
     TResult? Function(String error)? addingKnowledgeBaseFailure,
+    TResult? Function()? gettingKnowledges,
+    TResult? Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult? Function(String err)? gettingKnowledgeFailure,
   }) {
     return addingKnowledgeBase?.call();
   }
@@ -280,6 +334,10 @@ class _$AddingKnowledgeBaseImpl implements _AddingKnowledgeBase {
     TResult Function()? addingKnowledgeBase,
     TResult Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
     TResult Function(String error)? addingKnowledgeBaseFailure,
+    TResult Function()? gettingKnowledges,
+    TResult Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult Function(String err)? gettingKnowledgeFailure,
     required TResult orElse(),
   }) {
     if (addingKnowledgeBase != null) {
@@ -297,6 +355,11 @@ class _$AddingKnowledgeBaseImpl implements _AddingKnowledgeBase {
         addingKnowledgeBaseSuccess,
     required TResult Function(_AddingKnowledgeBaseFailure value)
         addingKnowledgeBaseFailure,
+    required TResult Function(_GettingKnowledges value) gettingKnowledges,
+    required TResult Function(_GettingKnowledgesS value)
+        gettingKnowledgeSuccess,
+    required TResult Function(_GettingKnowledgesF value)
+        gettingKnowledgeFailure,
   }) {
     return addingKnowledgeBase(this);
   }
@@ -310,6 +373,9 @@ class _$AddingKnowledgeBaseImpl implements _AddingKnowledgeBase {
         addingKnowledgeBaseSuccess,
     TResult? Function(_AddingKnowledgeBaseFailure value)?
         addingKnowledgeBaseFailure,
+    TResult? Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult? Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult? Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
   }) {
     return addingKnowledgeBase?.call(this);
   }
@@ -323,6 +389,9 @@ class _$AddingKnowledgeBaseImpl implements _AddingKnowledgeBase {
         addingKnowledgeBaseSuccess,
     TResult Function(_AddingKnowledgeBaseFailure value)?
         addingKnowledgeBaseFailure,
+    TResult Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
     required TResult orElse(),
   }) {
     if (addingKnowledgeBase != null) {
@@ -409,6 +478,10 @@ class _$AddingKnowledgeBaseSuccessImpl implements _AddingKnowledgeBaseSuccess {
     required TResult Function(SpaceKnowledgeBase base)
         addingKnowledgeBaseSuccess,
     required TResult Function(String error) addingKnowledgeBaseFailure,
+    required TResult Function() gettingKnowledges,
+    required TResult Function(List<SpaceKnowledgeBase> knowledges)
+        gettingKnowledgeSuccess,
+    required TResult Function(String err) gettingKnowledgeFailure,
   }) {
     return addingKnowledgeBaseSuccess(base);
   }
@@ -420,6 +493,10 @@ class _$AddingKnowledgeBaseSuccessImpl implements _AddingKnowledgeBaseSuccess {
     TResult? Function()? addingKnowledgeBase,
     TResult? Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
     TResult? Function(String error)? addingKnowledgeBaseFailure,
+    TResult? Function()? gettingKnowledges,
+    TResult? Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult? Function(String err)? gettingKnowledgeFailure,
   }) {
     return addingKnowledgeBaseSuccess?.call(base);
   }
@@ -431,6 +508,10 @@ class _$AddingKnowledgeBaseSuccessImpl implements _AddingKnowledgeBaseSuccess {
     TResult Function()? addingKnowledgeBase,
     TResult Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
     TResult Function(String error)? addingKnowledgeBaseFailure,
+    TResult Function()? gettingKnowledges,
+    TResult Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult Function(String err)? gettingKnowledgeFailure,
     required TResult orElse(),
   }) {
     if (addingKnowledgeBaseSuccess != null) {
@@ -448,6 +529,11 @@ class _$AddingKnowledgeBaseSuccessImpl implements _AddingKnowledgeBaseSuccess {
         addingKnowledgeBaseSuccess,
     required TResult Function(_AddingKnowledgeBaseFailure value)
         addingKnowledgeBaseFailure,
+    required TResult Function(_GettingKnowledges value) gettingKnowledges,
+    required TResult Function(_GettingKnowledgesS value)
+        gettingKnowledgeSuccess,
+    required TResult Function(_GettingKnowledgesF value)
+        gettingKnowledgeFailure,
   }) {
     return addingKnowledgeBaseSuccess(this);
   }
@@ -461,6 +547,9 @@ class _$AddingKnowledgeBaseSuccessImpl implements _AddingKnowledgeBaseSuccess {
         addingKnowledgeBaseSuccess,
     TResult? Function(_AddingKnowledgeBaseFailure value)?
         addingKnowledgeBaseFailure,
+    TResult? Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult? Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult? Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
   }) {
     return addingKnowledgeBaseSuccess?.call(this);
   }
@@ -474,6 +563,9 @@ class _$AddingKnowledgeBaseSuccessImpl implements _AddingKnowledgeBaseSuccess {
         addingKnowledgeBaseSuccess,
     TResult Function(_AddingKnowledgeBaseFailure value)?
         addingKnowledgeBaseFailure,
+    TResult Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
     required TResult orElse(),
   }) {
     if (addingKnowledgeBaseSuccess != null) {
@@ -566,6 +658,10 @@ class _$AddingKnowledgeBaseFailureImpl implements _AddingKnowledgeBaseFailure {
     required TResult Function(SpaceKnowledgeBase base)
         addingKnowledgeBaseSuccess,
     required TResult Function(String error) addingKnowledgeBaseFailure,
+    required TResult Function() gettingKnowledges,
+    required TResult Function(List<SpaceKnowledgeBase> knowledges)
+        gettingKnowledgeSuccess,
+    required TResult Function(String err) gettingKnowledgeFailure,
   }) {
     return addingKnowledgeBaseFailure(error);
   }
@@ -577,6 +673,10 @@ class _$AddingKnowledgeBaseFailureImpl implements _AddingKnowledgeBaseFailure {
     TResult? Function()? addingKnowledgeBase,
     TResult? Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
     TResult? Function(String error)? addingKnowledgeBaseFailure,
+    TResult? Function()? gettingKnowledges,
+    TResult? Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult? Function(String err)? gettingKnowledgeFailure,
   }) {
     return addingKnowledgeBaseFailure?.call(error);
   }
@@ -588,6 +688,10 @@ class _$AddingKnowledgeBaseFailureImpl implements _AddingKnowledgeBaseFailure {
     TResult Function()? addingKnowledgeBase,
     TResult Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
     TResult Function(String error)? addingKnowledgeBaseFailure,
+    TResult Function()? gettingKnowledges,
+    TResult Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult Function(String err)? gettingKnowledgeFailure,
     required TResult orElse(),
   }) {
     if (addingKnowledgeBaseFailure != null) {
@@ -605,6 +709,11 @@ class _$AddingKnowledgeBaseFailureImpl implements _AddingKnowledgeBaseFailure {
         addingKnowledgeBaseSuccess,
     required TResult Function(_AddingKnowledgeBaseFailure value)
         addingKnowledgeBaseFailure,
+    required TResult Function(_GettingKnowledges value) gettingKnowledges,
+    required TResult Function(_GettingKnowledgesS value)
+        gettingKnowledgeSuccess,
+    required TResult Function(_GettingKnowledgesF value)
+        gettingKnowledgeFailure,
   }) {
     return addingKnowledgeBaseFailure(this);
   }
@@ -618,6 +727,9 @@ class _$AddingKnowledgeBaseFailureImpl implements _AddingKnowledgeBaseFailure {
         addingKnowledgeBaseSuccess,
     TResult? Function(_AddingKnowledgeBaseFailure value)?
         addingKnowledgeBaseFailure,
+    TResult? Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult? Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult? Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
   }) {
     return addingKnowledgeBaseFailure?.call(this);
   }
@@ -631,6 +743,9 @@ class _$AddingKnowledgeBaseFailureImpl implements _AddingKnowledgeBaseFailure {
         addingKnowledgeBaseSuccess,
     TResult Function(_AddingKnowledgeBaseFailure value)?
         addingKnowledgeBaseFailure,
+    TResult Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
     required TResult orElse(),
   }) {
     if (addingKnowledgeBaseFailure != null) {
@@ -648,4 +763,510 @@ abstract class _AddingKnowledgeBaseFailure implements IntegrationState {
   @JsonKey(ignore: true)
   _$$AddingKnowledgeBaseFailureImplCopyWith<_$AddingKnowledgeBaseFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GettingKnowledgesImplCopyWith<$Res> {
+  factory _$$GettingKnowledgesImplCopyWith(_$GettingKnowledgesImpl value,
+          $Res Function(_$GettingKnowledgesImpl) then) =
+      __$$GettingKnowledgesImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GettingKnowledgesImplCopyWithImpl<$Res>
+    extends _$IntegrationStateCopyWithImpl<$Res, _$GettingKnowledgesImpl>
+    implements _$$GettingKnowledgesImplCopyWith<$Res> {
+  __$$GettingKnowledgesImplCopyWithImpl(_$GettingKnowledgesImpl _value,
+      $Res Function(_$GettingKnowledgesImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GettingKnowledgesImpl implements _GettingKnowledges {
+  const _$GettingKnowledgesImpl();
+
+  @override
+  String toString() {
+    return 'IntegrationState.gettingKnowledges()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GettingKnowledgesImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() addingKnowledgeBase,
+    required TResult Function(SpaceKnowledgeBase base)
+        addingKnowledgeBaseSuccess,
+    required TResult Function(String error) addingKnowledgeBaseFailure,
+    required TResult Function() gettingKnowledges,
+    required TResult Function(List<SpaceKnowledgeBase> knowledges)
+        gettingKnowledgeSuccess,
+    required TResult Function(String err) gettingKnowledgeFailure,
+  }) {
+    return gettingKnowledges();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? addingKnowledgeBase,
+    TResult? Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
+    TResult? Function(String error)? addingKnowledgeBaseFailure,
+    TResult? Function()? gettingKnowledges,
+    TResult? Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult? Function(String err)? gettingKnowledgeFailure,
+  }) {
+    return gettingKnowledges?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? addingKnowledgeBase,
+    TResult Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
+    TResult Function(String error)? addingKnowledgeBaseFailure,
+    TResult Function()? gettingKnowledges,
+    TResult Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult Function(String err)? gettingKnowledgeFailure,
+    required TResult orElse(),
+  }) {
+    if (gettingKnowledges != null) {
+      return gettingKnowledges();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_AddingKnowledgeBase value) addingKnowledgeBase,
+    required TResult Function(_AddingKnowledgeBaseSuccess value)
+        addingKnowledgeBaseSuccess,
+    required TResult Function(_AddingKnowledgeBaseFailure value)
+        addingKnowledgeBaseFailure,
+    required TResult Function(_GettingKnowledges value) gettingKnowledges,
+    required TResult Function(_GettingKnowledgesS value)
+        gettingKnowledgeSuccess,
+    required TResult Function(_GettingKnowledgesF value)
+        gettingKnowledgeFailure,
+  }) {
+    return gettingKnowledges(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_AddingKnowledgeBase value)? addingKnowledgeBase,
+    TResult? Function(_AddingKnowledgeBaseSuccess value)?
+        addingKnowledgeBaseSuccess,
+    TResult? Function(_AddingKnowledgeBaseFailure value)?
+        addingKnowledgeBaseFailure,
+    TResult? Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult? Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult? Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
+  }) {
+    return gettingKnowledges?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_AddingKnowledgeBase value)? addingKnowledgeBase,
+    TResult Function(_AddingKnowledgeBaseSuccess value)?
+        addingKnowledgeBaseSuccess,
+    TResult Function(_AddingKnowledgeBaseFailure value)?
+        addingKnowledgeBaseFailure,
+    TResult Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
+    required TResult orElse(),
+  }) {
+    if (gettingKnowledges != null) {
+      return gettingKnowledges(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GettingKnowledges implements IntegrationState {
+  const factory _GettingKnowledges() = _$GettingKnowledgesImpl;
+}
+
+/// @nodoc
+abstract class _$$GettingKnowledgesSImplCopyWith<$Res> {
+  factory _$$GettingKnowledgesSImplCopyWith(_$GettingKnowledgesSImpl value,
+          $Res Function(_$GettingKnowledgesSImpl) then) =
+      __$$GettingKnowledgesSImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<SpaceKnowledgeBase> knowledges});
+}
+
+/// @nodoc
+class __$$GettingKnowledgesSImplCopyWithImpl<$Res>
+    extends _$IntegrationStateCopyWithImpl<$Res, _$GettingKnowledgesSImpl>
+    implements _$$GettingKnowledgesSImplCopyWith<$Res> {
+  __$$GettingKnowledgesSImplCopyWithImpl(_$GettingKnowledgesSImpl _value,
+      $Res Function(_$GettingKnowledgesSImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? knowledges = null,
+  }) {
+    return _then(_$GettingKnowledgesSImpl(
+      null == knowledges
+          ? _value._knowledges
+          : knowledges // ignore: cast_nullable_to_non_nullable
+              as List<SpaceKnowledgeBase>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GettingKnowledgesSImpl implements _GettingKnowledgesS {
+  const _$GettingKnowledgesSImpl(final List<SpaceKnowledgeBase> knowledges)
+      : _knowledges = knowledges;
+
+  final List<SpaceKnowledgeBase> _knowledges;
+  @override
+  List<SpaceKnowledgeBase> get knowledges {
+    if (_knowledges is EqualUnmodifiableListView) return _knowledges;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_knowledges);
+  }
+
+  @override
+  String toString() {
+    return 'IntegrationState.gettingKnowledgeSuccess(knowledges: $knowledges)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GettingKnowledgesSImpl &&
+            const DeepCollectionEquality()
+                .equals(other._knowledges, _knowledges));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_knowledges));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GettingKnowledgesSImplCopyWith<_$GettingKnowledgesSImpl> get copyWith =>
+      __$$GettingKnowledgesSImplCopyWithImpl<_$GettingKnowledgesSImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() addingKnowledgeBase,
+    required TResult Function(SpaceKnowledgeBase base)
+        addingKnowledgeBaseSuccess,
+    required TResult Function(String error) addingKnowledgeBaseFailure,
+    required TResult Function() gettingKnowledges,
+    required TResult Function(List<SpaceKnowledgeBase> knowledges)
+        gettingKnowledgeSuccess,
+    required TResult Function(String err) gettingKnowledgeFailure,
+  }) {
+    return gettingKnowledgeSuccess(knowledges);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? addingKnowledgeBase,
+    TResult? Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
+    TResult? Function(String error)? addingKnowledgeBaseFailure,
+    TResult? Function()? gettingKnowledges,
+    TResult? Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult? Function(String err)? gettingKnowledgeFailure,
+  }) {
+    return gettingKnowledgeSuccess?.call(knowledges);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? addingKnowledgeBase,
+    TResult Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
+    TResult Function(String error)? addingKnowledgeBaseFailure,
+    TResult Function()? gettingKnowledges,
+    TResult Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult Function(String err)? gettingKnowledgeFailure,
+    required TResult orElse(),
+  }) {
+    if (gettingKnowledgeSuccess != null) {
+      return gettingKnowledgeSuccess(knowledges);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_AddingKnowledgeBase value) addingKnowledgeBase,
+    required TResult Function(_AddingKnowledgeBaseSuccess value)
+        addingKnowledgeBaseSuccess,
+    required TResult Function(_AddingKnowledgeBaseFailure value)
+        addingKnowledgeBaseFailure,
+    required TResult Function(_GettingKnowledges value) gettingKnowledges,
+    required TResult Function(_GettingKnowledgesS value)
+        gettingKnowledgeSuccess,
+    required TResult Function(_GettingKnowledgesF value)
+        gettingKnowledgeFailure,
+  }) {
+    return gettingKnowledgeSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_AddingKnowledgeBase value)? addingKnowledgeBase,
+    TResult? Function(_AddingKnowledgeBaseSuccess value)?
+        addingKnowledgeBaseSuccess,
+    TResult? Function(_AddingKnowledgeBaseFailure value)?
+        addingKnowledgeBaseFailure,
+    TResult? Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult? Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult? Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
+  }) {
+    return gettingKnowledgeSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_AddingKnowledgeBase value)? addingKnowledgeBase,
+    TResult Function(_AddingKnowledgeBaseSuccess value)?
+        addingKnowledgeBaseSuccess,
+    TResult Function(_AddingKnowledgeBaseFailure value)?
+        addingKnowledgeBaseFailure,
+    TResult Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
+    required TResult orElse(),
+  }) {
+    if (gettingKnowledgeSuccess != null) {
+      return gettingKnowledgeSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GettingKnowledgesS implements IntegrationState {
+  const factory _GettingKnowledgesS(final List<SpaceKnowledgeBase> knowledges) =
+      _$GettingKnowledgesSImpl;
+
+  List<SpaceKnowledgeBase> get knowledges;
+  @JsonKey(ignore: true)
+  _$$GettingKnowledgesSImplCopyWith<_$GettingKnowledgesSImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GettingKnowledgesFImplCopyWith<$Res> {
+  factory _$$GettingKnowledgesFImplCopyWith(_$GettingKnowledgesFImpl value,
+          $Res Function(_$GettingKnowledgesFImpl) then) =
+      __$$GettingKnowledgesFImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String err});
+}
+
+/// @nodoc
+class __$$GettingKnowledgesFImplCopyWithImpl<$Res>
+    extends _$IntegrationStateCopyWithImpl<$Res, _$GettingKnowledgesFImpl>
+    implements _$$GettingKnowledgesFImplCopyWith<$Res> {
+  __$$GettingKnowledgesFImplCopyWithImpl(_$GettingKnowledgesFImpl _value,
+      $Res Function(_$GettingKnowledgesFImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? err = null,
+  }) {
+    return _then(_$GettingKnowledgesFImpl(
+      null == err
+          ? _value.err
+          : err // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GettingKnowledgesFImpl implements _GettingKnowledgesF {
+  const _$GettingKnowledgesFImpl(this.err);
+
+  @override
+  final String err;
+
+  @override
+  String toString() {
+    return 'IntegrationState.gettingKnowledgeFailure(err: $err)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GettingKnowledgesFImpl &&
+            (identical(other.err, err) || other.err == err));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, err);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GettingKnowledgesFImplCopyWith<_$GettingKnowledgesFImpl> get copyWith =>
+      __$$GettingKnowledgesFImplCopyWithImpl<_$GettingKnowledgesFImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() addingKnowledgeBase,
+    required TResult Function(SpaceKnowledgeBase base)
+        addingKnowledgeBaseSuccess,
+    required TResult Function(String error) addingKnowledgeBaseFailure,
+    required TResult Function() gettingKnowledges,
+    required TResult Function(List<SpaceKnowledgeBase> knowledges)
+        gettingKnowledgeSuccess,
+    required TResult Function(String err) gettingKnowledgeFailure,
+  }) {
+    return gettingKnowledgeFailure(err);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? addingKnowledgeBase,
+    TResult? Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
+    TResult? Function(String error)? addingKnowledgeBaseFailure,
+    TResult? Function()? gettingKnowledges,
+    TResult? Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult? Function(String err)? gettingKnowledgeFailure,
+  }) {
+    return gettingKnowledgeFailure?.call(err);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? addingKnowledgeBase,
+    TResult Function(SpaceKnowledgeBase base)? addingKnowledgeBaseSuccess,
+    TResult Function(String error)? addingKnowledgeBaseFailure,
+    TResult Function()? gettingKnowledges,
+    TResult Function(List<SpaceKnowledgeBase> knowledges)?
+        gettingKnowledgeSuccess,
+    TResult Function(String err)? gettingKnowledgeFailure,
+    required TResult orElse(),
+  }) {
+    if (gettingKnowledgeFailure != null) {
+      return gettingKnowledgeFailure(err);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_AddingKnowledgeBase value) addingKnowledgeBase,
+    required TResult Function(_AddingKnowledgeBaseSuccess value)
+        addingKnowledgeBaseSuccess,
+    required TResult Function(_AddingKnowledgeBaseFailure value)
+        addingKnowledgeBaseFailure,
+    required TResult Function(_GettingKnowledges value) gettingKnowledges,
+    required TResult Function(_GettingKnowledgesS value)
+        gettingKnowledgeSuccess,
+    required TResult Function(_GettingKnowledgesF value)
+        gettingKnowledgeFailure,
+  }) {
+    return gettingKnowledgeFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_AddingKnowledgeBase value)? addingKnowledgeBase,
+    TResult? Function(_AddingKnowledgeBaseSuccess value)?
+        addingKnowledgeBaseSuccess,
+    TResult? Function(_AddingKnowledgeBaseFailure value)?
+        addingKnowledgeBaseFailure,
+    TResult? Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult? Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult? Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
+  }) {
+    return gettingKnowledgeFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_AddingKnowledgeBase value)? addingKnowledgeBase,
+    TResult Function(_AddingKnowledgeBaseSuccess value)?
+        addingKnowledgeBaseSuccess,
+    TResult Function(_AddingKnowledgeBaseFailure value)?
+        addingKnowledgeBaseFailure,
+    TResult Function(_GettingKnowledges value)? gettingKnowledges,
+    TResult Function(_GettingKnowledgesS value)? gettingKnowledgeSuccess,
+    TResult Function(_GettingKnowledgesF value)? gettingKnowledgeFailure,
+    required TResult orElse(),
+  }) {
+    if (gettingKnowledgeFailure != null) {
+      return gettingKnowledgeFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GettingKnowledgesF implements IntegrationState {
+  const factory _GettingKnowledgesF(final String err) =
+      _$GettingKnowledgesFImpl;
+
+  String get err;
+  @JsonKey(ignore: true)
+  _$$GettingKnowledgesFImplCopyWith<_$GettingKnowledgesFImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

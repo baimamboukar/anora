@@ -37,4 +37,31 @@ class IntegrationCubit extends Cubit<IntegrationState> {
       rethrow;
     }
   }
+
+  Future<void> getKnowledgeBasesByOrganization(
+    String orguid,
+  ) async {
+    try {
+      final firestore = FirebaseFirestore.instance;
+      final ref = firestore.collection('spaces').doc(orguid);
+      emit(const IntegrationState.gettingKnowledges());
+      final docSnapshot = await ref.get();
+
+      if (docSnapshot.exists) {
+        final data = docSnapshot.data();
+        if (data != null && data.containsKey('knowledges')) {
+          final knowledgeBases = (data['knowledges'] as List)
+              .map(
+                (kb) => SpaceKnowledgeBase.fromMap(kb as Map<String, dynamic>),
+              )
+              .toList();
+          emit(IntegrationState.gettingKnowledgeSuccess(knowledgeBases));
+        }
+      } else {
+        throw Exception();
+      }
+    } catch (err) {
+      emit(IntegrationState.gettingKnowledgeFailure(err.toString()));
+    }
+  }
 }

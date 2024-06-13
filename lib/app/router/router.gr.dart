@@ -108,10 +108,11 @@ abstract class $AppRouter extends _i19.RootStackRouter {
       final args = routeData.argsAs<IntegrationTypeRouteArgs>();
       return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i8.IntegrationTypePage(
+        child: _i19.WrappedRoute(
+            child: _i8.IntegrationTypePage(
           integration: args.integration,
           key: args.key,
-        ),
+        )),
       );
     },
     KnowledgeBaseRoute.name: (routeData) {

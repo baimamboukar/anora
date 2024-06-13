@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
+import 'package:heroicons/heroicons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:uuid/uuid.dart';
 
@@ -22,14 +23,29 @@ class IntegrationTypePage extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      create: (context) => IntegrationCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => IntegrationCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AuthCubit(),
+        ),
+      ],
       child: this,
     );
   }
 }
 
 class _IntegrationTypeState extends State<IntegrationTypePage> {
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<IntegrationCubit>()
+        .getKnowledgeBasesByOrganization(context.orgs.first.uid);
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnoraPage(
@@ -75,16 +91,7 @@ class _IntegrationTypeState extends State<IntegrationTypePage> {
             style: context.desc,
           ).floatL,
           14.vGap,
-          ListTile(
-            title: const Text('Business Strategy Base'),
-            onTap: () {
-              // context.router.push(
-              //   KnowledgeBaseRoute(
-              //     integration: widget.integration,
-              //   ),
-              // );
-            },
-          ),
+        
           34.vGap,
           ShadButton.ghost(
             onPressed: () {
@@ -107,6 +114,63 @@ class _IntegrationTypeState extends State<IntegrationTypePage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class KnowledgeBaseList extends StatelessWidget {
+  const KnowledgeBaseList({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<IntegrationCubit, IntegrationState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          orElse: () => const SizedBox(),
+          gettingKnowledges: () {
+            return Column(
+              children: [
+                CupertinoActivityIndicator(
+                  radius: 28,
+                  color: context.colorScheme.ring,
+                ),
+                const Text('Getting Your Knowledge Bases'),
+              ],
+            );
+          },
+          gettingKnowledgeFailure: (err) {
+            // failure in red and action to retry
+            return const Text(
+              'Failed to get Knowledge Bases',
+              style: TextStyle(color: Colors.red),
+            );
+          },
+          gettingKnowledgeSuccess: (knowledgeBases) {
+            return Column(
+              children: knowledgeBases
+                  .map(
+                    (knowledgeBase) => ListTile(
+                      leading: const HeroIcon(HeroIcons.folder),
+                      title: Text(
+                        knowledgeBase.name,
+                        style: context.title,
+                      ),
+                      onTap: () {
+                        context.router.push(
+                          KnowledgeBaseRoute(
+                            knowledgeBase: knowledgeBase,
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+        );
+      },
     );
   }
 }
