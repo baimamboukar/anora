@@ -1,8 +1,16 @@
+import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
+import 'package:anora/app/features/integrations/logic/integration_cubit.dart';
 import 'package:anora/app/features/settings/data/models/integration_model.dart';
+import 'package:anora/app/router/router.gr.dart';
 import 'package:anora/core/core.dart';
+import 'package:anora/core/extensions/authx.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:uuid/uuid.dart';
 
 @RoutePage()
 class IntegrationTypePage extends StatefulWidget {
@@ -58,7 +66,154 @@ class _IntegrationTypeState extends State<IntegrationTypePage> {
             'You can create knowledge bases and add up to 5 documents',
             style: context.desc,
           ).floatL,
+          14.vGap,
+          ListTile(
+            title: const Text('Business Strategy Base'),
+            onTap: () {
+              // context.router.push(
+              //   KnowledgeBaseRoute(
+              //     integration: widget.integration,
+              //   ),
+              // );
+            },
+          ),
+          34.vGap,
+          ShadButton.ghost(
+            onPressed: () {
+              showShadDialog<void>(
+                context: context,
+                builder: (context) => AddKnowledgeBase(
+                  contextX: context,
+                ),
+              );
+              // context.router.push(
+              //   KnowledgeBaseRoute(
+              // uid: widget.integration.uid,
+              //     integration: widget.integration,
+              //   ),
+              // );
+            },
+            text: const Text(
+              'Add Knowledge Base',
+            ),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class AddKnowledgeBase extends StatefulWidget {
+  const AddKnowledgeBase({required this.contextX, super.key});
+  final BuildContext contextX;
+
+  @override
+  State<AddKnowledgeBase> createState() => _AddKnowledgeBaseState();
+}
+
+class _AddKnowledgeBaseState extends State<AddKnowledgeBase> {
+  final formKey = GlobalKey<ShadFormState>();
+  late final TextEditingController nameController;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<IntegrationCubit>(
+          create: (context) => IntegrationCubit(),
+        ),
+        BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(),
+        ),
+      ],
+      child: ShadForm(
+        key: formKey,
+        child: ShadDialog(
+          title: const Text('Create Knowledge Base'),
+          description: const Text(
+            'Provide necessary information to create a Knowledge base',
+          ),
+          content: Container(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                ShadInputFormField(
+                  controller: nameController,
+                  placeholder: const Text('Name of Knowledge base'),
+                  validator: ValidationBuilder().required().build(),
+                ),
+              ],
+            ),
+          ).hPadding,
+          actions: [
+            BlocConsumer<IntegrationCubit, IntegrationState>(
+              listener: (context, state) {
+                state.maybeWhen(
+                  orElse: () {},
+                  addingKnowledgeBaseFailure: (err) {
+                    ShadToaster.of(context).show(
+                      ShadToast.destructive(
+                        title: const Text('Something Went Wrong'),
+                        description: const Text(
+                          'Failed to add Knowledge Base',
+                        ),
+                        action: ShadButton.destructive(
+                          text: const Text('Try again'),
+                          decoration: ShadDecoration(
+                            border: ShadBorder(
+                              color: context.colorScheme.destructiveForeground,
+                            ),
+                          ),
+                          onPressed: () => ShadToaster.of(context).hide(),
+                        ),
+                      ),
+                    );
+                  },
+                  addingKnowledgeBaseSuccess: (knowledgeBase) {
+                    context.router.maybePop();
+                    context.router.push(
+                      KnowledgeBaseRoute(
+                        knowledgeBase: knowledgeBase,
+                      ),
+                    );
+                  },
+                );
+              },
+              builder: (context, state) {
+                return state.maybeWhen(
+                  orElse: () => ShadButton(
+                    onPressed: () async {
+                      if (formKey.currentState!.saveAndValidate()) {
+                        await widget.contextX
+                            .read<IntegrationCubit>()
+                            .createKnowledgeBase(
+                              const Uuid().v4(),
+                              nameController.text.trim(),
+                              context.user!.uid,
+                              context.orgs.first.uid,
+                            );
+                      }
+                    },
+                    text: const Text('Create'),
+                  ),
+                  addingKnowledgeBase: () => ShadButton(
+                    enabled: false,
+                    icon: const CupertinoActivityIndicator().hPaddingx(8),
+                    text: const Text('Please wait...'),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

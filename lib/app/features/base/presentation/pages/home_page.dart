@@ -1,6 +1,7 @@
 import 'package:anora/app/features/auth/data/models/invitation_model.dart';
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/app/router/router.gr.dart';
+import 'package:anora/app/router/router_paths.dart';
 import 'package:anora/core/core.dart';
 import 'package:anora/core/extensions/authx.dart';
 import 'package:auto_route/auto_route.dart';
@@ -53,6 +54,13 @@ class _HomePageState extends State<HomePage> {
                 context.router.push(
                   SignupRoute(invitation: invitation),
                 );
+              },
+            ),
+            24.vGap,
+            ShadButton(
+              text: const Text('Welcome'),
+              onPressed: () {
+                context.router.pushNamed(WELCOME_ROUTE);
               },
             ),
           ],

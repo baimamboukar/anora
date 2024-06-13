@@ -1,5 +1,6 @@
 import 'package:anora/app/features/settings/settings.dart';
 import 'package:anora/core/core.dart';
+import 'package:anora/core/extensions/authx.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
@@ -85,9 +86,9 @@ class _MemberDetailsPageState extends State<MemberDetailsPage> {
             ],
           ),
           24.vGap,
-          const ShadButton.ghost(
+          ShadButton.ghost(
             text: Text(
-              'Remove from Xenora',
+              'Remove from ${context.orgs.first.name}',
             ),
           ),
           34.vGap,
