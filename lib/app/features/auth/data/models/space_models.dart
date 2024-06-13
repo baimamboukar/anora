@@ -90,17 +90,21 @@ class SpaceKnowledgeBase {
     required this.knowledgeID,
     required this.spaceID,
     required this.sources,
+    required this.name,
   });
   final String knowledgeID;
   final String spaceID;
+  final String name;
   final List<AnoraDataSource> sources;
 
   SpaceKnowledgeBase copyWith({
     String? knowledgeID,
     String? spaceID,
+    String? name,
     List<AnoraDataSource>? sources,
   }) {
     return SpaceKnowledgeBase(
+      name: name ?? this.name,
       knowledgeID: knowledgeID ?? this.knowledgeID,
       spaceID: spaceID ?? this.spaceID,
       sources: sources ?? this.sources,
@@ -117,6 +121,7 @@ class SpaceKnowledgeBase {
 
   factory SpaceKnowledgeBase.fromMap(Map<String, dynamic> map) {
     return SpaceKnowledgeBase(
+      name: (map['name'] ?? '') as String,
       knowledgeID: (map['knowledgeID'] ?? '') as String,
       spaceID: (map['spaceID'] ?? '') as String,
       sources: List<AnoraDataSource>.from(

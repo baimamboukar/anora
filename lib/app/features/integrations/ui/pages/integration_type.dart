@@ -13,12 +13,20 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:uuid/uuid.dart';
 
 @RoutePage()
-class IntegrationTypePage extends StatefulWidget {
+class IntegrationTypePage extends StatefulWidget implements AutoRouteWrapper {
   const IntegrationTypePage({required this.integration, super.key});
   final Integration integration;
 
   @override
   State<IntegrationTypePage> createState() => _IntegrationTypeState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (context) => IntegrationCubit(),
+      child: this,
+    );
+  }
 }
 
 class _IntegrationTypeState extends State<IntegrationTypePage> {
@@ -192,7 +200,7 @@ class _AddKnowledgeBaseState extends State<AddKnowledgeBase> {
                   orElse: () => ShadButton(
                     onPressed: () async {
                       if (formKey.currentState!.saveAndValidate()) {
-                        await widget.contextX
+                        await context
                             .read<IntegrationCubit>()
                             .createKnowledgeBase(
                               const Uuid().v4(),
