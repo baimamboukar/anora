@@ -90,28 +90,7 @@ class _IntegrationTypeState extends State<IntegrationTypePage> {
             'You can create knowledge bases and add up to 5 documents',
             style: context.desc,
           ).floatL,
-          14.vGap,
-        
           34.vGap,
-          ShadButton.ghost(
-            onPressed: () {
-              showShadDialog<void>(
-                context: context,
-                builder: (context) => AddKnowledgeBase(
-                  contextX: context,
-                ),
-              );
-              // context.router.push(
-              //   KnowledgeBaseRoute(
-              // uid: widget.integration.uid,
-              //     integration: widget.integration,
-              //   ),
-              // );
-            },
-            text: const Text(
-              'Add Knowledge Base',
-            ),
-          ),
         ],
       ),
     );

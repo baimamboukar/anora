@@ -22,6 +22,10 @@ mixin _$InvitationState {
     required TResult Function() inviting,
     required TResult Function() invited,
     required TResult Function() invitingFailed,
+    required TResult Function() gettingInvitations,
+    required TResult Function(List<Invitation> invitations)
+        gettingInvitationsSuccess,
+    required TResult Function(String err) gettingInvitationsFailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +34,9 @@ mixin _$InvitationState {
     TResult? Function()? inviting,
     TResult? Function()? invited,
     TResult? Function()? invitingFailed,
+    TResult? Function()? gettingInvitations,
+    TResult? Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult? Function(String err)? gettingInvitationsFailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +45,9 @@ mixin _$InvitationState {
     TResult Function()? inviting,
     TResult Function()? invited,
     TResult Function()? invitingFailed,
+    TResult Function()? gettingInvitations,
+    TResult Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult Function(String err)? gettingInvitationsFailed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +57,11 @@ mixin _$InvitationState {
     required TResult Function(_Inviting value) inviting,
     required TResult Function(_Invited value) invited,
     required TResult Function(_InvitingFailed value) invitingFailed,
+    required TResult Function(_GettingInvitations value) gettingInvitations,
+    required TResult Function(_GettingInvitationsSuccess value)
+        gettingInvitationsSuccess,
+    required TResult Function(_GettingInvitationsFailed value)
+        gettingInvitationsFailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +70,11 @@ mixin _$InvitationState {
     TResult? Function(_Inviting value)? inviting,
     TResult? Function(_Invited value)? invited,
     TResult? Function(_InvitingFailed value)? invitingFailed,
+    TResult? Function(_GettingInvitations value)? gettingInvitations,
+    TResult? Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult? Function(_GettingInvitationsFailed value)?
+        gettingInvitationsFailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +83,10 @@ mixin _$InvitationState {
     TResult Function(_Inviting value)? inviting,
     TResult Function(_Invited value)? invited,
     TResult Function(_InvitingFailed value)? invitingFailed,
+    TResult Function(_GettingInvitations value)? gettingInvitations,
+    TResult Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult Function(_GettingInvitationsFailed value)? gettingInvitationsFailed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,6 +152,10 @@ class _$InitialImpl implements _Initial {
     required TResult Function() inviting,
     required TResult Function() invited,
     required TResult Function() invitingFailed,
+    required TResult Function() gettingInvitations,
+    required TResult Function(List<Invitation> invitations)
+        gettingInvitationsSuccess,
+    required TResult Function(String err) gettingInvitationsFailed,
   }) {
     return initial();
   }
@@ -139,6 +167,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? inviting,
     TResult? Function()? invited,
     TResult? Function()? invitingFailed,
+    TResult? Function()? gettingInvitations,
+    TResult? Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult? Function(String err)? gettingInvitationsFailed,
   }) {
     return initial?.call();
   }
@@ -150,6 +181,9 @@ class _$InitialImpl implements _Initial {
     TResult Function()? inviting,
     TResult Function()? invited,
     TResult Function()? invitingFailed,
+    TResult Function()? gettingInvitations,
+    TResult Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult Function(String err)? gettingInvitationsFailed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -165,6 +199,11 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Inviting value) inviting,
     required TResult Function(_Invited value) invited,
     required TResult Function(_InvitingFailed value) invitingFailed,
+    required TResult Function(_GettingInvitations value) gettingInvitations,
+    required TResult Function(_GettingInvitationsSuccess value)
+        gettingInvitationsSuccess,
+    required TResult Function(_GettingInvitationsFailed value)
+        gettingInvitationsFailed,
   }) {
     return initial(this);
   }
@@ -176,6 +215,11 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Inviting value)? inviting,
     TResult? Function(_Invited value)? invited,
     TResult? Function(_InvitingFailed value)? invitingFailed,
+    TResult? Function(_GettingInvitations value)? gettingInvitations,
+    TResult? Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult? Function(_GettingInvitationsFailed value)?
+        gettingInvitationsFailed,
   }) {
     return initial?.call(this);
   }
@@ -187,6 +231,10 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Inviting value)? inviting,
     TResult Function(_Invited value)? invited,
     TResult Function(_InvitingFailed value)? invitingFailed,
+    TResult Function(_GettingInvitations value)? gettingInvitations,
+    TResult Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult Function(_GettingInvitationsFailed value)? gettingInvitationsFailed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -242,6 +290,10 @@ class _$InvitingImpl implements _Inviting {
     required TResult Function() inviting,
     required TResult Function() invited,
     required TResult Function() invitingFailed,
+    required TResult Function() gettingInvitations,
+    required TResult Function(List<Invitation> invitations)
+        gettingInvitationsSuccess,
+    required TResult Function(String err) gettingInvitationsFailed,
   }) {
     return inviting();
   }
@@ -253,6 +305,9 @@ class _$InvitingImpl implements _Inviting {
     TResult? Function()? inviting,
     TResult? Function()? invited,
     TResult? Function()? invitingFailed,
+    TResult? Function()? gettingInvitations,
+    TResult? Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult? Function(String err)? gettingInvitationsFailed,
   }) {
     return inviting?.call();
   }
@@ -264,6 +319,9 @@ class _$InvitingImpl implements _Inviting {
     TResult Function()? inviting,
     TResult Function()? invited,
     TResult Function()? invitingFailed,
+    TResult Function()? gettingInvitations,
+    TResult Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult Function(String err)? gettingInvitationsFailed,
     required TResult orElse(),
   }) {
     if (inviting != null) {
@@ -279,6 +337,11 @@ class _$InvitingImpl implements _Inviting {
     required TResult Function(_Inviting value) inviting,
     required TResult Function(_Invited value) invited,
     required TResult Function(_InvitingFailed value) invitingFailed,
+    required TResult Function(_GettingInvitations value) gettingInvitations,
+    required TResult Function(_GettingInvitationsSuccess value)
+        gettingInvitationsSuccess,
+    required TResult Function(_GettingInvitationsFailed value)
+        gettingInvitationsFailed,
   }) {
     return inviting(this);
   }
@@ -290,6 +353,11 @@ class _$InvitingImpl implements _Inviting {
     TResult? Function(_Inviting value)? inviting,
     TResult? Function(_Invited value)? invited,
     TResult? Function(_InvitingFailed value)? invitingFailed,
+    TResult? Function(_GettingInvitations value)? gettingInvitations,
+    TResult? Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult? Function(_GettingInvitationsFailed value)?
+        gettingInvitationsFailed,
   }) {
     return inviting?.call(this);
   }
@@ -301,6 +369,10 @@ class _$InvitingImpl implements _Inviting {
     TResult Function(_Inviting value)? inviting,
     TResult Function(_Invited value)? invited,
     TResult Function(_InvitingFailed value)? invitingFailed,
+    TResult Function(_GettingInvitations value)? gettingInvitations,
+    TResult Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult Function(_GettingInvitationsFailed value)? gettingInvitationsFailed,
     required TResult orElse(),
   }) {
     if (inviting != null) {
@@ -356,6 +428,10 @@ class _$InvitedImpl implements _Invited {
     required TResult Function() inviting,
     required TResult Function() invited,
     required TResult Function() invitingFailed,
+    required TResult Function() gettingInvitations,
+    required TResult Function(List<Invitation> invitations)
+        gettingInvitationsSuccess,
+    required TResult Function(String err) gettingInvitationsFailed,
   }) {
     return invited();
   }
@@ -367,6 +443,9 @@ class _$InvitedImpl implements _Invited {
     TResult? Function()? inviting,
     TResult? Function()? invited,
     TResult? Function()? invitingFailed,
+    TResult? Function()? gettingInvitations,
+    TResult? Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult? Function(String err)? gettingInvitationsFailed,
   }) {
     return invited?.call();
   }
@@ -378,6 +457,9 @@ class _$InvitedImpl implements _Invited {
     TResult Function()? inviting,
     TResult Function()? invited,
     TResult Function()? invitingFailed,
+    TResult Function()? gettingInvitations,
+    TResult Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult Function(String err)? gettingInvitationsFailed,
     required TResult orElse(),
   }) {
     if (invited != null) {
@@ -393,6 +475,11 @@ class _$InvitedImpl implements _Invited {
     required TResult Function(_Inviting value) inviting,
     required TResult Function(_Invited value) invited,
     required TResult Function(_InvitingFailed value) invitingFailed,
+    required TResult Function(_GettingInvitations value) gettingInvitations,
+    required TResult Function(_GettingInvitationsSuccess value)
+        gettingInvitationsSuccess,
+    required TResult Function(_GettingInvitationsFailed value)
+        gettingInvitationsFailed,
   }) {
     return invited(this);
   }
@@ -404,6 +491,11 @@ class _$InvitedImpl implements _Invited {
     TResult? Function(_Inviting value)? inviting,
     TResult? Function(_Invited value)? invited,
     TResult? Function(_InvitingFailed value)? invitingFailed,
+    TResult? Function(_GettingInvitations value)? gettingInvitations,
+    TResult? Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult? Function(_GettingInvitationsFailed value)?
+        gettingInvitationsFailed,
   }) {
     return invited?.call(this);
   }
@@ -415,6 +507,10 @@ class _$InvitedImpl implements _Invited {
     TResult Function(_Inviting value)? inviting,
     TResult Function(_Invited value)? invited,
     TResult Function(_InvitingFailed value)? invitingFailed,
+    TResult Function(_GettingInvitations value)? gettingInvitations,
+    TResult Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult Function(_GettingInvitationsFailed value)? gettingInvitationsFailed,
     required TResult orElse(),
   }) {
     if (invited != null) {
@@ -470,6 +566,10 @@ class _$InvitingFailedImpl implements _InvitingFailed {
     required TResult Function() inviting,
     required TResult Function() invited,
     required TResult Function() invitingFailed,
+    required TResult Function() gettingInvitations,
+    required TResult Function(List<Invitation> invitations)
+        gettingInvitationsSuccess,
+    required TResult Function(String err) gettingInvitationsFailed,
   }) {
     return invitingFailed();
   }
@@ -481,6 +581,9 @@ class _$InvitingFailedImpl implements _InvitingFailed {
     TResult? Function()? inviting,
     TResult? Function()? invited,
     TResult? Function()? invitingFailed,
+    TResult? Function()? gettingInvitations,
+    TResult? Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult? Function(String err)? gettingInvitationsFailed,
   }) {
     return invitingFailed?.call();
   }
@@ -492,6 +595,9 @@ class _$InvitingFailedImpl implements _InvitingFailed {
     TResult Function()? inviting,
     TResult Function()? invited,
     TResult Function()? invitingFailed,
+    TResult Function()? gettingInvitations,
+    TResult Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult Function(String err)? gettingInvitationsFailed,
     required TResult orElse(),
   }) {
     if (invitingFailed != null) {
@@ -507,6 +613,11 @@ class _$InvitingFailedImpl implements _InvitingFailed {
     required TResult Function(_Inviting value) inviting,
     required TResult Function(_Invited value) invited,
     required TResult Function(_InvitingFailed value) invitingFailed,
+    required TResult Function(_GettingInvitations value) gettingInvitations,
+    required TResult Function(_GettingInvitationsSuccess value)
+        gettingInvitationsSuccess,
+    required TResult Function(_GettingInvitationsFailed value)
+        gettingInvitationsFailed,
   }) {
     return invitingFailed(this);
   }
@@ -518,6 +629,11 @@ class _$InvitingFailedImpl implements _InvitingFailed {
     TResult? Function(_Inviting value)? inviting,
     TResult? Function(_Invited value)? invited,
     TResult? Function(_InvitingFailed value)? invitingFailed,
+    TResult? Function(_GettingInvitations value)? gettingInvitations,
+    TResult? Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult? Function(_GettingInvitationsFailed value)?
+        gettingInvitationsFailed,
   }) {
     return invitingFailed?.call(this);
   }
@@ -529,6 +645,10 @@ class _$InvitingFailedImpl implements _InvitingFailed {
     TResult Function(_Inviting value)? inviting,
     TResult Function(_Invited value)? invited,
     TResult Function(_InvitingFailed value)? invitingFailed,
+    TResult Function(_GettingInvitations value)? gettingInvitations,
+    TResult Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult Function(_GettingInvitationsFailed value)? gettingInvitationsFailed,
     required TResult orElse(),
   }) {
     if (invitingFailed != null) {
@@ -540,4 +660,496 @@ class _$InvitingFailedImpl implements _InvitingFailed {
 
 abstract class _InvitingFailed implements InvitationState {
   const factory _InvitingFailed() = _$InvitingFailedImpl;
+}
+
+/// @nodoc
+abstract class _$$GettingInvitationsImplCopyWith<$Res> {
+  factory _$$GettingInvitationsImplCopyWith(_$GettingInvitationsImpl value,
+          $Res Function(_$GettingInvitationsImpl) then) =
+      __$$GettingInvitationsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GettingInvitationsImplCopyWithImpl<$Res>
+    extends _$InvitationStateCopyWithImpl<$Res, _$GettingInvitationsImpl>
+    implements _$$GettingInvitationsImplCopyWith<$Res> {
+  __$$GettingInvitationsImplCopyWithImpl(_$GettingInvitationsImpl _value,
+      $Res Function(_$GettingInvitationsImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GettingInvitationsImpl implements _GettingInvitations {
+  const _$GettingInvitationsImpl();
+
+  @override
+  String toString() {
+    return 'InvitationState.gettingInvitations()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GettingInvitationsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() inviting,
+    required TResult Function() invited,
+    required TResult Function() invitingFailed,
+    required TResult Function() gettingInvitations,
+    required TResult Function(List<Invitation> invitations)
+        gettingInvitationsSuccess,
+    required TResult Function(String err) gettingInvitationsFailed,
+  }) {
+    return gettingInvitations();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? inviting,
+    TResult? Function()? invited,
+    TResult? Function()? invitingFailed,
+    TResult? Function()? gettingInvitations,
+    TResult? Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult? Function(String err)? gettingInvitationsFailed,
+  }) {
+    return gettingInvitations?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? inviting,
+    TResult Function()? invited,
+    TResult Function()? invitingFailed,
+    TResult Function()? gettingInvitations,
+    TResult Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult Function(String err)? gettingInvitationsFailed,
+    required TResult orElse(),
+  }) {
+    if (gettingInvitations != null) {
+      return gettingInvitations();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Inviting value) inviting,
+    required TResult Function(_Invited value) invited,
+    required TResult Function(_InvitingFailed value) invitingFailed,
+    required TResult Function(_GettingInvitations value) gettingInvitations,
+    required TResult Function(_GettingInvitationsSuccess value)
+        gettingInvitationsSuccess,
+    required TResult Function(_GettingInvitationsFailed value)
+        gettingInvitationsFailed,
+  }) {
+    return gettingInvitations(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Inviting value)? inviting,
+    TResult? Function(_Invited value)? invited,
+    TResult? Function(_InvitingFailed value)? invitingFailed,
+    TResult? Function(_GettingInvitations value)? gettingInvitations,
+    TResult? Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult? Function(_GettingInvitationsFailed value)?
+        gettingInvitationsFailed,
+  }) {
+    return gettingInvitations?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Inviting value)? inviting,
+    TResult Function(_Invited value)? invited,
+    TResult Function(_InvitingFailed value)? invitingFailed,
+    TResult Function(_GettingInvitations value)? gettingInvitations,
+    TResult Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult Function(_GettingInvitationsFailed value)? gettingInvitationsFailed,
+    required TResult orElse(),
+  }) {
+    if (gettingInvitations != null) {
+      return gettingInvitations(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GettingInvitations implements InvitationState {
+  const factory _GettingInvitations() = _$GettingInvitationsImpl;
+}
+
+/// @nodoc
+abstract class _$$GettingInvitationsSuccessImplCopyWith<$Res> {
+  factory _$$GettingInvitationsSuccessImplCopyWith(
+          _$GettingInvitationsSuccessImpl value,
+          $Res Function(_$GettingInvitationsSuccessImpl) then) =
+      __$$GettingInvitationsSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Invitation> invitations});
+}
+
+/// @nodoc
+class __$$GettingInvitationsSuccessImplCopyWithImpl<$Res>
+    extends _$InvitationStateCopyWithImpl<$Res, _$GettingInvitationsSuccessImpl>
+    implements _$$GettingInvitationsSuccessImplCopyWith<$Res> {
+  __$$GettingInvitationsSuccessImplCopyWithImpl(
+      _$GettingInvitationsSuccessImpl _value,
+      $Res Function(_$GettingInvitationsSuccessImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? invitations = null,
+  }) {
+    return _then(_$GettingInvitationsSuccessImpl(
+      null == invitations
+          ? _value._invitations
+          : invitations // ignore: cast_nullable_to_non_nullable
+              as List<Invitation>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GettingInvitationsSuccessImpl implements _GettingInvitationsSuccess {
+  const _$GettingInvitationsSuccessImpl(final List<Invitation> invitations)
+      : _invitations = invitations;
+
+  final List<Invitation> _invitations;
+  @override
+  List<Invitation> get invitations {
+    if (_invitations is EqualUnmodifiableListView) return _invitations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_invitations);
+  }
+
+  @override
+  String toString() {
+    return 'InvitationState.gettingInvitationsSuccess(invitations: $invitations)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GettingInvitationsSuccessImpl &&
+            const DeepCollectionEquality()
+                .equals(other._invitations, _invitations));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_invitations));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GettingInvitationsSuccessImplCopyWith<_$GettingInvitationsSuccessImpl>
+      get copyWith => __$$GettingInvitationsSuccessImplCopyWithImpl<
+          _$GettingInvitationsSuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() inviting,
+    required TResult Function() invited,
+    required TResult Function() invitingFailed,
+    required TResult Function() gettingInvitations,
+    required TResult Function(List<Invitation> invitations)
+        gettingInvitationsSuccess,
+    required TResult Function(String err) gettingInvitationsFailed,
+  }) {
+    return gettingInvitationsSuccess(invitations);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? inviting,
+    TResult? Function()? invited,
+    TResult? Function()? invitingFailed,
+    TResult? Function()? gettingInvitations,
+    TResult? Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult? Function(String err)? gettingInvitationsFailed,
+  }) {
+    return gettingInvitationsSuccess?.call(invitations);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? inviting,
+    TResult Function()? invited,
+    TResult Function()? invitingFailed,
+    TResult Function()? gettingInvitations,
+    TResult Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult Function(String err)? gettingInvitationsFailed,
+    required TResult orElse(),
+  }) {
+    if (gettingInvitationsSuccess != null) {
+      return gettingInvitationsSuccess(invitations);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Inviting value) inviting,
+    required TResult Function(_Invited value) invited,
+    required TResult Function(_InvitingFailed value) invitingFailed,
+    required TResult Function(_GettingInvitations value) gettingInvitations,
+    required TResult Function(_GettingInvitationsSuccess value)
+        gettingInvitationsSuccess,
+    required TResult Function(_GettingInvitationsFailed value)
+        gettingInvitationsFailed,
+  }) {
+    return gettingInvitationsSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Inviting value)? inviting,
+    TResult? Function(_Invited value)? invited,
+    TResult? Function(_InvitingFailed value)? invitingFailed,
+    TResult? Function(_GettingInvitations value)? gettingInvitations,
+    TResult? Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult? Function(_GettingInvitationsFailed value)?
+        gettingInvitationsFailed,
+  }) {
+    return gettingInvitationsSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Inviting value)? inviting,
+    TResult Function(_Invited value)? invited,
+    TResult Function(_InvitingFailed value)? invitingFailed,
+    TResult Function(_GettingInvitations value)? gettingInvitations,
+    TResult Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult Function(_GettingInvitationsFailed value)? gettingInvitationsFailed,
+    required TResult orElse(),
+  }) {
+    if (gettingInvitationsSuccess != null) {
+      return gettingInvitationsSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GettingInvitationsSuccess implements InvitationState {
+  const factory _GettingInvitationsSuccess(final List<Invitation> invitations) =
+      _$GettingInvitationsSuccessImpl;
+
+  List<Invitation> get invitations;
+  @JsonKey(ignore: true)
+  _$$GettingInvitationsSuccessImplCopyWith<_$GettingInvitationsSuccessImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GettingInvitationsFailedImplCopyWith<$Res> {
+  factory _$$GettingInvitationsFailedImplCopyWith(
+          _$GettingInvitationsFailedImpl value,
+          $Res Function(_$GettingInvitationsFailedImpl) then) =
+      __$$GettingInvitationsFailedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String err});
+}
+
+/// @nodoc
+class __$$GettingInvitationsFailedImplCopyWithImpl<$Res>
+    extends _$InvitationStateCopyWithImpl<$Res, _$GettingInvitationsFailedImpl>
+    implements _$$GettingInvitationsFailedImplCopyWith<$Res> {
+  __$$GettingInvitationsFailedImplCopyWithImpl(
+      _$GettingInvitationsFailedImpl _value,
+      $Res Function(_$GettingInvitationsFailedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? err = null,
+  }) {
+    return _then(_$GettingInvitationsFailedImpl(
+      null == err
+          ? _value.err
+          : err // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GettingInvitationsFailedImpl implements _GettingInvitationsFailed {
+  const _$GettingInvitationsFailedImpl(this.err);
+
+  @override
+  final String err;
+
+  @override
+  String toString() {
+    return 'InvitationState.gettingInvitationsFailed(err: $err)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GettingInvitationsFailedImpl &&
+            (identical(other.err, err) || other.err == err));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, err);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GettingInvitationsFailedImplCopyWith<_$GettingInvitationsFailedImpl>
+      get copyWith => __$$GettingInvitationsFailedImplCopyWithImpl<
+          _$GettingInvitationsFailedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() inviting,
+    required TResult Function() invited,
+    required TResult Function() invitingFailed,
+    required TResult Function() gettingInvitations,
+    required TResult Function(List<Invitation> invitations)
+        gettingInvitationsSuccess,
+    required TResult Function(String err) gettingInvitationsFailed,
+  }) {
+    return gettingInvitationsFailed(err);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? inviting,
+    TResult? Function()? invited,
+    TResult? Function()? invitingFailed,
+    TResult? Function()? gettingInvitations,
+    TResult? Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult? Function(String err)? gettingInvitationsFailed,
+  }) {
+    return gettingInvitationsFailed?.call(err);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? inviting,
+    TResult Function()? invited,
+    TResult Function()? invitingFailed,
+    TResult Function()? gettingInvitations,
+    TResult Function(List<Invitation> invitations)? gettingInvitationsSuccess,
+    TResult Function(String err)? gettingInvitationsFailed,
+    required TResult orElse(),
+  }) {
+    if (gettingInvitationsFailed != null) {
+      return gettingInvitationsFailed(err);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Inviting value) inviting,
+    required TResult Function(_Invited value) invited,
+    required TResult Function(_InvitingFailed value) invitingFailed,
+    required TResult Function(_GettingInvitations value) gettingInvitations,
+    required TResult Function(_GettingInvitationsSuccess value)
+        gettingInvitationsSuccess,
+    required TResult Function(_GettingInvitationsFailed value)
+        gettingInvitationsFailed,
+  }) {
+    return gettingInvitationsFailed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Inviting value)? inviting,
+    TResult? Function(_Invited value)? invited,
+    TResult? Function(_InvitingFailed value)? invitingFailed,
+    TResult? Function(_GettingInvitations value)? gettingInvitations,
+    TResult? Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult? Function(_GettingInvitationsFailed value)?
+        gettingInvitationsFailed,
+  }) {
+    return gettingInvitationsFailed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Inviting value)? inviting,
+    TResult Function(_Invited value)? invited,
+    TResult Function(_InvitingFailed value)? invitingFailed,
+    TResult Function(_GettingInvitations value)? gettingInvitations,
+    TResult Function(_GettingInvitationsSuccess value)?
+        gettingInvitationsSuccess,
+    TResult Function(_GettingInvitationsFailed value)? gettingInvitationsFailed,
+    required TResult orElse(),
+  }) {
+    if (gettingInvitationsFailed != null) {
+      return gettingInvitationsFailed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GettingInvitationsFailed implements InvitationState {
+  const factory _GettingInvitationsFailed(final String err) =
+      _$GettingInvitationsFailedImpl;
+
+  String get err;
+  @JsonKey(ignore: true)
+  _$$GettingInvitationsFailedImplCopyWith<_$GettingInvitationsFailedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

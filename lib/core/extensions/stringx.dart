@@ -1,3 +1,5 @@
+import 'package:anora/src/app/assets.dart';
+
 extension StringsX on String {
   String get toOrganizationName {
     final splitted = contains(' ') ? split(' ').first : trim();
@@ -26,4 +28,16 @@ extension StringsX on String {
   }
 
   String get toExtension => split('.').last;
+
+  String get iconify {
+    return switch (this) {
+      'pdf' => Assets.assetsIconsPdf,
+      'xls' => Assets.assetsIconsExcel,
+      'xlsx' => Assets.assetsIconsExcel,
+      'txt' => Assets.assetsIconsPdf,
+      'doc' => Assets.assetsIconsPdf,
+      'docx' => Assets.assetsIconsPdf,
+      _ => Assets.assetsIconsPdf
+    };
+  }
 }

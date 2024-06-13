@@ -2,13 +2,14 @@
 
 import 'dart:math' as math;
 
+import 'package:anora/app/features/auth/data/models/invitation_model.dart';
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/app/features/integrations/logic/integration_cubit.dart';
 import 'package:anora/app/features/integrations/ui/pages/integration_type.dart';
 import 'package:anora/app/features/settings/domain/auth_cubit/invitation_cubit.dart';
 import 'package:anora/app/features/settings/settings.dart';
 import 'package:anora/app/router/router.gr.dart';
-import 'package:anora/app/router/router_paths.dart';
+import 'package:anora/core/constants/anora_constants.dart';
 import 'package:anora/core/core.dart';
 import 'package:anora/core/extensions/authx.dart';
 import 'package:anora/core/extensions/stringx.dart';
@@ -48,6 +49,8 @@ class _SpacePageState extends State<SpacePage> {
   @override
   void initState() {
     super.initState();
+
+    context.read<InvitationsCubit>().getInvitations(context.orgs.first.uid);
     context
         .read<IntegrationCubit>()
         .getKnowledgeBasesByOrganization(context.orgs.first.uid);
@@ -107,11 +110,24 @@ class _SpacePageState extends State<SpacePage> {
               content: IntegrationsList(),
             ),
             14.vGap,
-            const ConfigBloc(
+            ConfigBloc(
               title: 'Knowledge Bases',
+              action: ShadButton.ghost(
+                onPressed: () {
+                  showShadDialog<void>(
+                    context: context,
+                    builder: (context) => AddKnowledgeBase(
+                      contextX: context,
+                    ),
+                  );
+                },
+                text: const Text(
+                  'Add New',
+                ),
+              ),
               desc:
                   'Knowledge Bases are sets of unstructed data classified by topics. You can add or remove knowledge bases from this space',
-              content: KnowledgeBaseList(),
+              content: const KnowledgeBaseList(),
             ),
             14.vGap,
             ConfigBloc(
@@ -134,45 +150,120 @@ class MembersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const userAvatar =
-        'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
-    final images = [userAvatar, userAvatar, userAvatar, userAvatar, userAvatar];
-    return InkWell(
-      onTap: () async {
-        await showModalBottomSheet<void>(
-          showDragHandle: true,
-          //side: ShadSheetSide.bottom,
-          context: context,
-          builder: (context) => MembersPage(contextX: contextX),
+    final images = [
+      DEFAULT_PROFILE,
+      DEFAULT_PROFILE,
+      DEFAULT_PROFILE,
+      DEFAULT_PROFILE,
+      DEFAULT_PROFILE,
+    ];
+    return BlocConsumer<InvitationsCubit, InvitationState>(
+      listener: (context, state) {
+        state.maybeWhen(
+          orElse: () {},
+          invited: () async {
+            await context.router.maybePop();
+            await context
+                .read<InvitationsCubit>()
+                .getInvitations(context.orgs.first.uid);
+          },
+          gettingInvitationsFailed: (err) {
+            ShadToaster.of(context).show(
+              ShadToast.destructive(
+                title: const Text('Uh oh! Something went wrong'),
+                description:
+                    const Text('There was a problem fetching the invitations'),
+                action: ShadButton.destructive(
+                  text: const Text('Try again'),
+                  decoration: ShadDecoration(
+                    border: ShadBorder(
+                      color: context.colorScheme.destructiveForeground,
+                    ),
+                  ),
+                  onPressed: () => ShadToaster.of(context).hide(),
+                ),
+              ),
+            );
+          },
+          invitingFailed: () {
+            ShadToaster.of(context).show(
+              ShadToast.destructive(
+                title: const Text('Uh oh! Something went wrong'),
+                description:
+                    const Text('There was a problem sending the invitation'),
+                action: ShadButton.destructive(
+                  text: const Text('Try again'),
+                  decoration: ShadDecoration(
+                    border: ShadBorder(
+                      color: context.colorScheme.destructiveForeground,
+                    ),
+                  ),
+                  onPressed: () => ShadToaster.of(context).hide(),
+                ),
+              ),
+            );
+          },
         );
       },
-      child: Container(
-        height: 54,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: context.colorScheme.secondary,
-          borderRadius: BorderRadius.circular(18),
-          //border: Border.all(color: theme.colorScheme.primary, width: .4),
-        ),
-        child: Row(
-          children: [
-            ImageStack(
-              imageRadius: 32,
-              imageBorderWidth: 0,
-              imageList: images,
-              totalCount: images
-                  .length, // If larger than images.length, will show extra empty circle
-            ),
-            8.hGap,
-            const Text('54 Members'),
-            const Spacer(),
-            const HeroIcon(
-              HeroIcons.chevronRight,
-              size: 16,
-            ),
-          ],
-        ).hPadding,
-      ),
+      builder: (context, state) {
+        return state.maybeWhen(
+          orElse: SizedBox.shrink,
+          gettingInvitations: () {
+            return Column(
+              children: [
+                CupertinoActivityIndicator(
+                  radius: 20,
+                  color: context.colorScheme.ring,
+                ),
+                const Text('Getting Members'),
+              ],
+            );
+          },
+          gettingInvitationsSuccess: (invites) {
+            return InkWell(
+              onTap: () async {
+                await showModalBottomSheet<void>(
+                  showDragHandle: true,
+                  //side: ShadSheetSide.bottom,
+                  context: context,
+                  builder: (context) =>
+                      MembersPage(contextX: contextX, invites: invites),
+                );
+              },
+              child: Container(
+                height: 54,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: context.colorScheme.secondary,
+                  borderRadius: BorderRadius.circular(18),
+                  //border: Border.all(color: theme.colorScheme.primary, width: .4),
+                ),
+                child: Row(
+                  children: [
+                    ImageStack(
+                      imageRadius: 32,
+                      imageBorderWidth: 0,
+                      imageList: [DEFAULT_PROFILE * invites.length],
+                      totalCount: images
+                          .length, // If larger than images.length, will show extra empty circle
+                    ),
+                    8.hGap,
+                    Text(
+                      '${context.orgs.first.name} Members',
+                      style: context.title,
+                    ),
+                    const Spacer(),
+                    const HeroIcon(
+                      HeroIcons.chevronRight,
+                      size: 16,
+                    ),
+                  ],
+                ).hPadding,
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
@@ -180,9 +271,11 @@ class MembersList extends StatelessWidget {
 class MembersPage extends StatefulWidget {
   const MembersPage({
     required this.contextX,
+    required this.invites,
     super.key,
   });
   final BuildContext contextX;
+  final List<Invitation> invites;
 
   @override
   State<MembersPage> createState() => _MembersPageState();
@@ -200,7 +293,7 @@ class _MembersPageState extends State<MembersPage> {
           Row(
             children: [
               Text(
-                'Xenora AI Members',
+                '${context.orgs.first.name} Members',
                 style: context.head
                     .copyWith(color: context.colorScheme.primary, fontSize: 18),
               ),
@@ -241,26 +334,27 @@ class _MembersPageState extends State<MembersPage> {
           Expanded(
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: 5,
+              itemCount: widget.invites.length,
               itemBuilder: (BuildContext context, int index) {
+                final member = widget.invites[index];
                 return ListTile(
                   onTap: () {
-                    context.router.pushNamed(MEMBER_DETAILS_ROUTE);
+                    context.router.push(MemberDetailsRoute(member: member));
                   },
                   visualDensity:
                       const VisualDensity(vertical: -4, horizontal: -4),
                   leading: const CircleAvatar(
                     backgroundImage: NetworkImage(
-                      'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                      DEFAULT_PROFILE,
                     ),
                   ),
                   trailing: Transform.rotate(
                     angle: math.pi / 4,
                     child: const HeroIcon(HeroIcons.chevronUpDown, size: 24),
                   ),
-                  title: const Text('Baimam Boukar'),
+                  title: Text(member.to.first.name),
                   subtitle: Text(
-                    'baimamboukar@xenora.org',
+                    member.to.first.email,
                     style: context.desc.copyWith(fontSize: 12),
                   ),
                 );
@@ -495,20 +589,28 @@ class ConfigBloc extends StatelessWidget {
     required this.title,
     required this.desc,
     required this.content,
+    this.action,
     super.key,
   });
   final String title;
   final String desc;
   final Widget content;
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          title,
-          style: context.head,
-        ).floatL,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: context.head,
+            ).floatL,
+            if (action != null) action!,
+          ],
+        ),
         8.vGap,
         Text(
           desc,

@@ -50,6 +50,7 @@ import 'package:anora/app/features/settings/presentation/pages/space_config_page
     as _i17;
 import 'package:auto_route/auto_route.dart' as _i19;
 import 'package:flutter/cupertino.dart' as _i21;
+import 'package:flutter/material.dart' as _i25;
 
 abstract class $AppRouter extends _i19.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -118,10 +119,11 @@ abstract class $AppRouter extends _i19.RootStackRouter {
       final args = routeData.argsAs<KnowledgeBaseRouteArgs>();
       return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i9.KnowledgeBasePage(
+        child: _i19.WrappedRoute(
+            child: _i9.KnowledgeBasePage(
           knowledgeBase: args.knowledgeBase,
           key: args.key,
-        ),
+        )),
       );
     },
     LanguageConfigRoute.name: (routeData) {
@@ -137,9 +139,13 @@ abstract class $AppRouter extends _i19.RootStackRouter {
       );
     },
     MemberDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<MemberDetailsRouteArgs>();
       return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i12.MemberDetailsPage(),
+        child: _i12.MemberDetailsPage(
+          member: args.member,
+          key: args.key,
+        ),
       );
     },
     NotificationsConfigRoute.name: (routeData) {
@@ -416,16 +422,40 @@ class LoginRoute extends _i19.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.MemberDetailsPage]
-class MemberDetailsRoute extends _i19.PageRouteInfo<void> {
-  const MemberDetailsRoute({List<_i19.PageRouteInfo>? children})
-      : super(
+class MemberDetailsRoute extends _i19.PageRouteInfo<MemberDetailsRouteArgs> {
+  MemberDetailsRoute({
+    required _i24.Invitation member,
+    _i25.Key? key,
+    List<_i19.PageRouteInfo>? children,
+  }) : super(
           MemberDetailsRoute.name,
+          args: MemberDetailsRouteArgs(
+            member: member,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'MemberDetailsRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i19.PageInfo<MemberDetailsRouteArgs> page =
+      _i19.PageInfo<MemberDetailsRouteArgs>(name);
+}
+
+class MemberDetailsRouteArgs {
+  const MemberDetailsRouteArgs({
+    required this.member,
+    this.key,
+  });
+
+  final _i24.Invitation member;
+
+  final _i25.Key? key;
+
+  @override
+  String toString() {
+    return 'MemberDetailsRouteArgs{member: $member, key: $key}';
+  }
 }
 
 /// generated route for

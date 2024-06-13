@@ -1,3 +1,4 @@
+import 'package:anora/app/features/auth/data/models/invitation_model.dart';
 import 'package:anora/app/features/settings/settings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,5 +43,23 @@ class InvitationsCubit extends Cubit<InvitationState> {
         const InvitationState.invited(),
       ),
     );
+  }
+
+  Future<void> getInvitations(String orguid) async {
+    try {
+      emit(const InvitationState.gettingInvitations());
+
+      final snapshot = await FirebaseFirestore.instance
+          .collection('invitations')
+          .where('orguid', isEqualTo: orguid)
+          .get();
+
+      final invitations =
+          snapshot.docs.map((doc) => Invitation.fromMap(doc.data())).toList();
+
+      emit(InvitationState.gettingInvitationsSuccess(invitations));
+    } catch (e) {
+      emit(InvitationState.gettingInvitationsFailed(e.toString()));
+    }
   }
 }

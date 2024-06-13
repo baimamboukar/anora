@@ -62,13 +62,14 @@ class DataSourceDatails {
     required this.sourceID,
     required this.sourceURL,
     required this.sourceName,
+    required this.sourceType,
     this.sourceToken,
   });
   final String sourceID;
   final String sourceURL;
   final String sourceName;
   final String? sourceToken;
-
+  final String sourceType;
   DataSourceDatails copyWith({
     String? sourceID,
     String? sourceURL,
@@ -76,6 +77,7 @@ class DataSourceDatails {
     String? sourceToken,
   }) {
     return DataSourceDatails(
+      sourceType: sourceType ?? sourceType,
       sourceID: sourceID ?? this.sourceID,
       sourceURL: sourceURL ?? this.sourceURL,
       sourceName: sourceName ?? this.sourceName,
@@ -94,6 +96,7 @@ class DataSourceDatails {
 
   factory DataSourceDatails.fromMap(Map<String, dynamic> map) {
     return DataSourceDatails(
+      sourceType: (map['sourceType'] ?? '') as String,
       sourceID: (map['sourceID'] ?? '') as String,
       sourceURL: (map['sourceURL'] ?? '') as String,
       sourceName: (map['sourceName'] ?? '') as String,
