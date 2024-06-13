@@ -182,18 +182,24 @@ class Picked extends StatelessWidget implements AutoRouteWrapper {
       },
       child: Container(
         width: context.width * .8,
-        height: 200,
+        //height: 200,
         decoration: BoxDecoration(
           color: context.colorScheme.ring,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
           children: [
-            ShadImage((file.extension ?? '').iconify),
+            ShadImage(
+              (file.extension ?? '').iconify,
+              width: 48,
+              height: 48,
+            ),
             14.vGap,
             Text(file.name, style: context.title),
-            ShadButton.outline(
-              text: const Text('Save Data Source'),
+            14.vGap,
+            ShadButton.ghost(
+              size: ShadButtonSize.lg,
+              text: Text('Add Data Source', style: context.paragraph),
               onPressed: () {
                 context.read<KnowledgebaseCubit>().addDataSource(
                       file,
@@ -202,6 +208,7 @@ class Picked extends StatelessWidget implements AutoRouteWrapper {
                     );
               },
             ),
+            24.vGap,
           ],
         ).hPadding.vPadding,
       ),

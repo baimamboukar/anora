@@ -91,15 +91,23 @@ class Invitation {
     if (fromInvite) {
       fromMap = _parseJsonString(map['from'] as String);
       toMap = _parseJsonString(map['to'] as String);
-    } else {
-      fromMap = map['from'] as Map<String, dynamic>;
-      toMap = map['to'] as Map<String, dynamic>;
     }
+
+    // else {
+    //   fromMap = map['from'] as Map<String, dynamic>;
+    //   toMap = map['to'] as Map<String, dynamic>;
+    // }
     return Invitation(
       orguid: (map['orguid'] ?? '') as String,
       role: (map['role'] ?? '') as String,
-      from: From.fromMap(fromMap),
-      to: [To.fromMap(toMap)],
+      from: fromInvite
+          ? From.fromMap(fromMap)
+          : From.fromMap(map['from'] as Map<String, dynamic>),
+      to: fromInvite
+          ? [To.fromMap(toMap)]
+          : (map['to'] as List)
+              .map((x) => To.fromMap(x as Map<String, dynamic>))
+              .toList(),
       organization: (map['organization'] ?? '') as String,
       subject: (map['subject'] ?? '') as String,
       text: (map['text'] ?? '') as String,

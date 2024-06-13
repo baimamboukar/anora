@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
           child: ShadForm(
             key: formKey,
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 350),
+              constraints: BoxConstraints(maxWidth: context.width * .9),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -91,8 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: context.head,
                   ).floatC,
                   Text(
-                    '''
-        We need few information. Please enter your email and password credentials to login to your account''',
+                    '''We need few information. Please enter your email and password credentials to login to your account''',
                     style: context.desc,
                   ).floatC,
                   24.vGap,

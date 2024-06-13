@@ -34,9 +34,10 @@ extension StringsX on String {
       'pdf' => Assets.assetsIconsPdf,
       'xls' => Assets.assetsIconsExcel,
       'xlsx' => Assets.assetsIconsExcel,
-      'txt' => Assets.assetsIconsPdf,
-      'doc' => Assets.assetsIconsPdf,
-      'docx' => Assets.assetsIconsPdf,
+      'txt' => Assets.assetsIconsDocx,
+      'doc' => Assets.assetsIconsDocx,
+      'docx' => Assets.assetsIconsDocx,
+      'jpg' || 'png' || 'jpeg' => Assets.assetsIconsJpg,
       _ => Assets.assetsIconsPdf
     };
   }

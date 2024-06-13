@@ -26,7 +26,9 @@ class _MemberDetailsPageState extends State<MemberDetailsPage> {
     return AnoraPage(
       withoutSingleScroll: true,
       appBar: AppBar(
-        title: Text(member.to.first.name),
+        title: Text(
+          member.to.first.name.isEmpty ? 'Empty' : member.to.first.name,
+        ),
       ),
       child: Column(
         children: [
@@ -53,9 +55,11 @@ class _MemberDetailsPageState extends State<MemberDetailsPage> {
             ),
             child: Row(
               children: [
-                Text(isPending
-                    ? 'Invitation sent is still pending '
-                    : 'Invitation has been accepted'),
+                Text(
+                  isPending
+                      ? 'Invitation sent is still pending '
+                      : 'Invitation has been accepted',
+                ),
                 const Spacer(),
                 TextButton(
                   onPressed: () {},

@@ -20,6 +20,7 @@ extension ContextX on BuildContext {
   TextStyle get paragraph => textTheme.p;
   TextStyle get title => textTheme.large;
   TextStyle get head => textTheme.h3;
+  TextStyle get header => textTheme.h1;
   TextStyle get desc => textTheme.muted;
   ShadThemeData get theme => ShadTheme.of(this);
   ShadColorScheme get colorScheme => theme.colorScheme;

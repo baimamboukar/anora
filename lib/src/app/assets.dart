@@ -13,6 +13,10 @@ class Assets {
   /// assets/fonts/Google-Sans.ttf
   static const String assetsFontsGoogleSans = "assets/fonts/Google-Sans.ttf";
 
+  /// Assets for assetsIconsDocx
+  /// assets/icons/docx.png
+  static const String assetsIconsDocx = "assets/icons/docx.png";
+
   /// Assets for assetsIconsDrive
   /// assets/icons/drive.svg
   static const String assetsIconsDrive = "assets/icons/drive.svg";
@@ -20,6 +24,10 @@ class Assets {
   /// Assets for assetsIconsExcel
   /// assets/icons/excel.svg
   static const String assetsIconsExcel = "assets/icons/excel.svg";
+
+  /// Assets for assetsIconsJpg
+  /// assets/icons/jpg.png
+  static const String assetsIconsJpg = "assets/icons/jpg.png";
 
   /// Assets for assetsIconsPdf
   /// assets/icons/pdf.png
@@ -32,6 +40,10 @@ class Assets {
   /// Assets for assetsIconsTelegram
   /// assets/icons/telegram.svg
   static const String assetsIconsTelegram = "assets/icons/telegram.svg";
+
+  /// Assets for assetsIconsWelcome
+  /// assets/icons/welcome.jpg
+  static const String assetsIconsWelcome = "assets/icons/welcome.jpg";
 
   /// Assets for assetsIconsWhatsapp
   /// assets/icons/whatsapp.svg

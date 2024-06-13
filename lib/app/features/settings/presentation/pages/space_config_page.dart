@@ -215,7 +215,7 @@ class MembersList extends StatelessWidget {
                   radius: 20,
                   color: context.colorScheme.ring,
                 ),
-                const Text('Getting Members'),
+                const Text('Getting Members...'),
               ],
             );
           },
@@ -355,7 +355,8 @@ class _MembersPageState extends State<MembersPage> {
                   title: Text(member.to.first.name),
                   subtitle: Text(
                     member.to.first.email,
-                    style: context.desc.copyWith(fontSize: 12),
+                    style: context.desc
+                        .copyWith(fontSize: 12, color: Colors.white),
                   ),
                 );
               },
