@@ -66,18 +66,18 @@ class _AppState extends State<App> {
         darkTheme: ShadThemeData(
           textTheme: ShadTextTheme(
             family: 'Gilroy',
-            colorScheme: const ShadRedColorScheme.dark(),
+            colorScheme: const ShadBlueColorScheme.dark(),
           ),
           brightness: Brightness.dark,
-          colorScheme: const ShadBlueColorScheme.dark(),
+          colorScheme: const ShadGreenColorScheme.dark(),
         ),
         theme: ShadThemeData(
           textTheme: ShadTextTheme(
             family: 'Gilroy',
-            colorScheme: const ShadBlueColorScheme.light(),
+            colorScheme: const ShadGreenColorScheme.light(),
           ),
           brightness: Brightness.light,
-          colorScheme: const ShadBlueColorScheme.light(),
+          colorScheme: const ShadGreenColorScheme.light(),
         ),
         themeMode: ThemeMode.system,
       ),

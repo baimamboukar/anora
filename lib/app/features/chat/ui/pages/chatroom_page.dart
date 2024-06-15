@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:anora/app/features/chat/logic/cubit/chat_cubit.dart';
+import 'package:anora/app/features/chat/logic/chat_cubit/chat_cubit.dart';
 import 'package:anora/app/features/chat/logic/models/anora_prompt.dart';
 import 'package:anora/core/core.dart';
 import 'package:auto_route/auto_route.dart';
