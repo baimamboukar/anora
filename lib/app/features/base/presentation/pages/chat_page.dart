@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:anora/app/features/auth/data/models/space_models.dart';
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/app/features/chat/logic/models/anora_prompt.dart';
+import 'package:anora/app/features/chat/logic/recent_chats_cubit/recent_chats_cubit.dart';
 import 'package:anora/app/features/integrations/logic/integration_cubit.dart';
 import 'package:anora/app/router/router.gr.dart';
 import 'package:anora/core/core.dart';
@@ -308,7 +309,7 @@ class RecentChats extends StatelessWidget {
     return SizedBox(
       height: 170,
       child: ListView.builder(
-        itemCount: 3,
+        itemCount: recents.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
@@ -324,7 +325,7 @@ class RecentChats extends StatelessWidget {
                 size: 16,
               ),
             ),
-            title: const Text('Create content for LinkedIn page'),
+            title: Text(recents[index]),
           );
         },
       ),

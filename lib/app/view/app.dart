@@ -7,6 +7,7 @@ import 'package:anora/app/router/router.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -40,46 +41,53 @@ class _AppState extends State<App> {
           create: (context) => KnowledgebaseCubit(),
         ),
       ],
-      child: ShadApp.router(
-        debugShowCheckedModeBanner: false,
-        routerConfig: _router.config(
-          placeholder: (context) => const Center(
-            child: CupertinoActivityIndicator(),
-          ),
-          rebuildStackOnDeepLink: true,
-          deepLinkBuilder: (link) {
-            if (link.path.contains('invitation')) {
-              final args = link.uri.queryParameters;
-              final invitation = Invitation.fromMap(args, fromInvite: true);
-              return DeepLink(
-                [
-                  SignupRoute(invitation: invitation),
-                ],
-              );
-            } else {
-              return DeepLink.defaultPath;
-            }
-          },
-
-          //deepLinkTransformer: (uri) {},
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+          systemStatusBarContrastEnforced: true,
         ),
-        darkTheme: ShadThemeData(
-          textTheme: ShadTextTheme(
-            family: 'Gilroy',
+        child: ShadApp.router(
+          debugShowCheckedModeBanner: false,
+          routerConfig: _router.config(
+            placeholder: (context) => const Center(
+              child: CupertinoActivityIndicator(),
+            ),
+            rebuildStackOnDeepLink: true,
+            deepLinkBuilder: (link) {
+              if (link.path.contains('invitation')) {
+                final args = link.uri.queryParameters;
+                final invitation = Invitation.fromMap(args, fromInvite: true);
+                return DeepLink(
+                  [
+                    SignupRoute(invitation: invitation),
+                  ],
+                );
+              } else {
+                return DeepLink.defaultPath;
+              }
+            },
+
+            //deepLinkTransformer: (uri) {},
+          ),
+          darkTheme: ShadThemeData(
+            textTheme: ShadTextTheme(
+              family: 'Gilroy',
+              colorScheme: const ShadBlueColorScheme.dark(),
+            ),
+            brightness: Brightness.dark,
             colorScheme: const ShadBlueColorScheme.dark(),
           ),
-          brightness: Brightness.dark,
-          colorScheme: const ShadGreenColorScheme.dark(),
-        ),
-        theme: ShadThemeData(
-          textTheme: ShadTextTheme(
-            family: 'Gilroy',
-            colorScheme: const ShadGreenColorScheme.light(),
+          theme: ShadThemeData(
+            textTheme: ShadTextTheme(
+              family: 'Gilroy',
+              colorScheme: const ShadBlueColorScheme.light(),
+            ),
+            brightness: Brightness.light,
+            colorScheme: const ShadBlueColorScheme.light(),
           ),
-          brightness: Brightness.light,
-          colorScheme: const ShadGreenColorScheme.light(),
+          themeMode: ThemeMode.system,
         ),
-        themeMode: ThemeMode.system,
       ),
     );
   }
