@@ -22,7 +22,7 @@ class _MemberDetailsPageState extends State<MemberDetailsPage> {
   Widget build(BuildContext context) {
     final member = widget.member;
     final isPending =
-        DateTime.now().isAfter(member.on.add(const Duration(days: 1)));
+        !DateTime.now().isAfter(member.on.add(const Duration(days: 1)));
     return AnoraPage(
       withoutSingleScroll: true,
       appBar: AppBar(

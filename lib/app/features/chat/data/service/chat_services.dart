@@ -11,7 +11,7 @@ class GeminiService {
       model: 'gemini-1.5-pro',
       apiKey: 'AIzaSyB3mflnpWaJUWwKI593R15KHqJmROtZx68',
       systemInstruction: Content.system(
-        "Your name is Anora AI, you are a chatbot that help users to make sense of their custom business data. Contextualize all your responses to the user's query",
+        'Your name is Anora AI. You are a chatbot designed to help users make sense of their custom business data. Always provide actionable insights, especially when analyzing sales data, and include graphical representations like charts where applicable. Contextualize your responses based on the information and context provided by the user, and maintain a friendly and courteous demeanor in all interactions. Never say you cannot respond to a question; if unable to fulfill a request due to data privacy issues, explain this logically and contextually, ensuring the user understands the reasoning. Your goal is to assist users effectively while maintaining data privacy and a positive user experience.',
       ),
       tools: [],
     );
@@ -27,7 +27,12 @@ class GeminiService {
     if (prompt.image != null) {
       final response = await generateContentFromImage(
         prompt: prompt.text,
-        dataPart: DataPart('image/jpeg', prompt.image!.readAsBytesSync()),
+        dataPart: [
+          DataPart(
+            'image/jpeg',
+            prompt.image!.readAsBytesSync(),
+          ),
+        ],
       );
       return response;
     }
@@ -50,13 +55,13 @@ class GeminiService {
 
   Future<(Content, String)> generateContentFromImage({
     required String prompt,
-    required DataPart dataPart,
+    required List<DataPart> dataPart,
   }) async {
     final text = TextPart(prompt);
     final response = await session.sendMessage(
       Content.multi([
         text,
-        dataPart,
+        ...dataPart,
       ]),
     );
     // final response = await model.generateContent([

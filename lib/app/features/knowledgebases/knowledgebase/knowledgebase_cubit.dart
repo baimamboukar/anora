@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 
@@ -53,13 +54,35 @@ class KnowledgebaseCubit extends Cubit<KnowledgebaseState> {
           .where('knowledgeBaseID', isEqualTo: uid)
           .get();
 
-      final sources = snapshot.docs.map((doc) {
-        return AnoraDataSource.fromMap(doc.data());
-      }).toList();
+      // final sources = snapshot.docs.map((doc) {
+      //   final source = AnoraDataSource.fromMap(doc.data());
+      //   return source;
+      // }).toList();
+      final sources = await Future.wait(
+        snapshot.docs.map((doc) async {
+          final source = AnoraDataSource.fromMap(doc.data());
+          final data = await downloadFile(source.details.sourceURL);
+          return source.copyWith(bytes: data);
+        }).toList(),
+      );
 
       emit(KnowledgebaseState.gettingDataSourceSuccess(sources));
     } catch (err) {
       emit(KnowledgebaseState.gettingDataSourceFailed(err.toString()));
+    }
+  }
+
+  Future<Uint8List> downloadFile(String fileUrl) async {
+    try {
+      final ref = FirebaseStorage.instance.refFromURL(fileUrl);
+      final data = await ref.getData();
+      if (data != null) {
+        return data;
+      } else {
+        throw Exception('Failed to download file.');
+      }
+    } catch (e) {
+      throw Exception('Error downloading file: $e');
     }
   }
 

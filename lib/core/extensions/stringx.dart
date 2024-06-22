@@ -41,4 +41,33 @@ extension StringsX on String {
       _ => Assets.assetsIconsPdf
     };
   }
+
+  String get mimeType {
+    final extension = split('.').last.toLowerCase();
+    switch (extension) {
+      case 'xls':
+        return 'application/vnd.ms-excel';
+      case 'xlsx':
+        return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+      case 'pdf':
+        return 'application/pdf';
+      case 'txt':
+        return 'text/plain';
+      case 'jpeg':
+      case 'jpg':
+        return 'image/jpeg';
+      case 'png':
+        return 'image/png';
+      case 'gif':
+        return 'image/gif';
+      case 'bmp':
+        return 'image/bmp';
+      case 'webp':
+        return 'image/webp';
+      case 'svg':
+        return 'image/svg+xml';
+      default:
+        return 'application/octet-stream'; // Default MIME type for unknown extensions
+    }
+  }
 }

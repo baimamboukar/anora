@@ -1,8 +1,12 @@
 import 'dart:math' as math;
 
+import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
+import 'package:anora/app/features/base/presentation/pages/chat_page.dart';
 import 'package:anora/app/features/chat/logic/chat_cubit/chat_cubit.dart';
 import 'package:anora/app/features/chat/logic/models/anora_prompt.dart';
+import 'package:anora/app/features/integrations/logic/integration_cubit.dart';
 import 'package:anora/core/core.dart';
+import 'package:anora/core/extensions/authx.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +28,19 @@ class ChatroomPage extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ChatCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(),
+        ),
+        BlocProvider<IntegrationCubit>(
+          create: (context) => IntegrationCubit(),
+          child: this,
+        ),
+        BlocProvider<ChatCubit>(
+          create: (context) => ChatCubit(),
+        ),
+      ],
       child: this,
     );
   }
@@ -54,6 +69,10 @@ class _ChatroomPageState extends State<ChatroomPage> {
   void initState() {
     super.initState();
     controller = TextEditingController();
+
+    context
+        .read<IntegrationCubit>()
+        .getKnowledgeBasesByOrganization(context.orgs.first.uid);
     context.read<ChatCubit>().completeChat(promt: widget.prompt);
   }
 
@@ -98,6 +117,9 @@ class _ChatroomPageState extends State<ChatroomPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Query Chatroom'),
+          actions: const [
+            ActiveKnowledgeBase(),
+          ],
         ),
         body: Column(
           children: [

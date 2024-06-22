@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:anora/app/features/auth/data/models/space_models.dart';
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
+import 'package:anora/app/features/base/presentation/widgets/recorder.dart';
 import 'package:anora/app/features/chat/logic/models/anora_prompt.dart';
 import 'package:anora/app/features/chat/logic/recent_chats_cubit/recent_chats_cubit.dart';
 import 'package:anora/app/features/integrations/logic/integration_cubit.dart';
@@ -49,9 +50,9 @@ class _ChatPageState extends State<ChatPage> {
   void initState() {
     super.initState();
     controller = TextEditingController();
-    context
-        .read<IntegrationCubit>()
-        .getKnowledgeBasesByOrganization(context.orgs.first.uid);
+    // context
+    //     .read<IntegrationCubit>()
+    //     .getKnowledgeBasesByOrganization(context.orgs.first.uid);
   }
 
   @override
@@ -128,11 +129,40 @@ class ChatAction extends StatelessWidget {
                   ),
                 ),
               ),
-              InkWell(
-                child: Transform.rotate(
-                  angle: math.pi / 4,
-                  child: const HeroIcon(HeroIcons.chevronUpDown, size: 24),
-                ),
+              Column(
+                children: [
+                  14.vGap,
+                  InkWell(
+                    onTap: () {
+                      showModalBottomSheet<void>(
+                        builder: (context) => const RecorderWidget(),
+                        context: context,
+                      );
+                    },
+                    child: Transform.rotate(
+                      angle: math.pi / 4,
+                      child: const HeroIcon(HeroIcons.chevronUpDown, size: 24),
+                    ),
+                  ),
+                  14.vGap,
+                  InkWell(
+                    onTap: () {
+                      showModalBottomSheet<void>(
+                        builder: (context) => const RecorderWidget(),
+                        context: context,
+                      );
+                    },
+                    child: Container(
+                      height: 25,
+                      width: 25,
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Center(child: Text('1')),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -206,73 +236,7 @@ class ChatHome extends StatelessWidget {
           14.vGap,
           const ChatSuggestions().hPadding,
           14.vGap,
-          BlocBuilder<IntegrationCubit, IntegrationState>(
-            builder: (context, state) {
-              return state.maybeWhen(
-                orElse: () => const SizedBox(),
-                gettingKnowledges: () {
-                  return Container(
-                    height: 48,
-                    width: context.width * .7,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18),
-                      color: context.colorScheme.primary,
-                    ),
-                  ).redacted(context: context, redact: true);
-                },
-                gettingKnowledgeFailure: (err) {
-                  // failure in red and action to retry
-                  return const HeroIcon(
-                    HeroIcons.eyeDropper,
-                    color: Colors.red,
-                  );
-                },
-                gettingKnowledgeSuccess: (knowledgeBases) {
-                  knowledgeListener.value = knowledgeBases.last;
-                  return Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Active Knowledge Base',
-                            style: context.paragraph,
-                          ),
-                          CupertinoContextMenu(
-                            enableHapticFeedback: true,
-                            actions: [
-                              for (int index = 0;
-                                  index < knowledgeBases.length;
-                                  index++)
-                                CupertinoContextMenuAction(
-                                  child: Text(knowledgeBases[index].name),
-                                  onPressed: () {
-                                    context.router.maybePop();
-                                    knowledgeListener.value =
-                                        knowledgeBases[index];
-                                  },
-                                ),
-                            ],
-                            child: const HeroIcon(HeroIcons.cog6Tooth),
-                          ),
-                        ],
-                      ).hPadding,
-                      ValueListenableBuilder(
-                        valueListenable: knowledgeListener,
-                        builder: (context, activeKnowledge, child) {
-                          return Text(
-                            activeKnowledge!.name,
-                            style: context.paragraph
-                                .copyWith(color: context.colorScheme.selection),
-                          ).floatL.hPadding;
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
+          const ActiveKnowledgeBase(),
 
           14.vGap,
           Row(
@@ -295,6 +259,85 @@ class ChatHome extends StatelessWidget {
           //   const Switcher(),
         ],
       ),
+    );
+  }
+}
+
+class ActiveKnowledgeBase extends StatelessWidget {
+  const ActiveKnowledgeBase({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<IntegrationCubit, IntegrationState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          orElse: () => const SizedBox(),
+          gettingKnowledges: () {
+            return Container(
+              height: 48,
+              width: context.width * .7,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                color: context.colorScheme.primary,
+              ),
+            ).redacted(context: context, redact: true);
+          },
+          gettingKnowledgeFailure: (err) {
+            // failure in red and action to retry
+            return const HeroIcon(
+              HeroIcons.eyeDropper,
+              color: Colors.red,
+            );
+          },
+          gettingKnowledgeSuccess: (knowledgeBases) {
+            knowledgeListener.value = knowledgeBases.last;
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Active Knowledge Base',
+                      style: context.paragraph,
+                    ),
+                    CupertinoContextMenu(
+                      enableHapticFeedback: true,
+                      actions: [
+                        for (int index = 0;
+                            index < knowledgeBases.length;
+                            index++)
+                          CupertinoContextMenuAction(
+                            child: Text(knowledgeBases[index].name),
+                            onPressed: () {
+                              context.router.maybePop();
+                              knowledgeListener.value = knowledgeBases[index];
+                            },
+                          ),
+                      ],
+                      child: HeroIcon(
+                        HeroIcons.cog6Tooth,
+                        color: context.colorScheme.ring,
+                      ),
+                    ),
+                  ],
+                ).hPadding,
+                ValueListenableBuilder(
+                  valueListenable: knowledgeListener,
+                  builder: (context, activeKnowledge, child) {
+                    return Text(
+                      activeKnowledge!.name,
+                      style: context.paragraph
+                          .copyWith(color: context.colorScheme.selection),
+                    ).floatL.hPadding;
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 }

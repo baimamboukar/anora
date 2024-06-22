@@ -54,6 +54,7 @@ dependencies:
   markdown_widget: ^2.3.2+6
   google_generative_ai: ^0.4.3
   dotted_border: ^2.1.0
+  highlight_text: ^1.7.0
 
 
 dependency_overrides:

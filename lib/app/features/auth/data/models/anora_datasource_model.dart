@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'dart:typed_data';
 
 class AnoraDataSource {
   AnoraDataSource({
@@ -7,8 +8,10 @@ class AnoraDataSource {
     required this.uid,
     required this.knowledgeBaseID,
     required this.details,
+    this.bytes,
   });
   final String type;
+  final Uint8List? bytes;
   final String uid;
   final String knowledgeBaseID;
   final DataSourceDatails details;
@@ -18,8 +21,10 @@ class AnoraDataSource {
     String? uid,
     String? knowledgeBaseID,
     DataSourceDatails? details,
+    Uint8List? bytes,
   }) {
     return AnoraDataSource(
+      bytes: bytes ?? this.bytes,
       type: type ?? this.type,
       uid: uid ?? this.uid,
       knowledgeBaseID: knowledgeBaseID ?? this.knowledgeBaseID,
