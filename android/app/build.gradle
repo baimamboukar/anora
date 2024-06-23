@@ -85,12 +85,12 @@ android {
         staging {
             dimension "default"
             applicationIdSuffix ".stg"
-            manifestPlaceholders = [appName: "[STG] Anora"]
+            manifestPlaceholders = [appName: "Anora"]
         }
         development {
             dimension "default"
             applicationIdSuffix ".dev"
-            manifestPlaceholders = [appName: "[DEV] Anora"]
+            manifestPlaceholders = [appName: "Anora"]
         }
     }
 
