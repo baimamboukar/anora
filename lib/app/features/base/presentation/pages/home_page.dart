@@ -28,6 +28,7 @@ class HomePage extends StatefulWidget implements AutoRouteWrapper {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final width = (context.width * 0.5) - 24;
     return Scaffold(
       body: Column(
         //mainAxisAlignment: MainAxisAlignment.center,
@@ -63,6 +64,50 @@ class _HomePageState extends State<HomePage> {
           ),
           24.vGap,
           const PaywallAction(),
+          30.vGap,
+          Row(
+            children: [
+              Container(
+                width: width,
+                height: 320,
+                decoration: BoxDecoration(
+                  color: context.colorScheme.selection,
+                  borderRadius: BorderRadius.circular(18),
+                ),
+              ),
+              10.hGap,
+              Column(
+                children: [
+                  Container(
+                    width: width,
+                    height: 156,
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.primary,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                  ),
+                  8.vGap,
+                  Container(
+                    width: width,
+                    height: 156,
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.destructive,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          10.vGap,
+          Container(
+            width: context.width,
+            height: 120,
+            decoration: BoxDecoration(
+              color: context.colorScheme.foreground,
+              borderRadius: BorderRadius.circular(18),
+            ),
+          ),
           // Text('Welcome to Anora, ${context.user!.names}'),
           // Text('Organization: ${context.orgs.first.name}'),
           // 24.vGap,
@@ -112,7 +157,7 @@ class PaywallAction extends StatelessWidget {
       },
       child: Container(
         width: context.width,
-        height: 220,
+        height: 180,
         decoration: BoxDecoration(
           color: context.colorScheme.ring,
           borderRadius: BorderRadius.circular(18),
@@ -126,7 +171,7 @@ class PaywallAction extends StatelessWidget {
                   Text('Anora AI Premium ✨', style: context.head),
                   8.vGap,
                   Text(
-                    'Upgrade to premium to unlock unlimited access and 5GB+ storage on Anora Spaces',
+                    'Upgrade to premium to unlock unlimited access on Anora Spaces',
                     style: context.paragraph,
                   ),
                   10.vGap,
