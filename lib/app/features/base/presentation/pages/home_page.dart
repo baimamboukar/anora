@@ -1,9 +1,12 @@
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
+import 'package:anora/app/router/router.gr.dart';
 import 'package:anora/core/core.dart';
+import 'package:anora/core/extensions/authx.dart';
 import 'package:anora/src/app/assets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:heroicons/heroicons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 @RoutePage()
@@ -27,46 +30,39 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            width: context.width,
-            height: 220,
-            decoration: BoxDecoration(
-              color: context.colorScheme.ring,
-              borderRadius: BorderRadius.circular(18),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          34.vGap,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 28,
+                    child: ShadImage(context.user!.photo),
+                  ),
+                  8.hGap,
+                  Column(
                     children: [
-                      Text('Anora AI Premium ✨', style: context.head),
-                      8.vGap,
                       Text(
-                        'Upgrade to premium to unlock unlimited access and 5GB+ storage on Anora Spaces',
-                        style: context.paragraph,
+                        'Hey ${context.user!.names} 👋',
+                        style: context.title,
                       ),
-                      10.vGap,
-                      Container(
-                        width: 200,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: context.colorScheme.muted,
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        child: Center(
-                          child: Text('Upgrade Now ✨', style: context.title),
-                        ),
-                      ),
+                      Text('Welcome Back to Anora', style: context.desc),
                     ],
                   ),
-                ),
-                const ShadImage(Assets.assetsLauncherIcon),
-              ],
-            ).hPadding.vPadding,
+                ],
+              ),
+              CircleAvatar(
+                backgroundColor: context.colorScheme.primary,
+                radius: 20,
+                child: const HeroIcon(HeroIcons.bellAlert),
+              ),
+            ],
           ),
+          24.vGap,
+          const PaywallAction(),
           // Text('Welcome to Anora, ${context.user!.names}'),
           // Text('Organization: ${context.orgs.first.name}'),
           // 24.vGap,
@@ -99,6 +95,59 @@ class _HomePageState extends State<HomePage> {
           // ),
         ],
       ).hPadding.vPadding,
+    );
+  }
+}
+
+class PaywallAction extends StatelessWidget {
+  const PaywallAction({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        await context.router.push(const PaywallRoute());
+      },
+      child: Container(
+        width: context.width,
+        height: 220,
+        decoration: BoxDecoration(
+          color: context.colorScheme.ring,
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Anora AI Premium ✨', style: context.head),
+                  8.vGap,
+                  Text(
+                    'Upgrade to premium to unlock unlimited access and 5GB+ storage on Anora Spaces',
+                    style: context.paragraph,
+                  ),
+                  10.vGap,
+                  Container(
+                    width: 200,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.muted,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Center(
+                      child: Text('Upgrade Now 💎', style: context.title),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const ShadImage(Assets.assetsLauncherIcon),
+          ],
+        ).hPadding.vPadding,
+      ),
     );
   }
 }

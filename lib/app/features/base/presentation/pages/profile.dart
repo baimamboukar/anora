@@ -1,4 +1,5 @@
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
+import 'package:anora/app/features/base/presentation/pages/home_page.dart';
 import 'package:anora/app/features/settings/settings.dart';
 import 'package:anora/app/router/router_paths.dart';
 import 'package:anora/core/core.dart';
@@ -74,7 +75,9 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           ),
-          54.vGap,
+          10.vGap,
+          const PaywallAction(),
+          24.vGap,
           const ActionsBloc(
             actions: [
               ActionLabel(

@@ -84,5 +84,9 @@ class AppRouter extends $AppRouter {
           page: KnowledgeBaseRoute.page,
           //path: CHAT_ROUTE,
         ),
+        AutoRoute(
+          page: PaywallRoute.page,
+          //path: CHAT_ROUTE,
+        ),
       ];
 }

@@ -123,12 +123,18 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
+class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   const _$InitialImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'KnowledgebaseState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'KnowledgebaseState.initial'));
   }
 
   @override
@@ -256,12 +262,19 @@ class __$$CreatingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CreatingImpl implements _Creating {
+class _$CreatingImpl with DiagnosticableTreeMixin implements _Creating {
   const _$CreatingImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'KnowledgebaseState.gettingDataSource()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'KnowledgebaseState.gettingDataSource'));
   }
 
   @override
@@ -404,7 +417,7 @@ class __$$CreatedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CreatedImpl implements _Created {
+class _$CreatedImpl with DiagnosticableTreeMixin implements _Created {
   const _$CreatedImpl(final List<AnoraDataSource> sources) : _sources = sources;
 
   final List<AnoraDataSource> _sources;
@@ -416,8 +429,17 @@ class _$CreatedImpl implements _Created {
   }
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'KnowledgebaseState.gettingDataSourceSuccess(sources: $sources)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'KnowledgebaseState.gettingDataSourceSuccess'))
+      ..add(DiagnosticsProperty('sources', sources));
   }
 
   @override
@@ -574,15 +596,24 @@ class __$$FailedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FailedImpl implements _Failed {
+class _$FailedImpl with DiagnosticableTreeMixin implements _Failed {
   const _$FailedImpl(this.err);
 
   @override
   final String err;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'KnowledgebaseState.gettingDataSourceFailed(err: $err)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'KnowledgebaseState.gettingDataSourceFailed'))
+      ..add(DiagnosticsProperty('err', err));
   }
 
   @override
@@ -723,12 +754,19 @@ class __$$AddDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddDataImpl implements _AddData {
+class _$AddDataImpl with DiagnosticableTreeMixin implements _AddData {
   const _$AddDataImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'KnowledgebaseState.addingData()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'KnowledgebaseState.addingData'));
   }
 
   @override
@@ -871,15 +909,23 @@ class __$$SuccessImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SuccessImpl implements _Success {
+class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
   const _$SuccessImpl(this.source);
 
   @override
   final AnoraDataSource source;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'KnowledgebaseState.addingDataSuccess(source: $source)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'KnowledgebaseState.addingDataSuccess'))
+      ..add(DiagnosticsProperty('source', source));
   }
 
   @override
@@ -1035,15 +1081,23 @@ class __$$AddingFailedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddingFailedImpl implements _AddingFailed {
+class _$AddingFailedImpl with DiagnosticableTreeMixin implements _AddingFailed {
   const _$AddingFailedImpl(this.err);
 
   @override
   final String err;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'KnowledgebaseState.addingDataFailed(err: $err)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'KnowledgebaseState.addingDataFailed'))
+      ..add(DiagnosticsProperty('err', err));
   }
 
   @override
