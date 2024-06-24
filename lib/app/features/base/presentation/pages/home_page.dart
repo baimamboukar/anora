@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:anora/app/features/auth/domain/auth_cubit/auth_cubit.dart';
 import 'package:anora/app/router/router.gr.dart';
 import 'package:anora/core/core.dart';
@@ -73,6 +75,11 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                   color: context.colorScheme.selection,
                   borderRadius: BorderRadius.circular(18),
+                ),
+                child: const Center(
+                  child: GlassCircleBox(
+                    icon: HeroIcon(HeroIcons.arrowDown),
+                  ),
                 ),
               ),
               10.hGap,
@@ -192,6 +199,43 @@ class PaywallAction extends StatelessWidget {
             const ShadImage(Assets.assetsLauncherIcon),
           ],
         ).hPadding.vPadding,
+      ),
+    );
+  }
+}
+
+class GlassCircleBox extends StatelessWidget {
+  const GlassCircleBox({required this.icon, super.key});
+  final Widget icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Container(
+        width: 80,
+        height: 80,
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        child: Stack(
+          children: [
+            // Glass effect background
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 4, sigmaY: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
+            ),
+            // Icon in the center
+            Center(
+              child: icon,
+            ),
+          ],
+        ),
       ),
     );
   }
