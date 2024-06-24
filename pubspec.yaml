@@ -55,6 +55,7 @@ dependencies:
   google_generative_ai: ^0.4.3
   dotted_border: ^2.1.0
   highlight_text: ^1.7.0
+  syncfusion_flutter_gauges: ^26.1.38
 
 
 dependency_overrides:

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget implements AutoRouteWrapper {
@@ -64,9 +65,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          24.vGap,
+          14.vGap,
           const PaywallAction(),
-          30.vGap,
+          14.vGap,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -84,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                   ActionBox(
                     width: width,
                     color: context.colorScheme.primary,
-                    text: 'Manage Knowledge Base',
+                    text: 'Manage Your Knowledge Base',
                     icon: HeroIcons.rectangleGroup,
                     height: 156,
                   ),
@@ -101,12 +102,61 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           10.vGap,
-          ActionBox(
+
+          Container(
             width: context.width,
-            color: context.colorScheme.foreground,
-            text: 'Get Insights on Your Sales Data',
-            icon: HeroIcons.sparkles,
-            height: 124,
+            height: 168,
+            decoration: BoxDecoration(
+              color: context.colorScheme.ring.withOpacity(.5),
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '300+',
+                          style: context.head,
+                        ),
+                        Text(
+                          'Requests Made',
+                          style: context.paragraph,
+                        ),
+                        Text(
+                          'View History',
+                          style: context.desc,
+                        ),
+                      ],
+                    ),
+                    20.hGap,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '2,200',
+                          style: context.head,
+                        ),
+                        Text(
+                          'Requests Left',
+                          style: context.paragraph,
+                        ),
+                        Text(
+                          'Upgrade for unlimited',
+                          style: context.desc,
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    const ScanGauge(),
+                  ],
+                ),
+              ],
+            ).hPadding.vPadding,
           ),
           // Text('Welcome to Anora, ${context.user!.names}'),
           // Text('Organization: ${context.orgs.first.name}'),
@@ -282,6 +332,74 @@ class GlassCircleBox extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ScanGauge extends StatelessWidget {
+  const ScanGauge({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 138,
+      width: 128,
+      child: SfRadialGauge(
+        axes: <RadialAxis>[
+          RadialAxis(
+            interval: 10,
+            showLabels: false,
+            // showTicks: false,
+            pointers: <GaugePointer>[
+              RangePointer(
+                value: 30,
+                width: 8,
+                color: context.colorScheme.primary,
+                enableAnimation: true,
+                cornerStyle: CornerStyle.bothCurve,
+              ),
+            ],
+            annotations: <GaugeAnnotation>[
+              GaugeAnnotation(
+                widget: Padding(
+                  padding: const EdgeInsets.only(top: 0.00001),
+                  child: Container(
+                    height: 84,
+                    width: 84,
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.primary,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '12%',
+                            style: context.paragraph.copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            'storage used',
+                            style: context.paragraph.copyWith(
+                              //   fontWeight: FontWeight.bold,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
