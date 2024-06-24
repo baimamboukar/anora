@@ -68,52 +68,45 @@ class _HomePageState extends State<HomePage> {
           const PaywallAction(),
           30.vGap,
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              ActionBox(
                 width: width,
+                max: true,
+                color: context.colorScheme.selection,
+                text: 'Get Insights on Your Sales Data',
+                icon: HeroIcons.sparkles,
                 height: 320,
-                decoration: BoxDecoration(
-                  color: context.colorScheme.selection,
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: const Center(
-                  child: GlassCircleBox(
-                    icon: HeroIcon(HeroIcons.arrowDown),
-                  ),
-                ),
               ),
               10.hGap,
               Column(
                 children: [
-                  Container(
+                  ActionBox(
                     width: width,
+                    color: context.colorScheme.primary,
+                    text: 'Manage Knowledge Base',
+                    icon: HeroIcons.rectangleGroup,
                     height: 156,
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.primary,
-                      borderRadius: BorderRadius.circular(18),
-                    ),
                   ),
                   8.vGap,
-                  Container(
+                  ActionBox(
                     width: width,
+                    color: context.colorScheme.destructive,
+                    text: 'Sync Your Data In One Click',
+                    icon: HeroIcons.cursorArrowRipple,
                     height: 156,
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.destructive,
-                      borderRadius: BorderRadius.circular(18),
-                    ),
                   ),
                 ],
               ),
             ],
           ),
           10.vGap,
-          Container(
+          ActionBox(
             width: context.width,
-            height: 120,
-            decoration: BoxDecoration(
-              color: context.colorScheme.foreground,
-              borderRadius: BorderRadius.circular(18),
-            ),
+            color: context.colorScheme.foreground,
+            text: 'Get Insights on Your Sales Data',
+            icon: HeroIcons.sparkles,
+            height: 124,
           ),
           // Text('Welcome to Anora, ${context.user!.names}'),
           // Text('Organization: ${context.orgs.first.name}'),
@@ -145,6 +138,58 @@ class _HomePageState extends State<HomePage> {
           //     context.router.pushNamed(WELCOME_ROUTE);
           //   },
           // ),
+        ],
+      ).hPadding.vPadding,
+    );
+  }
+}
+
+class ActionBox extends StatelessWidget {
+  const ActionBox({
+    required this.width,
+    required this.height,
+    required this.icon,
+    required this.text,
+    required this.color,
+    super.key,
+    this.max = false,
+  });
+
+  final double width;
+  final double height;
+  final HeroIcons icon;
+  final String text;
+  final Color color;
+  final bool max;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GlassCircleBox(
+                max: max,
+                icon: HeroIcon(icon, size: max ? 48 : 32),
+              ).floatL,
+              const HeroIcon(HeroIcons.arrowUpRight).floatR,
+            ],
+          ),
+          const Spacer(),
+          Text(
+            text,
+            style: max ? context.header : context.head,
+          ),
         ],
       ).hPadding.vPadding,
     );
@@ -205,15 +250,16 @@ class PaywallAction extends StatelessWidget {
 }
 
 class GlassCircleBox extends StatelessWidget {
-  const GlassCircleBox({required this.icon, super.key});
+  const GlassCircleBox({required this.icon, this.max = false, super.key});
   final Widget icon;
+  final bool max;
 
   @override
   Widget build(BuildContext context) {
     return ClipOval(
       child: Container(
-        width: 80,
-        height: 80,
+        width: max ? 80 : 60,
+        height: max ? 80 : 60,
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(25),
