@@ -48,7 +48,7 @@ class SettingsRemoteDataSource {
         organization: org,
         from: From(
           name: sender,
-          email: 'MS_RiPgsi@trial-yzkq340opj24d796.mlsender.net',
+          email: 'MS_jdMa2o@trial-z86org8d210lew13.mlsender.net',
         ),
         role: role,
         to: [

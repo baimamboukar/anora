@@ -179,7 +179,7 @@ class LogoutAction extends StatelessWidget {
           },
           loggedOut: () {
             context.router.popUntilRoot();
-            context.router.replaceNamed(LOGIN_ROUTE);
+            context.router.replaceNamed(WELCOME_ROUTE);
           },
         );
       },

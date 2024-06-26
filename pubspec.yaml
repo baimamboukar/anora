@@ -1,6 +1,6 @@
 name: anora
 description: Make sense of your enterprise data leveraging powerful LLMs
-version: 1.0.0+4
+version: 1.0.0+5
 publish_to: none
 
 environment:

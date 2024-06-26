@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   8.hGap,
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Hey ${context.user!.names} 👋',

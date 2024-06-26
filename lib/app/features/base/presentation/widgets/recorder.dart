@@ -1,3 +1,4 @@
+import 'package:anora/core/core.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
@@ -11,44 +12,6 @@ class RecorderWidget extends StatefulWidget {
 }
 
 class _RecorderWidgetState extends State<RecorderWidget> {
-  final Map<String, HighlightedWord> _highlights = {
-    'flutter': HighlightedWord(
-      onTap: () => debugPrint('flutter'),
-      textStyle: const TextStyle(
-        color: Colors.blue,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'voice': HighlightedWord(
-      onTap: () => debugPrint('voice'),
-      textStyle: const TextStyle(
-        color: Colors.green,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'subscribe': HighlightedWord(
-      onTap: () => debugPrint('subscribe'),
-      textStyle: const TextStyle(
-        color: Colors.red,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'like': HighlightedWord(
-      onTap: () => debugPrint('like'),
-      textStyle: const TextStyle(
-        color: Colors.blueAccent,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    'comment': HighlightedWord(
-      onTap: () => debugPrint('comment'),
-      textStyle: const TextStyle(
-        color: Colors.green,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  };
-
   late stt.SpeechToText _speech;
   bool _isListening = false;
   String _text = 'Press the button and start speaking';
@@ -61,6 +24,29 @@ class _RecorderWidgetState extends State<RecorderWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final style = context.header.copyWith(
+      color: context.colorScheme.primary,
+    );
+    final words = [
+      'flutter',
+      'Anora',
+      'Data',
+      'Highlight',
+      'Custom',
+      'Analyze',
+      'Analyse',
+      'Help',
+      'Custom',
+      'Please',
+      'Sales',
+    ];
+    final highlights = <String, HighlightedWord>{};
+    for (final word in words) {
+      highlights[word] = HighlightedWord(
+        onTap: () => debugPrint(word),
+        textStyle: style,
+      );
+    }
     return Scaffold(
       // appBar: AppBar(
       //   title: Text('Confidence: ${(_confidence * 100.0).toStringAsFixed(1)}%'),
@@ -68,7 +54,8 @@ class _RecorderWidgetState extends State<RecorderWidget> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AvatarGlow(
         animate: _isListening,
-        glowColor: Theme.of(context).primaryColor,
+        glowRadiusFactor: 0.9,
+        glowColor: context.colorScheme.primary,
         // endRadius: 75.0,
         // repeatPauseDuration: const Duration(milliseconds: 100),
         child: FloatingActionButton(
@@ -82,7 +69,8 @@ class _RecorderWidgetState extends State<RecorderWidget> {
           padding: const EdgeInsets.fromLTRB(30, 30, 30, 150),
           child: TextHighlight(
             text: _text,
-            words: _highlights,
+            words: highlights,
+            textStyle: context.header,
             // textStyle: const TextStyle(
             //   fontSize: 32,
             //   color: Colors.black,
@@ -103,6 +91,7 @@ class _RecorderWidgetState extends State<RecorderWidget> {
       if (available) {
         setState(() => _isListening = true);
         await _speech.listen(
+          localeId: 'en_US',
           onResult: (val) => setState(() {
             _text = val.recognizedWords;
             if (val.hasConfidenceRating && val.confidence > 0) {
